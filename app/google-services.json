@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757681798496",
+    "project_id": "plo-messenger",
+    "storage_bucket": "plo-messenger.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757681798496:android:10c64c21bc6660b83ef205",
+        "android_client_info": {
+          "package_name": "com.twoploapps.a2plomessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757681798496-nf5ildvguli00106nf23q27vf1o49310.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuxUgoQlAHhYuCfb5SaEsofQ9cFlbGetU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757681798496-nf5ildvguli00106nf23q27vf1o49310.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

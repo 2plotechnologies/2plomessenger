@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+    
+    <TextView
+        android:id="@+id/textlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bienvenido a 2Plo Messenger\n\nRegistrate:"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/textlogin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icono"/>
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="290dp"
+        android:gravity="center"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_showNameCode="false"
+        tools:ccp_contentColor="#fcfdfd"
+        tools:ccp_textSize="20dp" />
+
+    <EditText
+        android:id="@+id/numero"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/textos"
+        android:hint="Ingresar Número"
+        android:inputType="phone"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/botonregistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/numero"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:text="Enviar"
+        android:background="@drawable/botones"
+        android:textSize="18dp"/>
+    <EditText
+        android:id="@+id/codigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="30dp"
+        android:hint="Ingresar Codigo"
+        android:background="@drawable/textos"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:inputType="phone"/>
+    <Button
+        android:id="@+id/enviar_codigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/codigo"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:text="Enviar Codigo"
+        android:background="@drawable/botones"
+        android:visibility="gone"
+        android:textSize="18dp"/>
+
+    <TextView
+        android:id="@+id/emailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/botonregistrar"
+        android:gravity="center"
+        android:text="Registrate con Email" />
+
+
+</RelativeLayout>
