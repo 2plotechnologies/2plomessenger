@@ -31,6 +31,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Button enviarmensaje, cancelarmensaje;
     private DatabaseReference UserRef, SolicitudRef, ContactosRef, NotificacionesRef;
     private FirebaseAuth auth;
+    boolean contactoAgregado = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,19 @@ public class PerfilActivity extends AppCompatActivity {
         cancelarmensaje=(Button) findViewById(R.id.cancelar_mensaje_usuario_vic);
         CurrenEstado = "nueva";
         ObtenerInfromacionDB();
+        verificarContactoAgregado();
+    }
+
+    private void verificarContactoAgregado() {
+        ContactosRef.child(usuario_enviarid).child(usuario_revid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    contactoAgregado = true;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     private void ObtenerInfromacionDB() {
@@ -61,7 +75,9 @@ public class PerfilActivity extends AppCompatActivity {
                     String nombreUser = snapshot.child("nombre").getValue().toString();
                     String ciudadUser = snapshot.child("ciudad").getValue().toString();
                     String estadoUser = snapshot.child("estado").getValue().toString();
-                    if(privacidadimg.equals("Oculto")||privacidadimg.equals("Contacto")){
+                    if(privacidadimg.equals("Oculto")){
+                        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(usuarioima);
+                    }else if(privacidadimg.equals("Contacto")&&!contactoAgregado){
                         Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(usuarioima);
                     }else{
                         String imagenUser = snapshot.child("imagen").getValue().toString();
@@ -82,7 +98,9 @@ public class PerfilActivity extends AppCompatActivity {
                     String estadoUser = snapshot.child("estado").getValue().toString();
                     usuarionom.setText(nombreUser);
                     String privacidadciu = snapshot.child("PC").getValue().toString();
-                    if(privacidadciu.equals("-")||privacidadciu.equals("Contacto")){
+                    if(privacidadciu.equals("-")){
+                        usuariociu.setText("-");
+                    }else if(privacidadciu.equals("Contacto")&&!contactoAgregado){
                         usuariociu.setText("-");
                     }else{
                         usuariociu.setText(ciudadUser);
