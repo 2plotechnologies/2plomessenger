@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Random;
 
 public class InicioActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -148,16 +152,64 @@ public class InicioActivity extends AppCompatActivity {
             TBuscarAmigos();
 
         }
-        /*
-        if (item.getItemId() == R.id.crear_grupo_menu){
-            Toast.makeText(this, "Crear grupo", Toast.LENGTH_SHORT).show();
-            CrearNuevoGrupo();
-
+        if(item.getItemId()==R.id.new_call_menu){
+            // Generar el código aleatorio
+            Random rand = new Random();
+            int codigo = rand.nextInt(10000); // Generar un número aleatorio entre 0 y 9999
+            // Crear el AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.nuevallamada);
+            builder.setMessage(getString(R.string.callcode) + codigo + "\n\n"+getString(R.string.indicacionesllamada));
+            builder.setPositiveButton(R.string.copiarcodigo, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Copiar el código al portapapeles
+                    ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Call code", String.valueOf(codigo));
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(getApplicationContext(), R.string.secopio, Toast.LENGTH_SHORT).show();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                    ref.child("llamadascodes").child(String.valueOf(codigo)).child("Creada por").setValue(CurrentUserId);
+                }
+            });
+            builder.setNegativeButton(R.string.descartarcodigo, null); // Agregar un botón "Cancelar" que no hace nada
+            // Mostrar el AlertDialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
-        if(item.getItemId() == R.id.unirse_grupo){
-            UnirseAUnGrupo();
+        if(item.getItemId()==R.id.join_call_menu){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.codigodelavideollamada);
+            builder.setMessage(getString(R.string.intrduceelcodigodelallamada));
+            final EditText input = new EditText(this);
+            input.setHint(R.string.codigohint);
+            input.setTextColor(Color.BLACK);
+            builder.setView(input);
+            builder.setPositiveButton(R.string.unirse, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String codigo = input.getText().toString().trim();
+                    // Si el EditText no está vacío, inicia LlamadaActivity
+                    if (!codigo.isEmpty()) {
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                        ref.child("llamadascodes").child(codigo).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(!snapshot.exists()){
+                                    Toast.makeText(InicioActivity.this, R.string.codigonovalido, Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Intent intent = new Intent(InicioActivity.this, LlamadaActivity.class);
+                                    intent.putExtra("codigo", codigo);
+                                    startActivity(intent);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}});
+                    }
+                }
+            });
+            builder.show();
         }
-        */
         if (item.getItemId() == R.id.miperfil_menu){
             //Toast.makeText(this, "Mi perfil", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(InicioActivity.this, MiperfilActivity.class);

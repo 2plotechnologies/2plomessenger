@@ -18,6 +18,16 @@
     app:showAsAction="never">
 </item>
 <item
+    android:title="@string/new_call"
+    android:id="@+id/new_call_menu"
+    app:showAsAction="never">
+</item>
+<item
+    android:title="@string/join_call"
+    android:id="@+id/join_call_menu"
+    app:showAsAction="never">
+</item>
+<item
     android:title="@string/acerca_de"
     android:id="@+id/acerca_de_menu"
     app:showAsAction="never">

@@ -135,4 +135,18 @@
     <string name="reproduciraudio">Audio abspielen</string>
     <string name="mostrar_ciudad_solo_a_mis_contactos">Stadt nur für meine Kontakte anzeigen</string>
     <string name="mostrar_imagen_de_perfil_solo_a_mis_contactos">Profilbild nur für meine Kontakte anzeigen</string>
+    <string name="cargando_llamada">Anruf wird geladen…</string>
+    <string name="new_call">Neuer Anruf</string>
+    <string name="join_call">An Anruf teilnehmen</string>
+    <string name="nuevallamada">Neuer Anruf</string>
+    <string name="callcode">"Anrufcode: "</string>
+    <string name="indicacionesllamada">Kopieren Sie diesen Code und senden Sie ihn an diejenigen, die an dem Anruf teilnehmen möchten. Wenn Sie bereit sind, öffnen Sie das Menü, wählen Sie "An einem Anruf teilnehmen" und fügen Sie den Anrufcode ein.</string>
+    <string name="secopio">Code wurde in die Zwischenablage kopiert</string>
+    <string name="copiarcodigo">Kopieren</string>
+    <string name="descartarcodigo">Verwerfen</string>
+    <string name="codigodelavideollamada">Anrufcode</string>
+    <string name="intrduceelcodigodelallamada">Geben Sie den Anrufcode ein:</string>
+    <string name="unirse">Beitreten</string>
+    <string name="codigohint">Anrufcode</string>
+    <string name="codigonovalido">Dieser Code ist ungültig. Bitte geben Sie einen gültigen Code ein.</string>
 </resources>

@@ -92,8 +92,7 @@ public class ChatActivity extends AppCompatActivity {
         RecibirUserID=getIntent().getExtras().get("user_id").toString();
         nombre=getIntent().getExtras().get("user_nombre").toString();
         imagens=getIntent().getExtras().get("user_imagen").toString();
-
-        Toast.makeText(this, "Mensaje a: "+nombre, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Mensaje a: "+nombre, Toast.LENGTH_SHORT).show();
         IniciarelLayout();
         nombreusuario.setText(nombre);
         Picasso.get().load(imagens).placeholder(R.drawable.defaultprofilephoto).into(usuarioimagen);
@@ -104,8 +103,6 @@ public class ChatActivity extends AppCompatActivity {
         UsuariosrecyclerView.setLayoutManager(linearLayoutManager);
         UsuariosrecyclerView.setAdapter(mensajeAdapter);
         MetodoConexion();
-
-
         RootRef.child("Mensajes").child(EnviarUserID).child(RecibirUserID).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
