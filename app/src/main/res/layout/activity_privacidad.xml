@@ -58,7 +58,7 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mostrar ciudad solo a mis contactos"
+            android:text="@string/mostrar_ciudad_solo_a_mis_contactos"
             android:id="@+id/cb_showcontactsciu"
             android:layout_margin="6dp"/>
     </RadioGroup>
@@ -81,7 +81,7 @@
         <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mostrar imagen de perfil solo a mis contactos"
+            android:text="@string/mostrar_imagen_de_perfil_solo_a_mis_contactos"
             android:id="@+id/cb_contactoimage"
             android:layout_margin="6dp"/>
     </RadioGroup>

@@ -136,4 +136,6 @@ Descárgala aquí: https://play.google.com/store/apps/details?id=com.twoploapps.
     <string name="audio">Audio</string>
     <string name="seleccioinatipo">Selecciona el tipo de archivo</string>
     <string name="reproduciraudio">Reproducir audio</string>
+    <string name="mostrar_ciudad_solo_a_mis_contactos">Mostrar ciudad solo a mis contactos</string>
+    <string name="mostrar_imagen_de_perfil_solo_a_mis_contactos">Mostrar imagen de perfil solo a mis contactos</string>
 </resources>

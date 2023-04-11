@@ -133,4 +133,6 @@
     <string name="audio">Audio</string>
     <string name="seleccioinatipo">Wählen Sie den Dateityp aus</string>
     <string name="reproduciraudio">Audio abspielen</string>
+    <string name="mostrar_ciudad_solo_a_mis_contactos">Stadt nur für meine Kontakte anzeigen</string>
+    <string name="mostrar_imagen_de_perfil_solo_a_mis_contactos">Profilbild nur für meine Kontakte anzeigen</string>
 </resources>

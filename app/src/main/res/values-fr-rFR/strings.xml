@@ -135,4 +135,6 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="audio">Audio</string>
     <string name="seleccioinatipo">Sélectionnez le type de fichier</string>
     <string name="reproduciraudio">Lire l\'audio</string>
+    <string name="mostrar_ciudad_solo_a_mis_contactos">Afficher la ville uniquement à mes contacts</string>
+    <string name="mostrar_imagen_de_perfil_solo_a_mis_contactos">Afficher l\'image de profil uniquement à mes contacts</string>
 </resources>

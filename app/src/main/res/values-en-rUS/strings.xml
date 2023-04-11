@@ -135,4 +135,6 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="audio">Audio</string>
     <string name="seleccioinatipo">Select file type</string>
     <string name="reproduciraudio">Play audio</string>
+    <string name="mostrar_ciudad_solo_a_mis_contactos">Show city only to my contacts</string>
+    <string name="mostrar_imagen_de_perfil_solo_a_mis_contactos">Show profile picture only to my contacts</string>
 </resources>
