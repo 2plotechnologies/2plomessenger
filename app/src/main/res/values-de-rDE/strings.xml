@@ -149,4 +149,9 @@
     <string name="unirse">Beitreten</string>
     <string name="codigohint">Anrufcode</string>
     <string name="codigonovalido">Dieser Code ist ungültig. Bitte geben Sie einen gültigen Code ein.</string>
+    <string name="avandonastevideollamada">Du hast den Anruf verlassen</string>
+    <string name="volver_a_inicio">Zurück zum Start</string>
+    <string name="configuracion">Einstellungen</string>
+    <string name="cambiar_contrasena">Passwort ändern</string>
+    <string name="correoenviado">Eine E-Mail zum Zurücksetzen des Passworts wurde gesendet</string>
 </resources>

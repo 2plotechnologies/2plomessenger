@@ -8,7 +8,7 @@
     tools:context=".ChatActivity">
 
     <include android:id="@+id/chat_toolbar"
-        layout="@layout/toolbar_principal"></include>
+        layout="@layout/toolbar_principal"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listamensajesresikler"

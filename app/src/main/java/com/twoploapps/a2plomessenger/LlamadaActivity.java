@@ -2,11 +2,15 @@ package com.twoploapps.a2plomessenger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
+import org.jitsi.meet.sdk.JitsiMeetUserInfo;
 
 import java.net.URL;
 
@@ -16,7 +20,9 @@ public class LlamadaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llamada);
+        Button btnvolver = findViewById(R.id.btnvolverainicio);
         String idllamada = getIntent().getStringExtra("codigo");
+        String username = getIntent().getStringExtra("username");
         try{
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                     .setServerURL(new URL("https://meet.jit.si"))
@@ -26,12 +32,23 @@ public class LlamadaActivity extends AppCompatActivity {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+        JitsiMeetUserInfo userInfo = new JitsiMeetUserInfo();
+        userInfo.setDisplayName(username);
         JitsiMeetConferenceOptions options
                 = new JitsiMeetConferenceOptions.Builder()
                 .setRoom(idllamada)
                 .setAudioMuted(true)
                 .setVideoMuted(true)
+                .setUserInfo(userInfo)
                 .build();
         JitsiMeetActivity.launch(this, options);
+        btnvolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LlamadaActivity.this,InicioActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }

@@ -43,7 +43,7 @@ public class InicioActivity extends AppCompatActivity {
     private ViewPager myviewPager;
     private TabLayout mytabLayout;
     private AcesoTabsAdapter myacesoTabsAdapter;
-    private String CurrentUserId;
+    private String CurrentUserId, username;
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef, RootRef,GrupoRef;
     @Override
@@ -66,8 +66,21 @@ public class InicioActivity extends AppCompatActivity {
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("CodigosDeGrupo");
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
+        getUsername();
         Intent intent = new Intent(this, TokenUpdateService.class);
         startService(intent);
+    }
+
+    private void getUsername() {
+        UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()&&snapshot.hasChild("nombre")){
+                    username=snapshot.child("nombre").getValue().toString();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     @Override
@@ -150,7 +163,6 @@ public class InicioActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.buscar_contactos_menu){
             //Toast.makeText(this, "Buscar amigos", Toast.LENGTH_SHORT).show();
             TBuscarAmigos();
-
         }
         if(item.getItemId()==R.id.new_call_menu){
             // Generar el código aleatorio
@@ -200,6 +212,7 @@ public class InicioActivity extends AppCompatActivity {
                                 }else{
                                     Intent intent = new Intent(InicioActivity.this, LlamadaActivity.class);
                                     intent.putExtra("codigo", codigo);
+                                    intent.putExtra("username",username);
                                     startActivity(intent);
                                 }
                             }
@@ -234,9 +247,9 @@ public class InicioActivity extends AppCompatActivity {
             startActivity(Intent.createChooser(intent, getString(R.string.compartir_con)));
         }
         if (item.getItemId() == R.id.cerrarsesion_menu){
+            ActualizarActividad("inactivo");
             mAuth.signOut();
             EnviarAlLogin();
-
         }
         return true;
     }

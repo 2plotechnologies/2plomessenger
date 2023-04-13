@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -49,6 +50,14 @@ public class ChatFragment extends Fragment {
         ChatViewUnica = inflater.inflate(R.layout.fragment_chat, container, false);
         ChatLista=(RecyclerView)ChatViewUnica.findViewById(R.id.chat_lista);
         ChatLista.setLayoutManager(new LinearLayoutManager(getContext()));
+        ImageButton btnbuscar = ChatViewUnica.findViewById(R.id.btnbuscarcontactos);
+        btnbuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),BuscarAmigosActivity.class);
+                startActivity(intent);
+            }
+        });
         return ChatViewUnica;
     }
 

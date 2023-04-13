@@ -151,4 +151,9 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="unirse">Entrar</string>
     <string name="codigohint">Código da chamada</string>
     <string name="codigonovalido">Este código está incorreto, insira um código válido</string>
+    <string name="avandonastevideollamada">Você saiu da chamada</string>
+    <string name="volver_a_inicio">Voltar ao início</string>
+    <string name="configuracion">Configuração</string>
+    <string name="cambiar_contrasena">Alterar senha</string>
+    <string name="correoenviado">Um e-mail foi enviado para alterar a senha</string>
 </resources>

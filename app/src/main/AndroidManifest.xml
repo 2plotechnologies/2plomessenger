@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.2PloMessenger">
         <activity
+            android:name=".ConfiguracionActivity"
+            android:exported="false" />
+        <activity
             android:name=".LlamadaActivity"
             android:exported="false" />
         <activity
