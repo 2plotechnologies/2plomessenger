@@ -154,22 +154,22 @@ public class InicioActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.new_call_menu){
             // Generar el código aleatorio
-            Random rand = new Random();
-            int codigo = rand.nextInt(10000); // Generar un número aleatorio entre 0 y 9999
+            GeneradorCodigoGrupo codgen = new GeneradorCodigoGrupo();
+            String codllamada = codgen.generateAlphaNumeric(6);
             // Crear el AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(R.string.nuevallamada);
-            builder.setMessage(getString(R.string.callcode) + codigo + "\n\n"+getString(R.string.indicacionesllamada));
+            builder.setMessage(getString(R.string.callcode) + codllamada + "\n\n"+getString(R.string.indicacionesllamada));
             builder.setPositiveButton(R.string.copiarcodigo, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     // Copiar el código al portapapeles
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                    ClipData clip = ClipData.newPlainText("Call code", String.valueOf(codigo));
+                    ClipData clip = ClipData.newPlainText("Call code", codllamada);
                     clipboard.setPrimaryClip(clip);
                     Toast.makeText(getApplicationContext(), R.string.secopio, Toast.LENGTH_SHORT).show();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                    ref.child("llamadascodes").child(String.valueOf(codigo)).child("Creada por").setValue(CurrentUserId);
+                    ref.child("llamadascodes").child(codllamada).child("Creada por").setValue(CurrentUserId);
                 }
             });
             builder.setNegativeButton(R.string.descartarcodigo, null); // Agregar un botón "Cancelar" que no hace nada

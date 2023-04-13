@@ -96,12 +96,12 @@ public class ChatFragment extends Fragment {
                                     String fecha = snapshot.child("estadoUser").child("fecha").getValue().toString();
                                     String hora = snapshot.child("estadoUser").child("hora").getValue().toString();
                                     if(estado.equals("activo")){
-                                        holder.estadoc.setText(estadoc + "\n"+getString(R.string.activo));
+                                        holder.estadoc.setText(estadoc + "\n"+holder.itemView.getContext().getString(R.string.activo));
                                     }else if(estado.equals("inactivo")){
-                                        holder.estadoc.setText(estadoc+"\n"+getString(R.string.ultima_conexion_fragment) + fecha + "\n" + hora);
+                                        holder.estadoc.setText(estadoc+"\n"+holder.itemView.getContext().getString(R.string.ultima_conexion_fragment) + fecha + "\n" + hora);
                                     }
                                 }else{
-                                    holder.estadoc.setText(estadoc + "\n"+getString(R.string.inactivo));
+                                    holder.estadoc.setText(estadoc + "\n"+holder.itemView.getContext().getString(R.string.inactivo));
                                 }
                             }
 
