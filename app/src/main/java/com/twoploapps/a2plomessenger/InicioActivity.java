@@ -121,12 +121,6 @@ public class InicioActivity extends AppCompatActivity {
         finish();
 
     }
-
-    private void TBuscarAmigos() {
-        Intent intent = new Intent(InicioActivity.this, BuscarAmigosActivity.class);
-        startActivity(intent);
-    }
-
     private void verificarUsuario() {
         final String currentUserId = mAuth.getCurrentUser().getUid();
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
@@ -160,9 +154,10 @@ public class InicioActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        if (item.getItemId() == R.id.buscar_contactos_menu){
+        if (item.getItemId() == R.id.configmenu){
             //Toast.makeText(this, "Buscar amigos", Toast.LENGTH_SHORT).show();
-            TBuscarAmigos();
+            Intent intent = new Intent(InicioActivity.this,ConfiguracionActivity.class);
+            startActivity(intent);
         }
         if(item.getItemId()==R.id.new_call_menu){
             // Generar el código aleatorio
@@ -223,20 +218,6 @@ public class InicioActivity extends AppCompatActivity {
             });
             builder.show();
         }
-        if (item.getItemId() == R.id.miperfil_menu){
-            //Toast.makeText(this, "Mi perfil", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(InicioActivity.this, MiperfilActivity.class);
-            startActivity(intent);
-
-        }
-        if(item.getItemId() == R.id.privacidad_menu){
-            Intent intent = new Intent(InicioActivity.this,PrivacidadActivity.class);
-            startActivity(intent);
-        }
-        if(item.getItemId() == R.id.acerca_de_menu){
-            Intent intent = new Intent(InicioActivity.this, AcercaDeActivity.class);
-            startActivity(intent);
-        }
         if(item.getItemId()==R.id.compartir_menu){
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
@@ -253,157 +234,6 @@ public class InicioActivity extends AppCompatActivity {
         }
         return true;
     }
-/*
-    private void UnirseAUnGrupo() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(InicioActivity.this, R.style.AlertDialog);
-        builder.setTitle("Unirse a un grupo");
-        final EditText codigogrupo = new EditText(InicioActivity.this);
-        codigogrupo.setHint("Introduce el codigo del grupo");
-        codigogrupo.setBackgroundColor(Color.parseColor("#D3D3D3"));
-        SpannableString codigoHint = new SpannableString("Introduce el codigo del grupo");
-        codigoHint.setSpan(new ForegroundColorSpan(Color.GRAY), 0, codigoHint.length(), 0);
-        codigogrupo.setHint(codigoHint);
-        codigogrupo.setTextColor(Color.BLACK);
-        builder.setView(codigogrupo);
-
-        builder.setPositiveButton("Unirse", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String codigo = codigogrupo.getText().toString();
-                if(TextUtils.isEmpty(codigo)){
-                    Toast.makeText(InicioActivity.this, "Introduce un codigo", Toast.LENGTH_SHORT).show();
-                }else{
-                    UnirUsuarioAUnGrupo(codigo);
-                }
-
-            }
-        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
-    }
-*/
-    /*
-    private void UnirUsuarioAUnGrupo(String codigo) {
-        GrupoRef.child(codigo).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String nombregrupo = snapshot.child("nombre").getValue().toString();
-                    UserRef.child(CurrentUserId).child("Grupos").child(nombregrupo).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()){
-                                Toast.makeText(InicioActivity.this, "Ya estas en este grupo", Toast.LENGTH_SHORT).show();
-                            }else{
-                                UserRef.child(CurrentUserId).child("Grupos").child(nombregrupo).child("codigo").setValue(codigo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(InicioActivity.this, "Te uniste al grupo: "+nombregrupo, Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            String exception = task.getException().getMessage().toString();
-                                            Toast.makeText(InicioActivity.this, "Error: "+exception, Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }else{
-                    Toast.makeText(InicioActivity.this, "Ha introducido un codigo incorrecto, intentelo de nuevo", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-     */
-    /*
-    private void CrearNuevoGrupo() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(InicioActivity.this, R.style.AlertDialog);
-        builder.setTitle("Nombre del grupo: ");
-        final EditText nombregrupo = new EditText(InicioActivity.this);
-        nombregrupo.setHint("Introduce el nombre del grupo");
-        nombregrupo.setBackgroundColor(Color.parseColor("#D3D3D3"));
-        SpannableString nombreHint = new SpannableString("Introduce el nombre del grupo");
-        nombreHint.setSpan(new ForegroundColorSpan(Color.GRAY), 0, nombreHint.length(), 0);
-        nombregrupo.setHint(nombreHint);
-        nombregrupo.setTextColor(Color.BLACK);
-        builder.setView(nombregrupo);
-        builder.setPositiveButton("Crear", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String nombreg = nombregrupo.getText().toString();
-
-                if(TextUtils.isEmpty(nombreg)){
-                    Toast.makeText(InicioActivity.this, "Ingrese el nombre de el grupo", Toast.LENGTH_SHORT).show();
-                }else{
-                    
-                    CrearGrupoFirebase(nombreg);
-
-                }
-            }
-        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        builder.show();
-    }
-
-     */
-    /*
-    private void CrearGrupoFirebase(String nombreg) {
-        GeneradorCodigoGrupo codigoGrupo = new GeneradorCodigoGrupo();
-        String codigo = codigoGrupo.generateAlphaNumeric(6);
-        UserRef.child(CurrentUserId).child("Grupos").child(nombreg).child("codigo").setValue(codigo).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(InicioActivity.this, "Grupo creado con exito", Toast.LENGTH_SHORT).show();
-                    RootRef.child(nombreg).child("codigo").setValue(codigo).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                GrupoRef.child(codigo).child("nombre").setValue(nombreg).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(InicioActivity.this, "Comparte el codigo para que se unan mas usuarios", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            String error = task.getException().getMessage().toString();
-                                            Toast.makeText(InicioActivity.this, "Error"+error, Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                                Toast.makeText(InicioActivity.this, "Codigo: "+codigo, Toast.LENGTH_SHORT).show();
-                            }else{
-                                String error = task.getException().getMessage().toString();
-                                Toast.makeText(InicioActivity.this, "Se produjo un error: "+error, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }else{
-                    String error = task.getException().getMessage().toString();
-                    Toast.makeText(InicioActivity.this, "Error"+error, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-     */
     private void ActualizarActividad(String estado){
         String CurrentTime, CurrentDate;
         Calendar calendar = Calendar.getInstance();
@@ -419,8 +249,6 @@ public class InicioActivity extends AppCompatActivity {
 
         UserRef.child(CurrentUserId).child("estadoUser").updateChildren(EstadoOnline);
     }
-
-
 }
 
 

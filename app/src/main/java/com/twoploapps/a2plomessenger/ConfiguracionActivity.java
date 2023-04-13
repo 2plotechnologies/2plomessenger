@@ -121,7 +121,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         String CurrentUserId = mAuth.getCurrentUser().getUid();
         DatabaseReference uRef = FirebaseDatabase.getInstance().getReference();
-        uRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
+        uRef.child("Usuarios").child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){

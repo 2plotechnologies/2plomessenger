@@ -2,19 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <item
-    android:title="@string/buscar_contactos"
-    android:id="@+id/buscar_contactos_menu"
-    app:showAsAction="never">
-</item>
-<item
-    android:title="@string/mi_perfil"
-    android:id="@+id/miperfil_menu"
-    app:showAsAction="never">
-</item>
-
-<item
-    android:title="@string/privacidad"
-    android:id="@+id/privacidad_menu"
+    android:title="@string/configuracion"
+    android:id="@+id/configmenu"
     app:showAsAction="never">
 </item>
 <item
@@ -25,11 +14,6 @@
 <item
     android:title="@string/join_call"
     android:id="@+id/join_call_menu"
-    app:showAsAction="never">
-</item>
-<item
-    android:title="@string/acerca_de"
-    android:id="@+id/acerca_de_menu"
     app:showAsAction="never">
 </item>
 <item
