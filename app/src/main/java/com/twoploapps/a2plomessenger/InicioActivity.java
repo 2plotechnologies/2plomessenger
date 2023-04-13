@@ -43,7 +43,7 @@ public class InicioActivity extends AppCompatActivity {
     private ViewPager myviewPager;
     private TabLayout mytabLayout;
     private AcesoTabsAdapter myacesoTabsAdapter;
-    private String CurrentUserId, username;
+    private String CurrentUserId, username, imageurl;
     private FirebaseAuth mAuth;
     private DatabaseReference UserRef, RootRef,GrupoRef;
     @Override
@@ -76,6 +76,16 @@ public class InicioActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()&&snapshot.hasChild("nombre")){
+                    if(snapshot.hasChild("imagen")){
+                        String privacidadimg = snapshot.child("PI").getValue().toString();
+                        if(!privacidadimg.equals("Oculto")){
+                            imageurl = snapshot.child("imagen").getValue().toString();
+                        }else{
+                            imageurl="https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2";
+                        }
+                    }else{
+                        imageurl="https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2";
+                    }
                     username=snapshot.child("nombre").getValue().toString();
                 }
             }
@@ -208,6 +218,7 @@ public class InicioActivity extends AppCompatActivity {
                                     Intent intent = new Intent(InicioActivity.this, LlamadaActivity.class);
                                     intent.putExtra("codigo", codigo);
                                     intent.putExtra("username",username);
+                                    intent.putExtra("img",imageurl);
                                     startActivity(intent);
                                 }
                             }

@@ -3,6 +3,7 @@ package com.twoploapps.a2plomessenger;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import org.jitsi.meet.sdk.JitsiMeetActivity;
 import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 import org.jitsi.meet.sdk.JitsiMeetUserInfo;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class LlamadaActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class LlamadaActivity extends AppCompatActivity {
         Button btnvolver = findViewById(R.id.btnvolverainicio);
         String idllamada = getIntent().getStringExtra("codigo");
         String username = getIntent().getStringExtra("username");
+        String imgurl = getIntent().getStringExtra("img");
         try{
             JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
                     .setServerURL(new URL("https://meet.jit.si"))
@@ -34,6 +37,11 @@ public class LlamadaActivity extends AppCompatActivity {
         }
         JitsiMeetUserInfo userInfo = new JitsiMeetUserInfo();
         userInfo.setDisplayName(username);
+        try {
+            userInfo.setAvatar(new URL(imgurl));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         JitsiMeetConferenceOptions options
                 = new JitsiMeetConferenceOptions.Builder()
                 .setRoom(idllamada)
