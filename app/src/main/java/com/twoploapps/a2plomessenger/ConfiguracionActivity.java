@@ -42,6 +42,7 @@ public class ConfiguracionActivity extends AppCompatActivity {
         TextView txtprivacidad = findViewById(R.id.opcion_privacidad);
         TextView txtacercade = findViewById(R.id.opcion_acerca_de);
         TextView txtcerrarsesion = findViewById(R.id.opcion_cerrar_sesion);
+        TextView txtborracuenta = findViewById(R.id.opcion_eliminar_cuenta);
         ImageView btneditarperfil = findViewById(R.id.btneditarperfilconfig);
         Button btnvolver = findViewById(R.id.volverainicioconfig);
         getUserData();
@@ -112,6 +113,13 @@ public class ConfiguracionActivity extends AppCompatActivity {
                 FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
                 firebaseAuth.signOut();
                 Intent intent = new Intent(ConfiguracionActivity.this, LoginActivity2.class);
+                startActivity(intent);
+            }
+        });
+        txtborracuenta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConfiguracionActivity.this, ConfirmarEliminacionActivity.class);
                 startActivity(intent);
             }
         });

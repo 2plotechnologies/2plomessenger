@@ -86,8 +86,8 @@ public class MiperfilActivity extends AppCompatActivity {
 
                     Picasso.get()
                             .load(imagen1)
-                            .placeholder(R.drawable.welcome)
-                            .error(R.drawable.welcome)
+                            .placeholder(R.drawable.defaultprofilephoto)
+                            .error(R.drawable.defaultprofilephoto)
                             .into(imagenmiperfil);
 
 

@@ -156,4 +156,9 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="configuracion">Configuration</string>
     <string name="cambiar_contrasena">Changer le mot de passe</string>
     <string name="correoenviado">Un e-mail a été envoyé pour changer le mot de passe</string>
+    <string name="eliminar_cuenta">Supprimer mon compte</string>
+    <string name="est_seguro_de_que_desea_eliminar_su_cuenta">Etes-vous sur de vouloir supprimer votre compte ?</string>
+    <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Personne ne pourra vous envoyer de messages et toutes vos données seront perdues.</string>
+    <string name="s_eliminar_mi_cuenta">Oui, supprimer mon compte</string>
+    <string name="seeliminosucuenta">Votre compte a été supprimé</string>
 </resources>

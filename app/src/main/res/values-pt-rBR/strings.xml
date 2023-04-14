@@ -156,4 +156,9 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="configuracion">Configuração</string>
     <string name="cambiar_contrasena">Alterar senha</string>
     <string name="correoenviado">Um e-mail foi enviado para alterar a senha</string>
+    <string name="eliminar_cuenta">Excluir minha conta</string>
+    <string name="est_seguro_de_que_desea_eliminar_su_cuenta">Tem certeza de que deseja excluir sua conta?</string>
+    <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Ninguém poderá enviar mensagens para você e todos os seus dados serão perdidos.</string>
+    <string name="s_eliminar_mi_cuenta">Sim, excluir minha conta</string>
+    <string name="seeliminosucuenta">Sua conta foi excluída</string>
 </resources>

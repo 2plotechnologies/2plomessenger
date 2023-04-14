@@ -154,4 +154,9 @@
     <string name="configuracion">Einstellungen</string>
     <string name="cambiar_contrasena">Passwort ändern</string>
     <string name="correoenviado">Eine E-Mail zum Zurücksetzen des Passworts wurde gesendet</string>
+    <string name="eliminar_cuenta">Meinen Account löschen</string>
+    <string name="est_seguro_de_que_desea_eliminar_su_cuenta">Sind Sie sicher, dass Sie Ihren Account löschen möchten?</string>
+    <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Niemand wird Ihnen Nachrichten senden können und alle Ihre Daten werden gelöscht.</string>
+    <string name="s_eliminar_mi_cuenta">Ja, meinen Account löschen</string>
+    <string name="seeliminosucuenta">Ihr Account wurde erfolgreich gelöscht.</string>
 </resources>

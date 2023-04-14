@@ -157,4 +157,9 @@ Descárgala aquí: https://play.google.com/store/apps/details?id=com.twoploapps.
     <string name="configuracion">Configuracion</string>
     <string name="cambiar_contrasena">Cambiar contraseña</string>
     <string name="correoenviado">Se envió un correo para cambiar la contraseña</string>
+    <string name="eliminar_cuenta">Eliminar mi cuenta</string>
+    <string name="est_seguro_de_que_desea_eliminar_su_cuenta">¿Está seguro de que desea eliminar su cuenta?</string>
+    <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Nadie podrá enviarle mensajes y se perderán todos sus datos.</string>
+    <string name="s_eliminar_mi_cuenta">Sí, eliminar mi cuenta</string>
+    <string name="seeliminosucuenta">Tu cuenta fue eliminada</string>
 </resources>

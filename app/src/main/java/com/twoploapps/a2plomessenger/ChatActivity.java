@@ -200,7 +200,22 @@ public class ChatActivity extends AppCompatActivity {
                 popup.toggle();
             }
         });
-
+        nombreusuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, PerfilActivity.class);
+                intent.putExtra("usuario_id",RecibirUserID);
+                startActivity(intent);
+            }
+        });
+        ultimaconexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ChatActivity.this, PerfilActivity.class);
+                intent.putExtra("usuario_id",RecibirUserID);
+                startActivity(intent);
+            }
+        });
         botonenviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
