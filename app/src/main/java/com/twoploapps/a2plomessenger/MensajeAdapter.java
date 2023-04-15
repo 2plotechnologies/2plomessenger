@@ -1,6 +1,11 @@
 package com.twoploapps.a2plomessenger;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,14 +13,17 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,7 +82,6 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
 
     @Override
     public void onBindViewHolder(@NonNull MensajesViewHolder holder, int position) {
-
         String mensajeEnviadoID = auth.getCurrentUser().getUid();
         Mensajes mensajes = usuarioMensajes.get(holder.getAdapterPosition());
         String DeUsuarioId = mensajes.getDe();
@@ -105,7 +112,6 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
         holder.mensajeImagenEnviar.setVisibility(View.GONE);
 
         if (TipoMensaje.equals("texto")){
-
             if (DeUsuarioId.equals(mensajeEnviadoID)){
                 holder.enviarMensajeTexto.setVisibility(View.VISIBLE);
                 holder.enviarMensajeTexto.setBackgroundResource(R.drawable.enviar_mensaje_layout);
@@ -222,7 +228,8 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                         CharSequence opciones[] = new CharSequence[]{
                                 holder.itemView.getContext().getString(R.string.eliminar_mi),
                                 holder.itemView.getContext().getString(R.string.cancelar),
-                                holder.itemView.getContext().getString(R.string.eliminar_todos)
+                                holder.itemView.getContext().getString(R.string.eliminar_todos),
+                                holder.itemView.getContext().getString(R.string.copiar)
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
                         builder.setItems(opciones, new DialogInterface.OnClickListener() {
@@ -233,10 +240,19 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                                     Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
                                     holder.itemView.getContext().startActivity(intent);
                                 }else if (position==2) {
-
                                     EliminarMensajesTodos(holder.getAdapterPosition(), holder);
                                     Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
                                     holder.itemView.getContext().startActivity(intent);
+                                }
+                                else if(position==3){
+                                    String mensaje = usuarioMensajes.get(holder.getAdapterPosition()).getMensaje();
+                                    String mensajeDesc = decrypt(mensaje);
+                                    ClipData clipData = ClipData.newPlainText("text", mensajeDesc);
+                                    ClipboardManager clipboard = (ClipboardManager) ContextCompat.getSystemService(holder.itemView.getContext(), ClipboardManager.class);
+                                    if(clipboard!=null){
+                                        clipboard.setPrimaryClip(clipData);
+                                        Toast.makeText(holder.itemView.getContext(), R.string.mensajecopiado, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
 
                             }
@@ -320,6 +336,89 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                                         mediaPlayer.setDataSource(holder.itemView.getContext(), Uri.parse(usuarioMensajes.get(holder.getAdapterPosition()).getMensaje()));
                                         mediaPlayer.prepare();
                                         mediaPlayer.start();
+
+                                        // Agregar MediaController
+                                        MediaController mediaController = new MediaController(holder.itemView.getContext());
+                                        mediaController.setAnchorView(holder.itemView);
+                                        mediaController.setMediaPlayer(new MediaController.MediaPlayerControl() {
+                                            @Override
+                                            public void start() {
+                                                mediaPlayer.start();
+                                            }
+
+                                            @Override
+                                            public void pause() {
+                                                mediaPlayer.pause();
+                                            }
+
+                                            @Override
+                                            public int getDuration() {
+                                                return mediaPlayer.getDuration();
+                                            }
+
+                                            @Override
+                                            public int getCurrentPosition() {
+                                                return mediaPlayer.getCurrentPosition();
+                                            }
+
+                                            @Override
+                                            public void seekTo(int position) {
+                                                mediaPlayer.seekTo(position);
+                                            }
+
+                                            @Override
+                                            public boolean isPlaying() {
+                                                return mediaPlayer.isPlaying();
+                                            }
+
+                                            @Override
+                                            public int getBufferPercentage() {
+                                                return 0;
+                                            }
+
+                                            @Override
+                                            public boolean canPause() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public boolean canSeekBackward() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public boolean canSeekForward() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public int getAudioSessionId() {
+                                                return mediaPlayer.getAudioSessionId();
+                                            }
+                                        });
+                                        mediaController.setEnabled(true);
+                                        mediaController.show(0);
+
+                                        // Ocultar MediaController cuando se presiona el botón Atrás
+                                        mediaController.setOnKeyListener(new View.OnKeyListener() {
+                                            @Override
+                                            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                                                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                                    mediaController.hide();
+                                                    mediaPlayer.stop();
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        });
+
+                                        // Ocultar MediaController cuando el audio se reproduce por completo
+                                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                            @Override
+                                            public void onCompletion(MediaPlayer mp) {
+                                                mediaController.hide();
+                                            }
+                                        });
                                     } catch (IOException e) {
                                         Toast.makeText(holder.itemView.getContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
@@ -366,20 +465,28 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                     }else if (usuarioMensajes.get(holder.getAdapterPosition()).getTipo().equals("texto")){
                         CharSequence opciones[] = new CharSequence[]{
                                 holder.itemView.getContext().getString(R.string.eliminar_mi),
-                                holder.itemView.getContext().getString(R.string.cancelar)
+                                holder.itemView.getContext().getString(R.string.copiar),
+                                holder.itemView.getContext().getString(R.string.cancelar),
                         };
                         AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
                         builder.setItems(opciones, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int position) {
-
                                 if (position==0){
-
                                     EliminarMensajesRecibidos(holder.getAdapterPosition(), holder);
                                     Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
                                     holder.itemView.getContext().startActivity(intent);
                                 }
-
+                                else if(position==1){
+                                    String mensaje = usuarioMensajes.get(holder.getAdapterPosition()).getMensaje();
+                                    String mensajeDesc = decrypt(mensaje);
+                                    ClipData clipData = ClipData.newPlainText("text", mensajeDesc);
+                                    ClipboardManager clipboard = (ClipboardManager) ContextCompat.getSystemService(holder.itemView.getContext(), ClipboardManager.class);
+                                    if(clipboard!=null){
+                                        clipboard.setPrimaryClip(clipData);
+                                        Toast.makeText(holder.itemView.getContext(), R.string.mensajecopiado, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         });
                         builder.show();
@@ -451,6 +558,89 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                                         mediaPlayer.setDataSource(holder.itemView.getContext(), Uri.parse(usuarioMensajes.get(holder.getAdapterPosition()).getMensaje()));
                                         mediaPlayer.prepare();
                                         mediaPlayer.start();
+
+                                        // Agregar MediaController
+                                        MediaController mediaController = new MediaController(holder.itemView.getContext());
+                                        mediaController.setAnchorView(holder.itemView);
+                                        mediaController.setMediaPlayer(new MediaController.MediaPlayerControl() {
+                                            @Override
+                                            public void start() {
+                                                mediaPlayer.start();
+                                            }
+
+                                            @Override
+                                            public void pause() {
+                                                mediaPlayer.pause();
+                                            }
+
+                                            @Override
+                                            public int getDuration() {
+                                                return mediaPlayer.getDuration();
+                                            }
+
+                                            @Override
+                                            public int getCurrentPosition() {
+                                                return mediaPlayer.getCurrentPosition();
+                                            }
+
+                                            @Override
+                                            public void seekTo(int position) {
+                                                mediaPlayer.seekTo(position);
+                                            }
+
+                                            @Override
+                                            public boolean isPlaying() {
+                                                return mediaPlayer.isPlaying();
+                                            }
+
+                                            @Override
+                                            public int getBufferPercentage() {
+                                                return 0;
+                                            }
+
+                                            @Override
+                                            public boolean canPause() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public boolean canSeekBackward() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public boolean canSeekForward() {
+                                                return true;
+                                            }
+
+                                            @Override
+                                            public int getAudioSessionId() {
+                                                return mediaPlayer.getAudioSessionId();
+                                            }
+                                        });
+                                        mediaController.setEnabled(true);
+                                        mediaController.show(0);
+
+                                        // Ocultar MediaController cuando se presiona el botón Atrás
+                                        mediaController.setOnKeyListener(new View.OnKeyListener() {
+                                            @Override
+                                            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                                                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                                                    mediaController.hide();
+                                                    mediaPlayer.stop();
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        });
+
+                                        // Ocultar MediaController cuando el audio se reproduce por completo
+                                        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                            @Override
+                                            public void onCompletion(MediaPlayer mp) {
+                                                mediaController.hide();
+                                            }
+                                        });
                                     } catch (IOException e) {
                                         Toast.makeText(holder.itemView.getContext(), "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();

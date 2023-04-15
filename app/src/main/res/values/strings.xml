@@ -162,4 +162,7 @@ Descárgala aquí: https://play.google.com/store/apps/details?id=com.twoploapps.
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Nadie podrá enviarle mensajes y se perderán todos sus datos.</string>
     <string name="s_eliminar_mi_cuenta">Sí, eliminar mi cuenta</string>
     <string name="seeliminosucuenta">Tu cuenta fue eliminada</string>
+    <string name="esteusuarionoestadisponible">El usuario que intentas ver ya no está disponible</string>
+    <string name="copiar">Copiar mensaje</string>
+    <string name="mensajecopiado">Mensaje copiado al portapapeles</string>
 </resources>

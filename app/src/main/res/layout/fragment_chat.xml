@@ -12,11 +12,13 @@
         android:layout_alignParentBottom="true"/>
     <ImageButton
         android:id="@+id/btnbuscarcontactos"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_margin="20dp"
         android:scaleType="fitXY"
+        android:padding="10dp"
         android:src="@drawable/baseline_chat_24"
+        android:background="@drawable/boton_redondo"
         android:backgroundTint="@color/status_background"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />

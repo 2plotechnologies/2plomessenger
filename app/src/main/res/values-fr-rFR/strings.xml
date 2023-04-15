@@ -161,4 +161,7 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Personne ne pourra vous envoyer de messages et toutes vos données seront perdues.</string>
     <string name="s_eliminar_mi_cuenta">Oui, supprimer mon compte</string>
     <string name="seeliminosucuenta">Votre compte a été supprimé</string>
+    <string name="esteusuarionoestadisponible">Désolé, l\'utilisateur que vous essayez de voir n\'est plus disponible</string>
+    <string name="copiar">Copier le message</string>
+    <string name="mensajecopiado">Message copié dans le presse-papiers</string>
 </resources>

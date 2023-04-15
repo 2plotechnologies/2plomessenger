@@ -159,4 +159,7 @@
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Niemand wird Ihnen Nachrichten senden können und alle Ihre Daten werden gelöscht.</string>
     <string name="s_eliminar_mi_cuenta">Ja, meinen Account löschen</string>
     <string name="seeliminosucuenta">Ihr Account wurde erfolgreich gelöscht.</string>
+    <string name="esteusuarionoestadisponible">Der von Ihnen gesuchte Benutzer ist nicht verfügbar</string>
+    <string name="copiar">Nachricht kopieren</string>
+    <string name="mensajecopiado">Nachricht in die Zwischenablage kopiert</string>
 </resources>

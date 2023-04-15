@@ -161,4 +161,7 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Nessuno potrà inviarti messaggi e tutti i tuoi dati saranno persi.</string>
     <string name="s_eliminar_mi_cuenta">Sì, elimina il mio account</string>
     <string name="seeliminosucuenta">Il tuo account è stato eliminato</string>
+    <string name="esteusuarionoestadisponible">L\'utente che stai cercando di visualizzare non e più disponibile</string>
+    <string name="copiar">Copia il messaggio</string>
+    <string name="mensajecopiado">Messaggio copiato negli appunti</string>
 </resources>

@@ -161,4 +161,7 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">Ninguém poderá enviar mensagens para você e todos os seus dados serão perdidos.</string>
     <string name="s_eliminar_mi_cuenta">Sim, excluir minha conta</string>
     <string name="seeliminosucuenta">Sua conta foi excluída</string>
+    <string name="esteusuarionoestadisponible">O usuário que você está tentando ver não está mais disponível</string>
+    <string name="copiar">Copiar mensagem</string>
+    <string name="mensajecopiado">Mensagem copiada para a área de transferência</string>
 </resources>

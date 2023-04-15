@@ -161,4 +161,7 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="nadie_podr_enviarle_mensajes_y_se_perder_n_todos_sus_datos">No one will be able to send you messages and all your data will be lost.</string>
     <string name="s_eliminar_mi_cuenta">Yes, delete my account</string>
     <string name="seeliminosucuenta">Your account was deleted</string>
+    <string name="esteusuarionoestadisponible">The user you are trying to view is no longer available</string>
+    <string name="copiar">Copy message</string>
+    <string name="mensajecopiado">Message copied to clipboard</string>
 </resources>

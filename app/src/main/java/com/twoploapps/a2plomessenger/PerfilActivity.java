@@ -1,8 +1,11 @@
 package com.twoploapps.a2plomessenger;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,6 +55,36 @@ public class PerfilActivity extends AppCompatActivity {
         CurrenEstado = "nueva";
         ObtenerInfromacionDB();
         verificarContactoAgregado();
+        usuarioExiste();
+    }
+
+    private void usuarioExiste() {
+        UserRef.child(usuario_revid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    if(snapshot.hasChild("estadodecuenta")){
+                        String estado = snapshot.child("estadodecuenta").getValue().toString();
+                        if(estado.equals("eliminada")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
+                            builder.setMessage(getString(R.string.esteusuarionoestadisponible))
+                                    .setCancelable(false)
+                                    .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            Intent intent = new Intent(PerfilActivity.this, BuscarAmigosActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+                            AlertDialog alert = builder.create();
+                            alert.show();
+
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     private void verificarContactoAgregado() {
