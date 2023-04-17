@@ -78,8 +78,6 @@ public class ChatActivity extends AppCompatActivity {
     private String check="",myUrl="";
     private StorageTask uploadTaks;
     private Uri fileUri;
-    private static final String AES = "AES";
-    private static final String key = BuildConfig.CLAVE_CIFRADO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -425,7 +423,7 @@ public class ChatActivity extends AppCompatActivity {
             String mensajeRecibidoRef = "Mensajes/"+RecibirUserID + "/" + EnviarUserID;
             DatabaseReference usuarioMensajeRef = RootRef.child("mensajes").child(EnviarUserID).child(RecibirUserID).push();
             String MensajePushID = usuarioMensajeRef.getKey();
-            String mensajeEnc = encrypt(mensajeTexto);
+            String mensajeEnc = cifrado.encrypt(mensajeTexto);
             Map mensajeTxt = new HashMap();
             mensajeTxt.put("mensaje",mensajeEnc);
             mensajeTxt.put("tipo","texto");
@@ -454,17 +452,5 @@ public class ChatActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-    private static String encrypt(String mensajeTexto) {
-        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), AES);
-        byte[] encryptedData = new byte[0];
-        try {
-            Cipher cipher = Cipher.getInstance(AES);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            encryptedData = cipher.doFinal(mensajeTexto.getBytes(StandardCharsets.UTF_8));
-        } catch (Exception ex) {
-            Log.e("Error",ex.getMessage());
-        }
-        return Base64.encodeToString(encryptedData, Base64.DEFAULT);
     }
 }

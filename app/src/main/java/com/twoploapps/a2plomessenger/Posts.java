@@ -7,10 +7,8 @@ public class Posts {
     private String iduser;
     private String postId;
     private long fecha; // Nueva propiedad fecha de tipo long
-
     public Posts() {
     }
-
     public Posts(String texto, String imagen, String nomuser, String iduser, String postId, long fecha) {
         this.texto = texto;
         this.imagen = imagen;
@@ -19,7 +17,6 @@ public class Posts {
         this.postId = postId;
         this.fecha = fecha;
     }
-
     public String getTexto() {
         return texto;
     }

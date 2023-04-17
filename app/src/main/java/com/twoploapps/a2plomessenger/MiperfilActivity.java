@@ -52,7 +52,6 @@ public class MiperfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_miperfil);
-
         Componentes();
         dialog = new ProgressDialog(this);
         botonmiperfil.setOnClickListener(new View.OnClickListener() {
@@ -65,11 +64,9 @@ public class MiperfilActivity extends AppCompatActivity {
         RootRef= FirebaseDatabase.getInstance().getReference();
         auth=FirebaseAuth.getInstance();
         CurrentuserID=auth.getCurrentUser().getUid();
-
         RootRef.child("Usuarios").child(CurrentuserID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists() && snapshot.hasChild("imagen")) {
                     String nom1 = snapshot.child("nombre").getValue().toString();
                     String ciu1 = snapshot.child("ciudad").getValue().toString();
@@ -77,20 +74,16 @@ public class MiperfilActivity extends AppCompatActivity {
                     String gen1 = snapshot.child("genero").getValue().toString();
                     String est1 = snapshot.child("estado").getValue().toString();
                     String imagen1 = snapshot.child("imagen").getValue().toString();
-
                     nombre.setText(nom1);
                     ciudad.setText(ciu1);
                     edad.setText(eda1);
                     genero.setText(gen1);
                     estado.setText(est1);
-
                     Picasso.get()
                             .load(imagen1)
                             .placeholder(R.drawable.defaultprofilephoto)
                             .error(R.drawable.defaultprofilephoto)
                             .into(imagenmiperfil);
-
-
                 }else if (snapshot.exists()){
                     String nom1 = snapshot.child("nombre").getValue().toString();
                     String ciu1 = snapshot.child("ciudad").getValue().toString();
@@ -104,7 +97,6 @@ public class MiperfilActivity extends AppCompatActivity {
                     estado.setText(est1);
                 }
             }@Override public void onCancelled(@NonNull DatabaseError error) { }});
-
         imagenmiperfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +104,6 @@ public class MiperfilActivity extends AppCompatActivity {
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 intent.setType("image/*");
                 startActivityForResult(intent,Gallery_PICK);
-
             }
         });
         atrasmiperfil.setOnClickListener(new View.OnClickListener() {
@@ -121,22 +112,17 @@ public class MiperfilActivity extends AppCompatActivity {
                 Regresaralinicio();
             }
         });
-
     }
-
     private void Regresaralinicio() {
         Intent intent = new Intent(MiperfilActivity.this, InicioActivity.class);
         startActivity(intent);
     }
-
     private void ActualizarInformacion() {
-
-        String nom = nombre.getText().toString();
-        String ciu = ciudad.getText().toString();
-        String eda = edad.getText().toString();
-        String gen = genero.getText().toString();
-        String est = estado.getText().toString();
-
+        String nom = nombre.getText().toString().trim();
+        String ciu = ciudad.getText().toString().trim();
+        String eda = edad.getText().toString().trim();
+        String gen = genero.getText().toString().trim();
+        String est = estado.getText().toString().trim();
         if (TextUtils.isEmpty(nom)){
             Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(ciu)){
@@ -169,11 +155,7 @@ public class MiperfilActivity extends AppCompatActivity {
                         }
                     });
         }
-
-
     }
-
-
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
@@ -231,13 +213,10 @@ public class MiperfilActivity extends AppCompatActivity {
             }
         }
     }
-
-
     private void EnviaralInicio() {
         Intent intent = new Intent(MiperfilActivity.this, InicioActivity.class);
         startActivity(intent);
     }
-
     private void Componentes() {
         nombre=(EditText)findViewById(R.id.nombre_miperfil);
         ciudad=(EditText)findViewById(R.id.ciudad_miperfil);
@@ -250,6 +229,5 @@ public class MiperfilActivity extends AppCompatActivity {
         toolbar=(Toolbar) findViewById(R.id.toolbar_miperfil);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.mi_perfil);
-
     }
 }

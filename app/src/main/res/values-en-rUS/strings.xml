@@ -164,4 +164,5 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="esteusuarionoestadisponible">The user you are trying to view is no longer available</string>
     <string name="copiar">Copy message</string>
     <string name="mensajecopiado">Message copied to clipboard</string>
+    <string name="reproductor_de_audio_de_2plo_messenger">Audio player of 2Plo Messenger</string>
 </resources>

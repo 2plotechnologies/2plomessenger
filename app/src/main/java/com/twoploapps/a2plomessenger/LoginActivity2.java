@@ -80,7 +80,7 @@ public class LoginActivity2 extends AppCompatActivity {
         startActivity(intent);
     }
     public void userLogin(){
-        String Mail = txtcorreo.getText().toString().trim();
+        String Mail = txtcorreo.getText().toString().trim().toLowerCase();
         String Password = txtcontraseña.getText().toString().trim();
 
         if(TextUtils.isEmpty(Mail)){

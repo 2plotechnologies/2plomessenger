@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.2PloMessenger">
         <activity
+            android:name=".AudioActivity"
+            android:exported="false" />
+        <activity
             android:name=".ConfirmarEliminacionActivity"
             android:exported="false" />
         <activity

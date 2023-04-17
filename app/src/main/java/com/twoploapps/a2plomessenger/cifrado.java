@@ -14,49 +14,31 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class cifrado {
-    private static final int KEY_SIZE = 128; // Tamaño de la clave en bits.
-    private static final int IV_SIZE = 16; // Tamaño del vector de inicialización en bytes.
-    private static final String ALGORITHM = "AES/CBC/PKCS5Padding"; // Algoritmo de cifrado.
-
-    // Genera una clave aleatoria para cifrar los datos.
-    public static SecretKeySpec generateKey() {
-        byte[] keyBytes = new byte[0];
+    private static final String AES = "AES";
+    private static final String key = BuildConfig.CLAVE_CIFRADO;
+    public static String encrypt(String mensajeTexto) {
+        SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), AES);
+        byte[] encryptedData = new byte[0];
         try {
-            String password = BuildConfig.CLAVE_CIFRADO;
-            byte[] salt = new byte[16];
-            SecureRandom random = new SecureRandom();
-            random.nextBytes(salt);
-            int iterations = 10000;
-            int keyLength = 128;
-            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, keyLength);
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            keyBytes = factory.generateSecret(spec).getEncoded();
+            Cipher cipher = Cipher.getInstance(AES);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            encryptedData = cipher.doFinal(mensajeTexto.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
-            Log.e("error", ex.getMessage());
+            Log.e("Error",ex.getMessage());
         }
-        return new SecretKeySpec(keyBytes, "AES");
+        return Base64.encodeToString(encryptedData, Base64.DEFAULT);
     }
-    public static String encrypt(String plainText, SecretKeySpec secretKey, byte[] iv) {
-        byte[] cipherText = new byte[0];
+    public static String decrypt(String mensaje) {
+        byte[] decryptedData = new byte[0];
         try {
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(iv));
-            cipherText = cipher.doFinal(plainText.getBytes(StandardCharsets.UTF_8));
+            byte[] data = Base64.decode(mensaje, Base64.DEFAULT);
+            SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), AES);
+            Cipher cipher = Cipher.getInstance(AES);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            decryptedData = cipher.doFinal(data);
         } catch (Exception ex) {
-            Log.e("error", ex.getMessage());
+            Log.e("Error", ex.getMessage());
         }
-        return Base64.encodeToString(cipherText, Base64.DEFAULT);
-    }
-    // Desencripta los datos utilizando una clave y un vector de inicialización.
-    public static String decrypt(String cipherText, SecretKeySpec secretKey, byte[] iv) {
-        byte[] plainText = new byte[0];
-        try {
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(iv));
-            plainText = cipher.doFinal(Base64.decode(cipherText, Base64.DEFAULT));
-        } catch (Exception ex) {
-            Log.e("error", ex.getMessage());
-        }
-        return new String(plainText, StandardCharsets.UTF_8);
+        return new String(decryptedData, StandardCharsets.UTF_8);
     }
 }

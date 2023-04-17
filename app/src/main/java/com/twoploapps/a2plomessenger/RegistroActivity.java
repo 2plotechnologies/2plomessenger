@@ -49,9 +49,6 @@ public class RegistroActivity extends AppCompatActivity {
     private String userID;
     private FirebaseAuth mAuth;
     private FirebaseFirestore database;
-    private static final String AES = "AES";
-    private static final String key = BuildConfig.CIFRADOPASSWORD;
-    private static final int IV_SIZE = 16;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +97,7 @@ public class RegistroActivity extends AppCompatActivity {
     }
     public void CreateNewUser() {
         String username = textouser.getText().toString().trim();
-        String email = textocorreo.getText().toString().trim();
+        String email = textocorreo.getText().toString().trim().toLowerCase();
         String password = textocontra.getText().toString().trim();
 
         if(TextUtils.isEmpty(username)){
@@ -119,7 +116,7 @@ public class RegistroActivity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         userID = mAuth.getCurrentUser().getUid();
                         DocumentReference documentReference = database.collection("users").document(userID);
-                        String encryptedPassword = encrypt(password);
+                        String encryptedPassword = cifrado.encrypt(password);
                         Map<String, Object> user = new HashMap<>();
                         user.put("username",username);
                         user.put("email",email);
@@ -142,18 +139,5 @@ public class RegistroActivity extends AppCompatActivity {
                 }
             });
         }
-    }
-
-    private String encrypt(String data) {
-        byte[] encryptedData = new byte[0];
-        try {
-            SecretKeySpec secretKey = new SecretKeySpec(key.getBytes(), AES);
-            Cipher cipher = Cipher.getInstance(AES);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            encryptedData = cipher.doFinal(data.getBytes());
-        } catch (Exception ex) {
-            Log.e("Error","No se puede registrar, error: "+ex.getMessage());
-        }
-        return Base64.encodeToString(encryptedData, Base64.DEFAULT);
     }
 }

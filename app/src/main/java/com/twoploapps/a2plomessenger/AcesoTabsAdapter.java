@@ -17,7 +17,6 @@ public class AcesoTabsAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0:
                 ChatFragment chatFragment = new ChatFragment();
@@ -35,12 +34,10 @@ public class AcesoTabsAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
-
     @Override
     public int getCount() {
         return 4;
     }
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

@@ -164,4 +164,5 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="esteusuarionoestadisponible">L\'utente che stai cercando di visualizzare non e più disponibile</string>
     <string name="copiar">Copia il messaggio</string>
     <string name="mensajecopiado">Messaggio copiato negli appunti</string>
+    <string name="reproductor_de_audio_de_2plo_messenger">Lettore audio di 2Plo Messenger</string>
 </resources>
