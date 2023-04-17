@@ -1,96 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
     tools:context=".PrivacidadActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/privacidad_titulo"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ultima_conexion"
-        android:layout_marginTop="10dp"/>
-    <RadioGroup
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/radio_group">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/ocultar_ultima_conexion"
-            android:id="@+id/cb_hideseen"
-            android:layout_margin="6dp"/>
-        <RadioButton
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacidad_titulo"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ultima_conexion"
+            android:layout_marginTop="10dp"/>
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mostrar_ultima_conexion"
-            android:id="@+id/cb_showseen"
-            android:layout_margin="6dp"/>
-    </RadioGroup>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/datos"
-        android:layout_marginTop="10dp"/>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/radio_group_ciu">
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/ocultar_ciudad"
-            android:id="@+id/cb_hideciu"
-            android:layout_margin="6dp"/>
-        <RadioButton
+            android:id="@+id/radio_group">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/ocultar_ultima_conexion"
+                android:id="@+id/cb_hideseen"
+                android:layout_margin="6dp"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/mostrar_ultima_conexion"
+                android:id="@+id/cb_showseen"
+                android:layout_margin="6dp"/>
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ciudad"
+            android:layout_marginTop="10dp"/>
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mostrar_ciudad"
-            android:id="@+id/cb_showciu"
-            android:layout_margin="6dp"/>
-        <RadioButton
+            android:id="@+id/radio_group_ciu">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/ocultar"
+                android:id="@+id/cb_hideciu"
+                android:layout_margin="6dp"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/mostrar"
+                android:id="@+id/cb_showciu"
+                android:layout_margin="6dp"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/solo_a_mis_contactos"
+                android:id="@+id/cb_showcontactsciu"
+                android:layout_margin="6dp"/>
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/imagen_perfil"
+            android:layout_marginTop="10dp"/>
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mostrar_ciudad_solo_a_mis_contactos"
-            android:id="@+id/cb_showcontactsciu"
-            android:layout_margin="6dp"/>
-    </RadioGroup>
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/radio_group_image">
-        <RadioButton
+            android:id="@+id/radio_group_image">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/ocultar"
+                android:id="@+id/cb_hideimage"
+                android:layout_margin="6dp"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/mostrar"
+                android:id="@+id/cb_showimage"
+                android:layout_margin="6dp"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/solo_a_mis_contactos"
+                android:id="@+id/cb_contactoimage"
+                android:layout_margin="6dp"/>
+        </RadioGroup>
+        <CheckBox
+            android:id="@+id/chk_bloquearscreenshots"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/ocultar_imagen_de_perfil"
-            android:id="@+id/cb_hideimage"
-            android:layout_margin="6dp"/>
-        <RadioButton
+            android:layout_height="48dp"
+            android:text="@string/bloquear_screenshots"/>
+        <CheckBox
+            android:id="@+id/chk_proteccionchats"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@string/proteger_chats"/>
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/mostrar_imagen_de_perfil"
-            android:id="@+id/cb_showimage"
-            android:layout_margin="6dp"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mostrar_imagen_de_perfil_solo_a_mis_contactos"
-            android:id="@+id/cb_contactoimage"
-            android:layout_margin="6dp"/>
-    </RadioGroup>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/saveprivacity"
-        android:layout_marginTop="10dp"
-        android:background="@color/black"
-        android:text="@string/guardar"
-        android:textColor="@color/white"/>
-</LinearLayout>
+            android:id="@+id/saveprivacity"
+            android:layout_marginTop="10dp"
+            android:background="@color/black"
+            android:text="@string/guardar"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</ScrollView>

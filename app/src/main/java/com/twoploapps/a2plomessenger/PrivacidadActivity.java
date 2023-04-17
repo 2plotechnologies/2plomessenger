@@ -1,12 +1,20 @@
 package com.twoploapps.a2plomessenger;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -25,6 +33,7 @@ public class PrivacidadActivity extends AppCompatActivity {
     private String CurrentUserId;
     private FirebaseAuth mAuth;
     private RadioButton hideseen, showseen, hideciu, showciu, hideimage, showimage, showciucontacts, showimgcontacts;
+    private CheckBox protectchats, screenshotblock;
     private Button botonguardar;
 
     @Override
@@ -39,12 +48,46 @@ public class PrivacidadActivity extends AppCompatActivity {
         showimage = (RadioButton) findViewById(R.id.cb_showimage);
         showciucontacts = findViewById(R.id.cb_showcontactsciu);
         showimgcontacts = findViewById(R.id.cb_contactoimage);
+        screenshotblock = findViewById(R.id.chk_bloquearscreenshots);
+        protectchats = findViewById(R.id.chk_proteccionchats);
         botonguardar = (Button) findViewById(R.id.saveprivacity);
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         ultRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         ultRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        protectchats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (protectchats.isChecked()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PrivacidadActivity.this);
+                    builder.setTitle(R.string.proteger_chats);
+                    builder.setMessage(getString(R.string.escribetuclavedechats));
+                    final EditText input = new EditText(PrivacidadActivity.this);
+                    input.setHint(R.string.ingresa_password);
+                    input.setTextColor(Color.BLACK);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    builder.setView(input);
+                    builder.setPositiveButton(R.string.guardar, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String clave = input.getText().toString().trim();
+                            if(!clave.isEmpty()){
+                                UserRef.child(CurrentUserId).child("ClaveChats").setValue(clave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(PrivacidadActivity.this, "Password created successfuly", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    builder.show();
+                }
+            }
+        });
         botonguardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +110,25 @@ public class PrivacidadActivity extends AppCompatActivity {
                 }else if(showimgcontacts.isChecked()){
                     UserRef.child(CurrentUserId).child("PI").setValue("Contactos");
                 }
-                Toast.makeText(PrivacidadActivity.this, "Se guardo la configuracion", Toast.LENGTH_SHORT).show();
+                if(protectchats.isChecked()){
+                    UserRef.child(CurrentUserId).child("ProtegeChats").setValue("verdadero");
+                }else{
+                    try{
+                        UserRef.child(CurrentUserId).child("ProtegeChats").removeValue();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
+                if(screenshotblock.isChecked()){
+                    UserRef.child(CurrentUserId).child("screenshotsbloqueados").setValue("verdadero");
+                }else{
+                    try{
+                        UserRef.child(CurrentUserId).child("screenshotsbloqueados").removeValue();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
+                Toast.makeText(PrivacidadActivity.this, R.string.guardado_exitosamente, Toast.LENGTH_SHORT).show();
             }
         });
         obtenerConfiguracion();
@@ -101,6 +162,8 @@ public class PrivacidadActivity extends AppCompatActivity {
                     }else if(privacidadimg.equals("Contactos")){
                         showimgcontacts.setChecked(true);
                     }
+                    protectchats.setChecked(snapshot.hasChild("ProtegeChats"));
+                    screenshotblock.setChecked(snapshot.hasChild("screenshotsbloqueados"));
                 }
             }
 

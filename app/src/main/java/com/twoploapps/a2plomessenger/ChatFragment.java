@@ -1,18 +1,24 @@
 package com.twoploapps.a2plomessenger;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -117,11 +123,51 @@ public class ChatFragment extends Fragment {
                             holder.itemView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Intent intent = new Intent(getContext(), ChatActivity.class);
-                                    intent.putExtra("user_id", userIds);
-                                    intent.putExtra("user_nombre", nombres);
-                                    intent.putExtra("user_imagen", imagens[0]);
-                                    startActivity(intent);
+                                    UserRef.child(CurrentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.exists()){
+                                                if(snapshot.hasChild("ProtegeChats")&&snapshot.hasChild("ClaveChats")){
+                                                    String pass = snapshot.child("ClaveChats").getValue().toString();
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                                                    builder.setTitle(R.string.ingresa_password);
+                                                    final EditText input = new EditText(holder.itemView.getContext());
+                                                    input.setHint(R.string.introduce_tu_contrase_a);
+                                                    input.setTextColor(Color.BLACK);
+                                                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                                                    builder.setView(input);
+                                                    builder.setCancelable(false);
+                                                    builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            String clave = input.getText().toString().trim();
+                                                            if(!clave.isEmpty()) {
+                                                                if(!clave.equals(pass)){
+                                                                    Toast.makeText(holder.itemView.getContext(), R.string.claveincorrecta, Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(holder.itemView.getContext(),InicioActivity.class);
+                                                                    startActivity(intent);
+                                                                }else{
+                                                                    Intent intent = new Intent(getContext(), ChatActivity.class);
+                                                                    intent.putExtra("user_id", userIds);
+                                                                    intent.putExtra("user_nombre", nombres);
+                                                                    intent.putExtra("user_imagen", imagens[0]);
+                                                                    startActivity(intent);
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                    builder.show();
+                                                }else{
+                                                    Intent intent = new Intent(getContext(), ChatActivity.class);
+                                                    intent.putExtra("user_id", userIds);
+                                                    intent.putExtra("user_nombre", nombres);
+                                                    intent.putExtra("user_imagen", imagens[0]);
+                                                    startActivity(intent);
+                                                }
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {}});
                                 }
                             });
                         }

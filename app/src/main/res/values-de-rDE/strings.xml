@@ -163,4 +163,11 @@
     <string name="copiar">Nachricht kopieren</string>
     <string name="mensajecopiado">Nachricht in die Zwischenablage kopiert</string>
     <string name="reproductor_de_audio_de_2plo_messenger">Audio-Player von 2Plo Messenger</string>
+    <string name="ocultar">Niemand</string>
+    <string name="mostrar">Alle</string>
+    <string name="solo_a_mis_contactos">Nur meine Kontakte</string>
+    <string name="bloquear_screenshots">Screenshots blockieren</string>
+    <string name="proteger_chats">Chats mit Passwort schützen</string>
+    <string name="escribetuclavedechats">Geben Sie ein Passwort ein, um Ihre Chats zu schützen</string>
+    <string name="claveincorrecta">Das eingegebene Passwort ist falsch, Sie können nicht auf diesen Chat zugreifen</string>
 </resources>

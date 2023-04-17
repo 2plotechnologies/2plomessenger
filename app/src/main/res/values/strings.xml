@@ -166,4 +166,11 @@ Descárgala aquí: https://play.google.com/store/apps/details?id=com.twoploapps.
     <string name="copiar">Copiar mensaje</string>
     <string name="mensajecopiado">Mensaje copiado al portapapeles</string>
     <string name="reproductor_de_audio_de_2plo_messenger">Reproductor de audio de 2Plo Messenger</string>
+    <string name="ocultar">Nadie</string>
+    <string name="mostrar">Todos</string>
+    <string name="solo_a_mis_contactos">Solo mis contactos</string>
+    <string name="bloquear_screenshots">Bloquear screenshots</string>
+    <string name="proteger_chats">Proteger chats con contraseña</string>
+    <string name="escribetuclavedechats">Introduce una clave para proteger tus chats</string>
+    <string name="claveincorrecta">La clave introducida no es correcta, no puedes acceder a este chat</string>
 </resources>

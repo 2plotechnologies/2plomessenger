@@ -165,4 +165,11 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="copiar">Copier le message</string>
     <string name="mensajecopiado">Message copié dans le presse-papiers</string>
     <string name="reproductor_de_audio_de_2plo_messenger">Lecteur audio de 2Plo Messenger</string>
+    <string name="ocultar">Personne</string>
+    <string name="mostrar">Tout le monde</string>
+    <string name="solo_a_mis_contactos">Seulement mes contacts</string>
+    <string name="bloquear_screenshots">Bloquer les captures d\'ecran</string>
+    <string name="proteger_chats">Protéger les chats avec un mot de passe</string>
+    <string name="escribetuclavedechats">Entrez un mot de passe pour protéger vos chats</string>
+    <string name="claveincorrecta">Le mot de passe saisi est incorrect, vous ne pouvez pas accéder à ce chat</string>
 </resources>
