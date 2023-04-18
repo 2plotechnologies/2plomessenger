@@ -180,21 +180,21 @@ public class SetupActivity2 extends AppCompatActivity {
         }
     }
     private void GuardarInfromacionDB() {
-        String nom = nombre.getText().toString();
-        String ciu = ciudad.getText().toString();
-        String gen = genero.getText().toString();
-        String eda = edad.getText().toString();
-        String est = estado.getText().toString();
+        String nom = nombre.getText().toString().trim();
+        String ciu = ciudad.getText().toString().trim();
+        String gen = genero.getText().toString().trim();
+        String eda = edad.getText().toString().trim();
+        String est = estado.getText().toString().trim();
         int edad = Integer.parseInt(eda);
-        if (TextUtils.isEmpty(nom)){
+        if (TextUtils.isEmpty(nom)||nom.length()>30){
             Toast.makeText(this, R.string.ingrese_su_nombre, Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(ciu)){
+        }else if (TextUtils.isEmpty(ciu)||ciu.length()>50){
             Toast.makeText(this, R.string.ingrese_su_ciudad, Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(gen)){
+        }else if (TextUtils.isEmpty(gen)||gen.length()>10){
             Toast.makeText(this, R.string.ingrese_su_genero, Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(eda)){
             Toast.makeText(this, R.string.ingrese_su_edad, Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(est)){
+        }else if (TextUtils.isEmpty(est)||est.length()>140){
             Toast.makeText(this, R.string.ingrese_su_estado, Toast.LENGTH_SHORT).show();
         }else if(edad<15){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

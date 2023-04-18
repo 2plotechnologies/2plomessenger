@@ -129,6 +129,7 @@ public class ChatFragment extends Fragment {
                                             if(snapshot.exists()){
                                                 if(snapshot.hasChild("ProtegeChats")&&snapshot.hasChild("ClaveChats")){
                                                     String pass = snapshot.child("ClaveChats").getValue().toString();
+                                                    String decryptedPass = cifrado.decrypt(pass);
                                                     AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
                                                     builder.setTitle(R.string.ingresa_password);
                                                     final EditText input = new EditText(holder.itemView.getContext());
@@ -142,7 +143,7 @@ public class ChatFragment extends Fragment {
                                                         public void onClick(DialogInterface dialog, int which) {
                                                             String clave = input.getText().toString().trim();
                                                             if(!clave.isEmpty()) {
-                                                                if(!clave.equals(pass)){
+                                                                if(!clave.equals(decryptedPass)){
                                                                     Toast.makeText(holder.itemView.getContext(), R.string.claveincorrecta, Toast.LENGTH_SHORT).show();
                                                                     Intent intent = new Intent(holder.itemView.getContext(),InicioActivity.class);
                                                                     startActivity(intent);
@@ -155,7 +156,7 @@ public class ChatFragment extends Fragment {
                                                                 }
                                                             }
                                                         }
-                                                    });
+                                                    }).setNegativeButton(R.string.cancelar,null);
                                                     builder.show();
                                                 }else{
                                                     Intent intent = new Intent(getContext(), ChatActivity.class);

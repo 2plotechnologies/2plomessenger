@@ -34,11 +34,11 @@
     <string name="abrirregistro">Non hai ancora un account? Registrati</string>
     <string name="showpass">Mostra password</string>
     <string name="loginbtn">Accedi</string>
-    <string name="ingrese_su_nombre">Inserisci il tuo nome</string>
-    <string name="ingrese_su_ciudad">Inserisci la tua città</string>
-    <string name="ingrese_su_estado">Inserisci il tuo stato</string>
+    <string name="ingrese_su_nombre">Il campo nome non deve essere vuoto né superare i 30 caratteri</string>
+    <string name="ingrese_su_ciudad">Il campo città non deve essere vuoto né superare i 50 caratteri</string>
+    <string name="ingrese_su_estado">Il campo stato non deve essere vuoto né superare i 10 caratteri</string>
     <string name="ingrese_su_edad">Inserisci la tua età</string>
-    <string name="ingrese_su_genero">Inserisci il tuo genere</string>
+    <string name="ingrese_su_genero">Il campo genere non deve essere vuoto né superare i 140 caratteri</string>
     <string name="guardar_informacion">Salva informazioni</string>
     <string name="nombre">Nome</string>
     <string name="ciudad">Città</string>
@@ -172,4 +172,5 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="proteger_chats">Proteggi le chat con una password</string>
     <string name="escribetuclavedechats">Inserisci una password per proteggere le tue chat</string>
     <string name="claveincorrecta">La password inserita non è corretta, non puoi accedere a questa chat</string>
+    <string name="mas_opciones">Più opzioni</string>
 </resources>

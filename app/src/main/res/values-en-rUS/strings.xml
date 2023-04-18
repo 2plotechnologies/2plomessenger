@@ -34,11 +34,11 @@
     <string name="abrirregistro">Don\'t have an account yet? Sign up</string>
     <string name="showpass">Show password</string>
     <string name="loginbtn">Log in</string>
-    <string name="ingrese_su_nombre">Enter your name</string>
-    <string name="ingrese_su_ciudad">Enter your city</string>
-    <string name="ingrese_su_estado">Enter your state</string>
+    <string name="ingrese_su_nombre">The name field should not be empty or exceed 30 characters</string>
+    <string name="ingrese_su_ciudad">The city field should not be empty or exceed 50 characters</string>
+    <string name="ingrese_su_genero">The gender field should not be empty or exceed 10 characters</string>
     <string name="ingrese_su_edad">Enter your age</string>
-    <string name="ingrese_su_genero">Enter your gender</string>
+    <string name="ingrese_su_estado">The status field should not be empty or exceed 140 characters</string>
     <string name="guardar_informacion">Save Information</string>
     <string name="nombre">Name</string>
     <string name="ciudad">City</string>
@@ -172,4 +172,5 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="proteger_chats">Protect chats with password</string>
     <string name="escribetuclavedechats">Enter a password to protect your chats</string>
     <string name="claveincorrecta">The password entered is incorrect, you cannot access this chat</string>
+    <string name="mas_opciones">More options</string>
 </resources>

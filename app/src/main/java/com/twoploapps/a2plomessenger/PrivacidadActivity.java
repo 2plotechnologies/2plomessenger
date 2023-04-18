@@ -56,6 +56,7 @@ public class PrivacidadActivity extends AppCompatActivity {
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         ultRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         ultRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        verificar();
         protectchats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,22 +69,29 @@ public class PrivacidadActivity extends AppCompatActivity {
                     input.setTextColor(Color.BLACK);
                     input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     builder.setView(input);
+                    builder.setCancelable(false);
                     builder.setPositiveButton(R.string.guardar, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String clave = input.getText().toString().trim();
                             if(!clave.isEmpty()){
-                                UserRef.child(CurrentUserId).child("ClaveChats").setValue(clave).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                String claveEnc = cifrado.encrypt(clave);
+                                UserRef.child(CurrentUserId).child("ClaveChats").setValue(claveEnc).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             Toast.makeText(PrivacidadActivity.this, "Password created successfuly", Toast.LENGTH_SHORT).show();
+                                            UserRef.child(CurrentUserId).child("ProtegeChats").setValue("verdadero");
                                         }
                                     }
                                 });
                             }
                         }
-                    });
+                    }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            protectchats.setChecked(false);
+                        }});
                     builder.show();
                 }
             }
@@ -134,6 +142,43 @@ public class PrivacidadActivity extends AppCompatActivity {
         obtenerConfiguracion();
     }
 
+    private void verificar() {
+        UserRef.child(CurrentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    if(snapshot.hasChild("ProtegeChats")&&snapshot.hasChild("ClaveChats")){
+                        String pass = snapshot.child("ClaveChats").getValue().toString();
+                        String decryptedPass = cifrado.decrypt(pass);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PrivacidadActivity.this);
+                        builder.setTitle(R.string.ingresa_password);
+                        final EditText input = new EditText(PrivacidadActivity.this);
+                        input.setHint(R.string.introduce_tu_contrase_a);
+                        input.setTextColor(Color.BLACK);
+                        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                        builder.setView(input);
+                        builder.setCancelable(false);
+                        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String clave = input.getText().toString().trim();
+                                if(!clave.isEmpty()) {
+                                    if(!clave.equals(decryptedPass)){
+                                        Toast.makeText(PrivacidadActivity.this, "ACCESS DENIED!", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(PrivacidadActivity.this,InicioActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }
+                            }
+                        }).setNegativeButton(R.string.cancelar,null);
+                        builder.show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
+    }
+
     private void obtenerConfiguracion() {
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -147,20 +192,27 @@ public class PrivacidadActivity extends AppCompatActivity {
                     }else if(privacidaduc.equals("Publico")){
                         showseen.setChecked(true);
                     }
-                    if(privacidadciu.equals("-")){
-                        hideciu.setChecked(true);
-                    }else if(privacidadciu.equals("Publico")){
-                        showciu.setChecked(true);
+                    switch (privacidadciu) {
+                        case "-":
+                            hideciu.setChecked(true);
+                            break;
+                        case "Publico":
+                            showciu.setChecked(true);
+                            break;
+                        case "Contactos":
+                            showciucontacts.setChecked(true);
+                            break;
                     }
-                    else if(privacidadciu.equals("Contactos")){
-                       showciucontacts.setChecked(true);
-                    }
-                    if(privacidadimg.equals("Oculto")){
-                        hideimage.setChecked(true);
-                    }else if(privacidadimg.equals("Publico")){
-                        showimage.setChecked(true);
-                    }else if(privacidadimg.equals("Contactos")){
-                        showimgcontacts.setChecked(true);
+                    switch (privacidadimg) {
+                        case "Oculto":
+                            hideimage.setChecked(true);
+                            break;
+                        case "Publico":
+                            showimage.setChecked(true);
+                            break;
+                        case "Contactos":
+                            showimgcontacts.setChecked(true);
+                            break;
                     }
                     protectchats.setChecked(snapshot.hasChild("ProtegeChats"));
                     screenshotblock.setChecked(snapshot.hasChild("screenshotsbloqueados"));
@@ -168,9 +220,6 @@ public class PrivacidadActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 }

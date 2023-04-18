@@ -34,11 +34,11 @@
     <string name="abrirregistro">Pas encore de compte? Inscrivez-vous</string>
     <string name="showpass">Afficher le mot de passe</string>
     <string name="loginbtn">Se connecter</string>
-    <string name="ingrese_su_nombre">Entrez votre nom</string>
-    <string name="ingrese_su_ciudad">Entrez votre ville</string>
-    <string name="ingrese_su_estado">Entrez votre état</string>
+    <string name="ingrese_su_nombre">Le champ nom ne doit pas être vide et ne doit pas dépasser 30 caractères</string>
+    <string name="ingrese_su_ciudad">Le champ ville ne doit pas être vide et ne doit pas dépasser 50 caractères</string>
+    <string name="ingrese_su_genero">Le champ genre ne doit pas être vide et ne doit pas dépasser 10 caractères</string>
     <string name="ingrese_su_edad">Entrez votre âge</string>
-    <string name="ingrese_su_genero">Entrez votre genre</string>
+    <string name="ingrese_su_estado">Le champ état ne doit pas être vide et ne doit pas dépasser 140 caractères</string>
     <string name="guardar_informacion">Enregistrer les informations</string>
     <string name="nombre">Nom</string>
     <string name="ciudad">Ville</string>
@@ -172,4 +172,5 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="proteger_chats">Protéger les chats avec un mot de passe</string>
     <string name="escribetuclavedechats">Entrez un mot de passe pour protéger vos chats</string>
     <string name="claveincorrecta">Le mot de passe saisi est incorrect, vous ne pouvez pas accéder à ce chat</string>
+    <string name="mas_opciones">Plus d\'options</string>
 </resources>

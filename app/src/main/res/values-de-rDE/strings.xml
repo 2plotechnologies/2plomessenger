@@ -34,11 +34,11 @@
     <string name="abrirregistro">Noch kein Konto? Registrieren</string>
     <string name="showpass">Passwort anzeigen</string>
     <string name="loginbtn">Anmelden</string>
-    <string name="ingrese_su_nombre">Geben Sie Ihren Namen ein</string>
-    <string name="ingrese_su_ciudad">Geben Sie Ihre Stadt ein</string>
-    <string name="ingrese_su_estado">Geben Sie Ihren Zustand ein</string>
+    <string name="ingrese_su_nombre">Das Feld Name darf nicht leer sein und darf nicht länger als 30 Zeichen sein</string>
+    <string name="ingrese_su_ciudad">Das Feld Stadt darf nicht leer sein und darf nicht länger als 50 Zeichen sein</string>
+    <string name="ingrese_su_genero">Das Feld Geschlecht darf nicht leer sein und darf nicht länger als 10 Zeichen sein</string>
     <string name="ingrese_su_edad">Geben Sie Ihr Alter ein</string>
-    <string name="ingrese_su_genero">Geben Sie Ihr Geschlecht ein</string>
+    <string name="ingrese_su_estado">Das Feld Status darf nicht leer sein und darf nicht länger als 140 Zeichen sein</string>
     <string name="guardar_informacion">Informationen speichern</string>
     <string name="nombre">Name</string>
     <string name="ciudad">Stadt</string>
@@ -170,4 +170,5 @@
     <string name="proteger_chats">Chats mit Passwort schützen</string>
     <string name="escribetuclavedechats">Geben Sie ein Passwort ein, um Ihre Chats zu schützen</string>
     <string name="claveincorrecta">Das eingegebene Passwort ist falsch, Sie können nicht auf diesen Chat zugreifen</string>
+    <string name="mas_opciones">Weitere Optionen</string>
 </resources>

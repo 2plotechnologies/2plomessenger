@@ -123,16 +123,16 @@ public class MiperfilActivity extends AppCompatActivity {
         String eda = edad.getText().toString().trim();
         String gen = genero.getText().toString().trim();
         String est = estado.getText().toString().trim();
-        if (TextUtils.isEmpty(nom)){
-            Toast.makeText(this, "Ingrese su nombre", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(ciu)){
-            Toast.makeText(this, "Ingrese su ciudad", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(eda)){
-            Toast.makeText(this, "Ingrese su edad", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(gen)){
-            Toast.makeText(this, "Ingrese su genero", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(est)){
-            Toast.makeText(this, "Ingrese su estado", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(nom)||nom.length()>30){
+            Toast.makeText(this, R.string.ingrese_su_nombre, Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(ciu)||ciu.length()>50){
+            Toast.makeText(this, R.string.ingrese_su_ciudad, Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(eda)||Integer.parseInt(eda)<15){
+            Toast.makeText(this, R.string.ingrese_su_edad, Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(gen)||gen.length()>10){
+            Toast.makeText(this, R.string.ingrese_su_genero, Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(est)||est.length()>140){
+            Toast.makeText(this, R.string.ingrese_su_estado, Toast.LENGTH_SHORT).show();
         }else{
             HashMap profile = new HashMap();
             profile.put("uid",CurrentuserID);
