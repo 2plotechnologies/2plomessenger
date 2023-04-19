@@ -1,5 +1,6 @@
 package com.twoploapps.a2plomessenger;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -145,8 +146,6 @@ public class ChatFragment extends Fragment {
                                                             if(!clave.isEmpty()) {
                                                                 if(!clave.equals(decryptedPass)){
                                                                     Toast.makeText(holder.itemView.getContext(), R.string.claveincorrecta, Toast.LENGTH_SHORT).show();
-                                                                    Intent intent = new Intent(holder.itemView.getContext(),InicioActivity.class);
-                                                                    startActivity(intent);
                                                                 }else{
                                                                     Intent intent = new Intent(getContext(), ChatActivity.class);
                                                                     intent.putExtra("user_id", userIds);

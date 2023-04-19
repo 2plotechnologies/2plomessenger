@@ -35,7 +35,6 @@ public class PrivacidadActivity extends AppCompatActivity {
     private RadioButton hideseen, showseen, hideciu, showciu, hideimage, showimage, showciucontacts, showimgcontacts;
     private CheckBox protectchats, screenshotblock;
     private Button botonguardar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +84,8 @@ public class PrivacidadActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
+                            }else{
+                                protectchats.setChecked(false);
                             }
                         }
                     }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
@@ -165,12 +166,19 @@ public class PrivacidadActivity extends AppCompatActivity {
                                 if(!clave.isEmpty()) {
                                     if(!clave.equals(decryptedPass)){
                                         Toast.makeText(PrivacidadActivity.this, "ACCESS DENIED!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(PrivacidadActivity.this,InicioActivity.class);
-                                        startActivity(intent);
+                                        finish();
                                     }
+                                }else{
+                                    Toast.makeText(PrivacidadActivity.this, R.string.ingresa_password, Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
                             }
-                        }).setNegativeButton(R.string.cancelar,null);
+                        }).setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        });
                         builder.show();
                     }
                 }

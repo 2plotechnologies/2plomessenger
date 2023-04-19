@@ -108,11 +108,23 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="@string/bloquear_screenshots"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/los_otros_usuarios_no_podran_tomar_screenshots_de_sus_conversaciones_contigo"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
         <CheckBox
             android:id="@+id/chk_proteccionchats"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:text="@string/proteger_chats"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tambien_necesitaras_colocar_tu_contrase_a_para_acceder_a_privacidad"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

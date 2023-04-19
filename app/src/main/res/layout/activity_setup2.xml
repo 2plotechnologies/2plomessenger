@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/textos"
                 android:padding="10dp"
-                android:hint="@string/ingrese_su_nombre"
+                android:hint="@string/ingresa_nombre"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
@@ -38,7 +38,7 @@
                 android:background="@drawable/textos"
                 android:layout_below="@id/nombre_setup2"
                 android:padding="10dp"
-                android:hint="@string/ingrese_su_ciudad"
+                android:hint="@string/ingresa_ciudad"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
@@ -50,7 +50,7 @@
                 android:background="@drawable/textos"
                 android:layout_below="@id/ciudad_setup2"
                 android:padding="10dp"
-                android:hint="@string/ingrese_su_estado"
+                android:hint="@string/ingresa_estado"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>
@@ -75,7 +75,7 @@
                 android:background="@drawable/textos"
                 android:layout_below="@id/edad_setup2"
                 android:padding="10dp"
-                android:hint="@string/ingrese_su_genero"
+                android:hint="@string/ingresa_genero"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>

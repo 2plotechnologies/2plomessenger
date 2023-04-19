@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolbar_miperfil"
-        layout="@layout/toolbar_principal"></include>
+        layout="@layout/toolbar_principal" />
 
     <ScrollView
         android:id="@+id/mi_scroll_view12"
@@ -63,7 +63,8 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/textos"
         android:padding="8dp"
-        android:hint="@string/edad"/>
+        android:hint="@string/edad"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/genero_miperfil"

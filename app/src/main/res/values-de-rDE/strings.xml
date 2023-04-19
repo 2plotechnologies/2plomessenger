@@ -87,11 +87,11 @@
     <string name="imagen_guardada">Bild gespeichert</string>
     <string name="imagen_se_guardo">Ihr Bild wurde hochgeladen</string>
     <string name="imagen_no_soportada">Bild wird nicht unterstützt. Bitte versuchen Sie es erneut.</string>
-    <string name="ingresa_nombre">Sie müssen Ihren Namen eingeben.</string>
-    <string name="ingresa_ciudad">Sie müssen Ihre Stadt eingeben.</string>
-    <string name="ingresa_genero">Sie müssen Ihr Geschlecht eingeben.</string>
-    <string name="ingresa_edad">Sie müssen Ihr Alter eingeben.</string>
-    <string name="ingresa_estado">Geben Sie einen Zustand ein.</string>
+    <string name="ingresa_nombre">Gib deinen Namen ein</string>
+    <string name="ingresa_ciudad">Gib deine Stadt ein</string>
+    <string name="ingresa_genero">Gib dein Geschlecht ein</string>
+    <string name="ingresa_edad">Gib dein Alter ein</string>
+    <string name="ingresa_estado">Gib einen Zustand ein</string>
     <string name="edad_insuficiente">Sie haben nicht das Mindestalter, um sich zu registrieren.</string>
     <string name="guardando">Ihre Daten werden gespeichert.</string>
     <string name="espere">Bitte warten Sie, bis der Vorgang abgeschlossen ist.</string>
@@ -171,4 +171,6 @@
     <string name="escribetuclavedechats">Geben Sie ein Passwort ein, um Ihre Chats zu schützen</string>
     <string name="claveincorrecta">Das eingegebene Passwort ist falsch, Sie können nicht auf diesen Chat zugreifen</string>
     <string name="mas_opciones">Weitere Optionen</string>
+    <string name="los_otros_usuarios_no_podran_tomar_screenshots_de_sus_conversaciones_contigo">Andere Benutzer können keine Screenshots von Ihren Gesprächen mit Ihnen machen</string>
+    <string name="tambien_necesitaras_colocar_tu_contrase_a_para_acceder_a_privacidad">Sie müssen auch Ihr Passwort eingeben, um auf die Datenschutzeinstellungen zuzugreifen</string>
 </resources>
