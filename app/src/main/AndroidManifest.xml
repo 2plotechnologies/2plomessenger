@@ -3,6 +3,7 @@
     package="com.twoploapps.a2plomessenger">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -17,6 +18,9 @@
         android:roundIcon="@mipmap/ic_app_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.2PloMessenger">
+        <activity
+            android:name=".NoInternetActivity"
+            android:exported="false" />
         <activity
             android:name=".AudioActivity"
             android:exported="false" />

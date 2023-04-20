@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -53,24 +55,33 @@ public class InicioActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.app_main_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("2Plo Messenger");
-
         myviewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
         myacesoTabsAdapter = new AcesoTabsAdapter(getSupportFragmentManager(),this);
         myviewPager.setAdapter(myacesoTabsAdapter);
 
         mytabLayout = (TabLayout)findViewById(R.id.main_tabs);
         mytabLayout.setupWithViewPager(myviewPager);
-
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         RootRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("CodigosDeGrupo");
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         getUsername();
+        getConnectionStatus();
         Intent intent = new Intent(this, TokenUpdateService.class);
         startService(intent);
     }
 
+    private void getConnectionStatus() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected()) {
+            // No hay conexión a Internet, abre la actividad de mensaje
+            Intent intent = new Intent(this, NoInternetActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
     private void getUsername() {
         UserRef.child(CurrentUserId).addValueEventListener(new ValueEventListener() {
             @Override

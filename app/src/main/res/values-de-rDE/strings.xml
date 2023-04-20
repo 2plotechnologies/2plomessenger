@@ -173,4 +173,7 @@
     <string name="mas_opciones">Weitere Optionen</string>
     <string name="los_otros_usuarios_no_podran_tomar_screenshots_de_sus_conversaciones_contigo">Andere Benutzer können keine Screenshots von Ihren Gesprächen mit Ihnen machen</string>
     <string name="tambien_necesitaras_colocar_tu_contrase_a_para_acceder_a_privacidad">Sie müssen auch Ihr Passwort eingeben, um auf die Datenschutzeinstellungen zuzugreifen</string>
+    <string name="no_tienes_conexi_n">Keine Verbindung</string>
+    <string name="necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger">Sie benötigen eine Internetverbindung, um 2Plo Messenger zu verwenden</string>
+    <string name="reintentar">Erneut versuchen</string>
 </resources>

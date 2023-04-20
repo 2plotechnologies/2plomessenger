@@ -175,4 +175,7 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="mas_opciones">Plus d\'options</string>
     <string name="los_otros_usuarios_no_podran_tomar_screenshots_de_sus_conversaciones_contigo">Les autres utilisateurs ne pourront pas prendre de captures d\'écran de leurs conversations avec vous</string>
     <string name="tambien_necesitaras_colocar_tu_contrase_a_para_acceder_a_privacidad">Vous devrez également saisir votre mot de passe pour accéder aux paramètres de confidentialité</string>
+    <string name="no_tienes_conexi_n">Pas de connexion</string>
+    <string name="necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger">Vous avez besoin d\'une connexion internet pour utiliser 2Plo Messenger</string>
+    <string name="reintentar">Réessayer</string>
 </resources>

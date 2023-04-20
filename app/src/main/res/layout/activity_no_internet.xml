@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".NoInternetActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_tienes_conexi_n"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000" />
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/baseline_signal_wifi_statusbar_connected_no_internet_4_24"
+        android:layout_marginTop="32dp"
+        android:contentDescription="@string/image_description"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginTop="32dp"/>
+    <Button
+        android:id="@+id/btnreintentar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reintentar"
+        android:textSize="18sp"
+        android:layout_marginTop="32dp"
+        android:padding="15dp"
+        android:textColor="@color/white"
+        android:background="@drawable/boton_redondeado"/>
+</LinearLayout>

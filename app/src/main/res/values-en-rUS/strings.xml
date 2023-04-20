@@ -175,4 +175,7 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="mas_opciones">More options</string>
     <string name="los_otros_usuarios_no_podran_tomar_screenshots_de_sus_conversaciones_contigo">Other users won\'t be able to take screenshots of their conversations with you</string>
     <string name="tambien_necesitaras_colocar_tu_contrase_a_para_acceder_a_privacidad">You will also need to enter your password to access privacy settings</string>
+    <string name="no_tienes_conexi_n">No connection</string>
+    <string name="necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger">You need an internet connection to use 2Plo Messenger</string>
+    <string name="reintentar">Retry</string>
 </resources>
