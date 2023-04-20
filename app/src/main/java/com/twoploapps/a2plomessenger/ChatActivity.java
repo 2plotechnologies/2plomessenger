@@ -411,7 +411,7 @@ public class ChatActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task task) {
                                     if(task.isSuccessful()){
                                         dialog.dismiss();
-                                        Toast.makeText(ChatActivity.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ChatActivity.this, R.string.mensaje_enviado, Toast.LENGTH_SHORT).show();
                                         HashMap<String, String> chatNoficicacion = new HashMap<>();
                                         chatNoficicacion.put("de", EnviarUserID);
                                         chatNoficicacion.put("tipo","mensaje");
