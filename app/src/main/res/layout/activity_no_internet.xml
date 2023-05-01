@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/no_tienes_conexi_n"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#000" />
+        android:textStyle="bold" />
 
     <ImageView
         android:layout_width="200dp"
@@ -28,7 +27,6 @@
         android:layout_height="wrap_content"
         android:text="@string/necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger"
         android:textSize="18sp"
-        android:textColor="#000"
         android:layout_marginTop="32dp"/>
     <Button
         android:id="@+id/btnreintentar"

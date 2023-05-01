@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".PublicarPostActivity"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:padding="16dp">
 
     <TextView
         android:layout_width="match_parent"

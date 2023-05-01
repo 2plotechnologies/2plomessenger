@@ -109,15 +109,17 @@ public class AudioActivity extends AppCompatActivity  implements View.OnClickLis
         }
     }
     private void updateSeekBar() {
-        seekBar.setProgress(mediaPlayer.getCurrentPosition());
-        if (mediaPlayer.isPlaying()) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    updateSeekBar();
-                }
-            };
-            handler.postDelayed(runnable, 1000);
+        if(mediaPlayer!=null){
+            seekBar.setProgress(mediaPlayer.getCurrentPosition());
+            if (mediaPlayer.isPlaying()) {
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        updateSeekBar();
+                    }
+                };
+                handler.postDelayed(runnable, 1000);
+            }
         }
     }
     @Override
