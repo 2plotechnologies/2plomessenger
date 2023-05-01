@@ -4,8 +4,11 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -28,7 +31,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
-
+import android.Manifest;
 public class LoginActivity2 extends AppCompatActivity {
     private EditText txtcorreo, txtcontraseña;
     private TextView txtitulo, txpregunta;
@@ -49,6 +52,7 @@ public class LoginActivity2 extends AppCompatActivity {
         btnlogin=(Button) findViewById(R.id.btnlogin);
         mostarpassword=(CheckBox) findViewById(R.id.mostrarpasswordlogin);
         mAuth=FirebaseAuth.getInstance();
+        CheckPermissions();
         mostarpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -75,6 +79,48 @@ public class LoginActivity2 extends AppCompatActivity {
         });
     }
 
+    private void CheckPermissions() {
+        // Verificar si el permiso para enviar notificaciones ya ha sido concedido
+        if (ContextCompat.checkSelfPermission(this, "com.google.android.c2dm.permission.RECEIVE") != PackageManager.PERMISSION_GRANTED) {
+            // Solicitar el permiso
+            ActivityCompat.requestPermissions(this, new String[]{"com.google.android.c2dm.permission.RECEIVE"}, 1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.INTERNET},
+                    1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_NETWORK_STATE},
+                    1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WAKE_LOCK)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WAKE_LOCK},
+                    1);
+        }
+    }
     public void abrirRegistroActivity() {
         Intent intent = new Intent(LoginActivity2.this, RegistroActivity.class);
         startActivity(intent);

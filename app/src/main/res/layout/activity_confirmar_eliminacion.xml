@@ -27,11 +27,17 @@
         android:id="@+id/btn_confirmar_eliminar_cuenta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/s_eliminar_mi_cuenta"/>
+        android:text="@string/s_eliminar_mi_cuenta"
+        android:background="@drawable/boton_redondo"
+        android:backgroundTint="@color/red"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"/>
 
     <Button
         android:id="@+id/btn_cancelar_eliminar_cuenta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cancelar"/>
+        android:text="@string/cancelar"
+        android:background="@drawable/boton_redondo"
+        android:textColor="@color/white"/>
 </LinearLayout>
