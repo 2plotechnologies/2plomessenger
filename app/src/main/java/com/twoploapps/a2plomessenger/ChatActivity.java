@@ -70,7 +70,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageView botonenviar, botonarchivo, emojiboton;
     private DatabaseReference RootRef,NotificacionesRef;
     private FirebaseAuth auth;
-    private String EnviarUserID;
+    private String EnviarUserID, RecibirUserName;
     private ProgressDialog dialog;
 
     private final List<Mensajes> mensajesList = new ArrayList<>();
@@ -105,6 +105,7 @@ public class ChatActivity extends AppCompatActivity {
         UsuariosrecyclerView.setAdapter(mensajeAdapter);
         MetodoConexion();
         getPrivacy();
+        getReceiverUserName();
         RootRef.child("Mensajes").child(EnviarUserID).child(RecibirUserID).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -135,6 +136,18 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void getReceiverUserName() {
+        RootRef.child("Usuarios").child(EnviarUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    RecibirUserName = snapshot.child("nombre").getValue(String.class);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     private void getPrivacy() {
@@ -185,7 +198,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     private void IniciarelLayout() {
@@ -350,6 +362,7 @@ public class ChatActivity extends AppCompatActivity {
                                         HashMap<String, String> chatNoficicacion = new HashMap<>();
                                         chatNoficicacion.put("de", EnviarUserID);
                                         chatNoficicacion.put("tipo","mensaje");
+                                        chatNoficicacion.put("username", RecibirUserName);
                                         NotificacionesRef.child(RecibirUserID).push().setValue(chatNoficicacion);
                                     }
                                 }
@@ -415,6 +428,7 @@ public class ChatActivity extends AppCompatActivity {
                                         HashMap<String, String> chatNoficicacion = new HashMap<>();
                                         chatNoficicacion.put("de", EnviarUserID);
                                         chatNoficicacion.put("tipo","mensaje");
+                                        chatNoficicacion.put("username", RecibirUserName);
                                         NotificacionesRef.child(RecibirUserID).push().setValue(chatNoficicacion);
                                     }else{
                                         String error = task.getException().getMessage().toString();
@@ -463,6 +477,7 @@ public class ChatActivity extends AppCompatActivity {
                         HashMap<String, String> chatNoficicacion = new HashMap<>();
                         chatNoficicacion.put("de", EnviarUserID);
                         chatNoficicacion.put("tipo","mensaje");
+                        chatNoficicacion.put("username", RecibirUserName);
                         NotificacionesRef.child(RecibirUserID).push().setValue(chatNoficicacion);
                     }else{
                         Toast.makeText(ChatActivity.this, R.string.error_al_enviar, Toast.LENGTH_SHORT).show();

@@ -6,9 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -81,9 +82,11 @@ public class LoginActivity2 extends AppCompatActivity {
 
     private void CheckPermissions() {
         // Verificar si el permiso para enviar notificaciones ya ha sido concedido
-        if (ContextCompat.checkSelfPermission(this, "com.google.android.c2dm.permission.RECEIVE") != PackageManager.PERMISSION_GRANTED) {
-            // Solicitar el permiso
-            ActivityCompat.requestPermissions(this, new String[]{"com.google.android.c2dm.permission.RECEIVE"}, 1);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.TIRAMISU){
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Solicitar el permiso
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
