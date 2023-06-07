@@ -9,7 +9,7 @@
     <string name="compartir">Compartilhar</string>
     <string name="cerrar_sesion">Sair</string>
     <string name="app_desarrollada_por_isaias_guzm_n_2plo_apps">App desenvolvido por Isaias Guzmán - 2Plo Apps</string>
-    <string name="version_app">Versão 1.3.1</string>
+    <string name="version_app">Versão 1.3.2</string>
     <string name="volver">Voltar</string>
     <string name="buscador">Procurar usuários</string>
     <string name="chats">conversas</string>
@@ -178,4 +178,8 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="no_tienes_conexi_n">Sem conexão</string>
     <string name="necesitas_tener_conexi_n_a_internet_para_usar_2plo_messenger">Você precisa de uma conexão à internet para usar o 2Plo Messenger</string>
     <string name="reintentar">Tentar novamente</string>
+    <string name="escribe_un_comentario">Escreva um comentário…</string>
+    <string name="comentar">Comentar</string>
+    <string name="comentarioeliminado">Comentário excluído</string>
+    <string name="seagrego">Seu comentário foi adicionado</string>
 </resources>

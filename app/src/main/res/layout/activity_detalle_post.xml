@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetallePostActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Nombre del usuario -->
+        <TextView
+            android:id="@+id/textViewUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre de Usuario"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:textStyle="bold" />
+
+        <!-- Imagen -->
+        <ImageView
+            android:id="@+id/imageViewPostImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/baseline_image_24"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Texto debajo de la imagen -->
+        <TextView
+            android:id="@+id/textViewPostText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Texto del Post"
+            android:textSize="16sp"
+            android:textColor="#555555" />
+
+        <!-- Sección de comentarios -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <!-- EditText para comentarios -->
+            <EditText
+                android:id="@+id/editTextComment"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="@string/escribe_un_comentario"
+                android:textSize="16sp"
+                android:background="@drawable/edittext_background"
+                android:padding="8dp" />
+
+            <!-- Botón para comentar -->
+            <Button
+                android:id="@+id/buttonComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/comentar"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/boton_redondo"
+                android:layout_marginTop="8dp" />
+            <!-- RecyclerView para los comentarios -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

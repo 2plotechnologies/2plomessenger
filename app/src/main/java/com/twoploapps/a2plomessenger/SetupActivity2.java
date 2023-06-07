@@ -185,7 +185,13 @@ public class SetupActivity2 extends AppCompatActivity {
         String gen = genero.getText().toString().trim();
         String eda = edad.getText().toString().trim();
         String est = estado.getText().toString().trim();
-        int edad = Integer.parseInt(eda);
+        int edad = 0;
+        try{
+            edad = Integer.parseInt(eda);
+        }catch(NumberFormatException ex){
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
+        }
         if (TextUtils.isEmpty(nom)||nom.length()>30){
             Toast.makeText(this, R.string.ingrese_su_nombre, Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(ciu)||ciu.length()>50){

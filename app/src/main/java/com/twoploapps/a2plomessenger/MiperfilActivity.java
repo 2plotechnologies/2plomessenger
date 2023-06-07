@@ -123,11 +123,18 @@ public class MiperfilActivity extends AppCompatActivity {
         String eda = edad.getText().toString().trim();
         String gen = genero.getText().toString().trim();
         String est = estado.getText().toString().trim();
+        int edadint = 0;
+        try{
+            edadint = Integer.parseInt(eda);
+        }catch (NumberFormatException ex){
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
+        }
         if (TextUtils.isEmpty(nom)||nom.length()>30){
             Toast.makeText(this, R.string.ingrese_su_nombre, Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(ciu)||ciu.length()>50){
             Toast.makeText(this, R.string.ingrese_su_ciudad, Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(eda)||Integer.parseInt(eda)<15){
+        }else if (TextUtils.isEmpty(eda)||edadint<15){
             Toast.makeText(this, R.string.ingrese_su_edad, Toast.LENGTH_SHORT).show();
         }else if (TextUtils.isEmpty(gen)||gen.length()>10){
             Toast.makeText(this, R.string.ingrese_su_genero, Toast.LENGTH_SHORT).show();

@@ -79,11 +79,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderpo
             Picasso.get().load(posts.getImagen()).into(holder.imagen);
             holder.texto.setText(posts.getTexto());
         }
-        if(!posts.hasText()&& posts.hasImage()){
+        else if(!posts.hasText()&& posts.hasImage()){
             Picasso.get().load(posts.getImagen()).into(holder.imagen);
             holder.texto.setVisibility(View.GONE);
         }
-        if(!posts.hasImage()&& posts.hasText()){
+        else if(!posts.hasImage()&& posts.hasText()){
             holder.texto.setText(posts.getTexto());
             holder.imagen.setVisibility(View.GONE);
         }
@@ -170,6 +170,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderpo
             public void onClick(View view) {
                 Intent intent = new Intent(holder.itemView.getContext(),PerfilActivity.class);
                 intent.putExtra("usuario_id", posts.getIduser());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), DetallePostActivity.class);
+                intent.putExtra("post_id", posts.getPostId());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
