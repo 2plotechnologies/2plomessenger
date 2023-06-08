@@ -182,5 +182,5 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="comentar">Comment</string>
     <string name="comentarioeliminado">Comment deleted</string>
     <string name="seagrego">Your comment has been added</string>
-
+    <string name="ingresalaclavedetucuenta">You must enter your account password to proceed</string>
 </resources>

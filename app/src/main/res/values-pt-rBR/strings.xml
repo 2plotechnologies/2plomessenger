@@ -182,4 +182,5 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="comentar">Comentar</string>
     <string name="comentarioeliminado">Comentário excluído</string>
     <string name="seagrego">Seu comentário foi adicionado</string>
+    <string name="ingresalaclavedetucuenta">Você precisa inserir a senha da sua conta para continuar</string>
 </resources>

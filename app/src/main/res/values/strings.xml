@@ -183,4 +183,5 @@ Descárgala aquí: https://play.google.com/store/apps/details?id=com.twoploapps.
     <string name="comentar">Comentar</string>
     <string name="comentarioeliminado">Comentario eliminado</string>
     <string name="seagrego">Se agrego su comentario</string>
+    <string name="ingresalaclavedetucuenta">Debes ingresar la contraseña de tu cuenta para proceder con la eliminacion</string>
 </resources>

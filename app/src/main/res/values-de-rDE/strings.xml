@@ -180,5 +180,5 @@
     <string name="comentar">Kommentieren</string>
     <string name="comentarioeliminado">Kommentar gelöscht</string>
     <string name="seagrego">Ihr Kommentar wurde hinzugefügt</string>
-
+    <string name="ingresalaclavedetucuenta">Du musst dein Kontopasswort eingeben, um fortzufahren</string>
 </resources>

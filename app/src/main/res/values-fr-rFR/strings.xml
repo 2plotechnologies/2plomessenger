@@ -182,4 +182,5 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="comentar">Commenter</string>
     <string name="comentarioeliminado">Commentaire supprimé</string>
     <string name="seagrego">Votre commentaire a été ajouté</string>
+    <string name="ingresalaclavedetucuenta">Vous devez entrer le mot de passe de votre compte pour continuer</string>
 </resources>
