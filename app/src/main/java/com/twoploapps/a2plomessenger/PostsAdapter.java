@@ -191,7 +191,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderpo
     public class viewholderposts extends RecyclerView.ViewHolder {
         TextView texto, username;
         ImageView imagen;
-        Button eliminar,editar;
+        ImageButton eliminar,editar;
         ImageButton reportar;
         public viewholderposts(@NonNull View itemView) {
             super(itemView);
