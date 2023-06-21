@@ -2,6 +2,7 @@ package com.twoploapps.a2plomessenger;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,14 @@ public class ComentariosAdapter extends RecyclerView.Adapter<ComentariosAdapter.
         Comentarios comentarios = comentariosList.get(position);
         holder.txtnombreusuario.setText(comentarios.getNombre_usuario());
         holder.txtcomentario.setText(comentarios.getComentario());
+        holder.txtnombreusuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.itemView.getContext(), PerfilActivity.class);
+                intent.putExtra("usuario_id",comentarios.getId_usuario());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

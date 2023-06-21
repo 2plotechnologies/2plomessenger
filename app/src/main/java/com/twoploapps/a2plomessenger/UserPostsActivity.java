@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +50,7 @@ public class UserPostsActivity extends AppCompatActivity {
     ImageView imageView;
     Button btncargar, btnactualizar;
     EditText textPost;
+    ProgressBar myprogressbar;
     Uri imageUri;
     final  static  int Gallery_PICK =1;
 
@@ -65,6 +67,7 @@ public class UserPostsActivity extends AppCompatActivity {
         btncargar = findViewById(R.id.updateimg);
         btnactualizar = findViewById(R.id.updatepost);
         textPost = findViewById(R.id.posttextedit);
+        myprogressbar = findViewById(R.id.progresspostupdate);
         obtenerNombreUser();
         getPostData();
         btncargar.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +115,10 @@ public class UserPostsActivity extends AppCompatActivity {
         if(TextUtils.isEmpty(textPost.getText())){
             Toast.makeText(this, R.string.mensaje_post_vacio, Toast.LENGTH_SHORT).show();
         }else{
+            myprogressbar.setVisibility(View.VISIBLE);
+            btncargar.setEnabled(false);
+            textPost.setEnabled(false);
+            btnactualizar.setVisibility(View.GONE);
             Date date = new Date();
             long timestamp = date.getTime();
             Map<String, Object> postUpdates = new HashMap<>();
@@ -136,6 +143,10 @@ public class UserPostsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
+            myprogressbar.setVisibility(View.VISIBLE);
+            btncargar.setEnabled(false);
+            textPost.setEnabled(false);
+            btnactualizar.setVisibility(View.GONE);
             String postId = getIntent().getExtras().get("post_id").toString();
             imageUri = data.getData();
             Picasso.get().load(imageUri).into(imageView);
@@ -153,6 +164,10 @@ public class UserPostsActivity extends AppCompatActivity {
                             postUpdates.put("fecha", timestamp);
                             PostRef.child(postId).updateChildren(postUpdates);
                             Toast.makeText(UserPostsActivity.this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
+                            myprogressbar.setVisibility(View.GONE);
+                            btncargar.setEnabled(true);
+                            textPost.setEnabled(true);
+                            btnactualizar.setVisibility(View.VISIBLE);
                         }
                     });
                 }

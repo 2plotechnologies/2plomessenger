@@ -67,5 +67,9 @@
         android:background="@drawable/boton_redondeado"
         android:textColor="@color/white"
         android:padding="16dp"/>
-
+    <ProgressBar
+        android:id="@+id/progresspost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>

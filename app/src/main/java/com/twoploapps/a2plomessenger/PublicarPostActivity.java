@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,6 +46,7 @@ public class PublicarPostActivity extends AppCompatActivity {
     ImageView imageView;
     Button btncargar, btnpublicar;
     EditText textPost;
+    ProgressBar myprogressbar;
     Uri imageUri;
     final  static  int Gallery_PICK =1;
     @Override
@@ -60,6 +62,7 @@ public class PublicarPostActivity extends AppCompatActivity {
         btncargar = findViewById(R.id.cargarimg);
         btnpublicar = findViewById(R.id.publicar);
         textPost = findViewById(R.id.postedit);
+        myprogressbar = findViewById(R.id.progresspost);
         obtenerNombreUser();
         verificarStrikes();
         btncargar.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +125,10 @@ public class PublicarPostActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.mensaje_post_vacio, Toast.LENGTH_SHORT).show();
         //Imagen sin texto
         } else if (imageUri!=null && TextUtils.isEmpty(textPost.getText())) {
+            myprogressbar.setVisibility(View.VISIBLE);
+            btncargar.setEnabled(false);
+            textPost.setEnabled(false);
+            btnpublicar.setVisibility(View.GONE);
             String postid = PostRef.push().getKey();
             StorageReference imagenPath = reference.child("posts/" + postid + ".jpg");
             imagenPath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -163,6 +170,10 @@ public class PublicarPostActivity extends AppCompatActivity {
             });
         //Texto sin imagen
         }else if(imageUri==null && !TextUtils.isEmpty(textPost.getText())){
+            myprogressbar.setVisibility(View.VISIBLE);
+            btncargar.setEnabled(false);
+            textPost.setEnabled(false);
+            btnpublicar.setVisibility(View.GONE);
             Date date = new Date();
             long timestamp = date.getTime();
             Posts post = new Posts();
@@ -186,6 +197,10 @@ public class PublicarPostActivity extends AppCompatActivity {
             });
         //Imagen con texto
         }else if(!TextUtils.isEmpty(textPost.getText())&&imageUri!=null){
+            myprogressbar.setVisibility(View.VISIBLE);
+            btncargar.setEnabled(false);
+            textPost.setEnabled(false);
+            btnpublicar.setVisibility(View.GONE);
             StorageReference imagenPath = reference.child("portadas/" + postId + ".jpg");
             imagenPath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
