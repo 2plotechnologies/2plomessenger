@@ -81,6 +81,7 @@
         <activity
             android:name=".PerfilActivity"
             android:exported="false"
+            android:parentActivityName=".BuscarAmigosActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".BuscarAmigosActivity"

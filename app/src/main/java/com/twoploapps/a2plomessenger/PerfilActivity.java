@@ -1,8 +1,10 @@
 package com.twoploapps.a2plomessenger;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,10 +37,17 @@ public class PerfilActivity extends AppCompatActivity {
     private DatabaseReference UserRef, SolicitudRef, ContactosRef, NotificacionesRef;
     private FirebaseAuth auth;
     boolean contactoAgregado = false;
+
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        toolbar=(Toolbar) findViewById(R.id.usuario_perfil_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
         usuario_revid = getIntent().getExtras().get("usuario_id").toString();
         auth = FirebaseAuth.getInstance();
         UserRef= FirebaseDatabase.getInstance().getReference().child("Usuarios");

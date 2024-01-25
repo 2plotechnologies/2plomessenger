@@ -7,6 +7,9 @@
     tools:context=".PerfilActivity"
     android:background="@color/teal_700">
 
+    <include android:id="@+id/usuario_perfil_toolbar"
+        layout="@layout/toolbar_principal"/>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/usuario_vic_imagen"
         android:layout_width="200dp"

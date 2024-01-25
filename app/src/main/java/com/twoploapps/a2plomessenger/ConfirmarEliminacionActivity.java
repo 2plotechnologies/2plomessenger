@@ -83,6 +83,7 @@ public class ConfirmarEliminacionActivity extends AppCompatActivity {
                             }
                         }
                     });
+                    builder.show();
                 }
 
             }
