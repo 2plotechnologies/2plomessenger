@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,10 +46,10 @@ public class RegistroActivity extends AppCompatActivity {
     private Button btnregister, btniniciasesion;
     private CheckBox mostrarpassword;
     private ImageView logo;
-
     private String userID;
     private FirebaseAuth mAuth;
     private FirebaseFirestore database;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class RegistroActivity extends AppCompatActivity {
         textocontra=(EditText) findViewById(R.id.textocontra);
         btnregister=(Button)findViewById(R.id.btnregistrer);
         mostrarpassword=(CheckBox) findViewById(R.id.mostrarpasswordregistro);
+        progressBar = findViewById(R.id.progressregistro);
         mAuth=FirebaseAuth.getInstance();
         database = FirebaseFirestore.getInstance();
         mostrarpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -110,6 +112,8 @@ public class RegistroActivity extends AppCompatActivity {
             textocontra.setError(getString(R.string.ingresa_password));
             textocontra.requestFocus();
         }else{
+            progressBar.setVisibility(View.VISIBLE);
+            btnregister.setVisibility(View.GONE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -133,6 +137,8 @@ public class RegistroActivity extends AppCompatActivity {
                         intent.putExtra("username",username);
                         startActivity(intent);
                     }else{
+                        progressBar.setVisibility(View.GONE);
+                        btnregister.setVisibility(View.VISIBLE);
                         String error = task.getException().getMessage().toString();
                         Toast.makeText(RegistroActivity.this, "Error: "+error, Toast.LENGTH_SHORT).show();
                     }

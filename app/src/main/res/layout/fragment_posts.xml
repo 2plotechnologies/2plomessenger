@@ -17,6 +17,7 @@
         android:backgroundTint="@color/white"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:background="@null"
-        android:scaleType="fitXY"/>
+        android:background="@drawable/boton_redondo"
+        android:scaleType="fitXY"
+        android:contentDescription="New Post" />
 </FrameLayout>

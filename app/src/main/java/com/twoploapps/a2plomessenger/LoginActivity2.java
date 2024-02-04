@@ -21,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LoginActivity2 extends AppCompatActivity {
     private Button btnlogin;
     private ImageView logo;
     private CheckBox mostarpassword;
+    private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
     @Override
@@ -52,6 +54,7 @@ public class LoginActivity2 extends AppCompatActivity {
         txpregunta=(TextView) findViewById(R.id.registro);
         btnlogin=(Button) findViewById(R.id.btnlogin);
         mostarpassword=(CheckBox) findViewById(R.id.mostrarpasswordlogin);
+        progressBar = findViewById(R.id.progresslogin);
         mAuth=FirebaseAuth.getInstance();
         CheckPermissions();
         mostarpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -139,6 +142,8 @@ public class LoginActivity2 extends AppCompatActivity {
             Toast.makeText(LoginActivity2.this, R.string.hintpass, Toast.LENGTH_SHORT).show();
             txtcontraseña.requestFocus();
         }else{
+            progressBar.setVisibility(View.VISIBLE);
+            btnlogin.setVisibility(View.GONE);
             mAuth.signInWithEmailAndPassword(Mail, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -150,6 +155,8 @@ public class LoginActivity2 extends AppCompatActivity {
                     }else{
                         String error = task.getException().getMessage().toString();
                         Toast.makeText(LoginActivity2.this, "Error: "+error, Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
+                        btnlogin.setVisibility(View.VISIBLE);
                     }
                 }
             });

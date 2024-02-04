@@ -111,4 +111,9 @@
             android:background="@drawable/boton_redondo"
             android:textSize="16sp"
             android:padding="15dp" />
+    <ProgressBar
+        android:id="@+id/progressregistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>

@@ -10,8 +10,8 @@ android {
         applicationId "com.twoploapps.a2plomessenger"
         minSdk 23
         targetSdk 33
-        versionCode 13
-        versionName "1.3.2"
+        versionCode 14
+        versionName "1.3.3"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "CLAVE_CIFRADO", "\"$CLAVE_CIFRADO\""
@@ -21,7 +21,7 @@ android {
         release {
             keyAlias 'aplicacion'
             keyPassword 'Horus1234+'
-            storeFile file('C:\\Users\\ISAIAS\\aplicacion.jks')
+            storeFile file('C:\\Users\\isaia\\aplicacion.jks')
             storePassword 'Horus1234+'
             //Enable V1 signing
             v1SigningEnabled true
