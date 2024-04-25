@@ -88,7 +88,7 @@ public class SolicitudesFragment extends Fragment {
                                         if(snapshot.exists()){
                                             if (snapshot.hasChild("imagen")) {
                                                 String privacidadimg = snapshot.child("PI").getValue().toString();
-                                                if(privacidadimg.equals("Oculto")){
+                                                if(privacidadimg.equals("Oculto")||privacidadimg.equals("Contacto")){
                                                     Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(holder.images);
                                                 }else{
                                                     String img = snapshot.child("imagen").getValue().toString();
@@ -99,10 +99,10 @@ public class SolicitudesFragment extends Fragment {
                                             nom = snapshot.child("nombre").getValue().toString();
                                             String ciu;
                                             ciu = snapshot.child("ciudad").getValue().toString();
-                                            String est = snapshot.child("estado").getValue().toString();
+                                            //String est = snapshot.child("estado").getValue().toString();
                                             String privacidadciu = snapshot.child("PC").getValue().toString();
                                             holder.nombres.setText(nom);
-                                            if(privacidadciu.equals("-")){
+                                            if(privacidadciu.equals("-")||privacidadciu.equals("Contacto")){
                                                 holder.ciudades.setText("-");
                                             }else{
                                                 holder.ciudades.setText(ciu);
@@ -236,9 +236,10 @@ public class SolicitudesFragment extends Fragment {
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         if (snapshot.hasChild("imagen")) {
                                             String privacidadimg = snapshot.child("PI").getValue().toString();
-                                            if(privacidadimg.equals("Oculto")){
+                                            if(privacidadimg.equals("Oculto")||privacidadimg.equals("Contacto")){
                                                 Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(holder.images);
-                                            }else{
+                                            }
+                                            else{
                                                 String img = snapshot.child("imagen").getValue().toString();
                                                 Picasso.get().load(img).placeholder(R.drawable.defaultprofilephoto).into(holder.images);
                                             }
@@ -248,7 +249,7 @@ public class SolicitudesFragment extends Fragment {
                                         String ciu = snapshot.child("ciudad").getValue().toString();
                                         //String est = snapshot.child("estado").getValue().toString();
                                         holder.nombres.setText(nom);
-                                        if(privacidadCiu.equals("-")){
+                                        if(privacidadCiu.equals("-")||privacidadCiu.equals("Contacto")){
                                             holder.ciudades.setText("-");
                                         }else{
                                             holder.ciudades.setText(ciu);
