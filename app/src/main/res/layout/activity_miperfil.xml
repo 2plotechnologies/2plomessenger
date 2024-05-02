@@ -32,7 +32,7 @@
     <EditText
         android:id="@+id/nombre_miperfil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/imagen_miperfil"
@@ -44,19 +44,20 @@
     <EditText
         android:id="@+id/ciudad_miperfil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/nombre_miperfil"
         android:layout_marginTop="5dp"
         android:background="@drawable/textos"
         android:padding="8dp"
-        android:hint="@string/ciudad"/>
+        android:hint="@string/ciudad"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edad_miperfil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/ciudad_miperfil"
@@ -69,7 +70,7 @@
     <EditText
         android:id="@+id/genero_miperfil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
         android:layout_below="@+id/edad_miperfil"
@@ -81,7 +82,7 @@
     <EditText
         android:id="@+id/estado_miperfil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_below="@+id/genero_miperfil"
@@ -97,6 +98,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/estado_miperfil"
         android:layout_margin="20dp"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/fb_color"
+        android:textColor="@color/white"
         android:text="@string/actualizar_informacion"/>
 
     <Button
@@ -104,6 +108,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/boton_miperfil"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/red"
+        android:textColor="@color/white"
         android:layout_margin="20dp"
         android:text="@string/volver_miperfil"/>
         </RelativeLayout>

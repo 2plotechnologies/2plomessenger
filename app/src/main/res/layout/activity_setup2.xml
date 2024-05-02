@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolbar_setup2"
-        layout="@layout/toolbar_principal"></include>
+        layout="@layout/toolbar_principal" />
 
     <ScrollView
         android:id="@+id/mi_scroll_view2"
@@ -23,42 +23,45 @@
             <EditText
                 android:id="@+id/nombre_setup2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/textos"
                 android:padding="10dp"
                 android:hint="@string/ingresa_nombre"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/ciudad_setup2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/textos"
                 android:layout_below="@id/nombre_setup2"
                 android:padding="10dp"
                 android:hint="@string/ingresa_ciudad"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/Estado_setup2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/textos"
                 android:layout_below="@id/ciudad_setup2"
                 android:padding="10dp"
                 android:hint="@string/ingresa_estado"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/edad_setup2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/textos"
                 android:layout_below="@id/Estado_setup2"
                 android:padding="10dp"
@@ -71,14 +74,15 @@
             <EditText
                 android:id="@+id/genero_setup2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:background="@drawable/textos"
                 android:layout_below="@id/edad_setup2"
                 android:padding="10dp"
                 android:hint="@string/ingresa_genero"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imagen_setup2"
@@ -95,11 +99,20 @@
                 android:id="@+id/boton_setup2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/botones"
+                android:background="@drawable/boton_redondeado"
+                android:backgroundTint="@color/fb_color"
                 android:layout_below="@id/imagen_setup2"
                 android:padding="10dp"
                 android:text="@string/guardar_informacion"
                 android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/boton_setup2"
+                android:text="@string/enviamosuncorreoasudireccion"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"/>

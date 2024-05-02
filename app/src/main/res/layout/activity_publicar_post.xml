@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cargar_imagen"
         android:background="@drawable/boton_redondeado"
-        android:backgroundTint="@color/whatsAppColor"
+        android:backgroundTint="@color/fb_color"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:padding="12dp"
@@ -63,7 +63,7 @@
         android:text="@string/publicar"
         android:textSize="18sp"
         android:textAllCaps="false"
-        android:backgroundTint="@color/status_background"
+        android:backgroundTint="@color/fb_color"
         android:background="@drawable/boton_redondeado"
         android:textColor="@color/white"
         android:padding="16dp"/>

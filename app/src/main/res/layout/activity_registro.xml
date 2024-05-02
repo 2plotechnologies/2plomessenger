@@ -25,7 +25,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:contentPadding="10dp"
-        android:backgroundTint="@color/colorAccent">
+        android:backgroundTint="@color/fb_color">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

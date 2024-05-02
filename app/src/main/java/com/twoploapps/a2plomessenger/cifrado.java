@@ -1,17 +1,13 @@
 package com.twoploapps.a2plomessenger;
 
-import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
-import java.security.spec.KeySpec;
-
 import android.util.Base64;
-import android.util.Log;
+
+import java.nio.charset.StandardCharsets;
 
 import javax.crypto.Cipher;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+
+import timber.log.Timber;
 
 public class cifrado {
     private static final String AES = "AES";
@@ -24,7 +20,7 @@ public class cifrado {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             encryptedData = cipher.doFinal(mensajeTexto.getBytes(StandardCharsets.UTF_8));
         } catch (Exception ex) {
-            Log.e("Error",ex.getMessage());
+            Timber.tag("Error").e(ex);
         }
         return Base64.encodeToString(encryptedData, Base64.DEFAULT);
     }
@@ -37,7 +33,7 @@ public class cifrado {
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             decryptedData = cipher.doFinal(data);
         } catch (Exception ex) {
-            Log.e("Error", ex.getMessage());
+            Timber.tag("Error").e(ex);
         }
         return new String(decryptedData, StandardCharsets.UTF_8);
     }

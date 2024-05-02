@@ -1,10 +1,5 @@
 package com.twoploapps.a2plomessenger;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,16 +7,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,9 +39,10 @@ import java.io.File;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import timber.log.Timber;
+
 public class SetupActivity2 extends AppCompatActivity {
     private EditText nombre, ciudad, genero, edad,estado;
-    private Button guardarinfo;
     private CircleImageView imagen_setup;
     private FirebaseAuth auth;
     private DatabaseReference UserRef;
@@ -49,20 +50,21 @@ public class SetupActivity2 extends AppCompatActivity {
     private String CurrenUserID;
     final  static  int Gallery_PICK =1;
     private StorageReference UserProfileImagen;
-    private Toolbar toolbar;
+
+    boolean emailValido = false;
     private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        nombre=(EditText) findViewById(R.id.nombre_setup);
-        ciudad=(EditText) findViewById(R.id.ciudad_setup);
-        genero=(EditText) findViewById(R.id.genero_setup);
-        edad=(EditText) findViewById(R.id.edad_setup);
-        estado=(EditText) findViewById(R.id.Estado_setup);
-        guardarinfo=(Button)findViewById(R.id.boton_setup);
-        imagen_setup=(CircleImageView)findViewById(R.id.imagen_setup);
-        toolbar = (Toolbar)findViewById(R.id.toolbar_setup);
+        nombre= findViewById(R.id.nombre_setup);
+        ciudad= findViewById(R.id.ciudad_setup);
+        genero= findViewById(R.id.genero_setup);
+        edad= findViewById(R.id.edad_setup);
+        estado= findViewById(R.id.Estado_setup);
+        Button guardarinfo = findViewById(R.id.boton_setup);
+        imagen_setup= findViewById(R.id.imagen_setup);
+        Toolbar toolbar = findViewById(R.id.toolbar_setup);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.completa_perfil);
         dialog = new ProgressDialog(this);
@@ -75,7 +77,7 @@ public class SetupActivity2 extends AppCompatActivity {
             // Ahora puedes usar username
         } else {
             // extras es nulo, no hay nada que hacer aquí
-            Log.e("Mensaje", "Usuario cerro app antes de completar perfil");
+            Timber.tag("Mensaje").e("Usuario cerro app antes de completar perfil");
         }
         estado.setText(R.string.estado_default);
         UserRef= FirebaseDatabase.getInstance().getReference().child("Usuarios");
@@ -112,7 +114,7 @@ public class SetupActivity2 extends AppCompatActivity {
 
                     }else{
                         //Toast.makeText(SetupActivity2.this, "Puede cargar una foto....", Toast.LENGTH_SHORT).show();
-                        Log.i("mensaje","puede cargar una foto");
+                        Timber.tag("mensaje").i("puede cargar una foto");
                     }
                 }
 
@@ -180,6 +182,19 @@ public class SetupActivity2 extends AppCompatActivity {
         }
     }
     private void GuardarInfromacionDB() {
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            user.reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        if(user.isEmailVerified()){
+                            emailValido = true;
+                        }
+                    }
+                }
+            });
+        }
         String nom = nombre.getText().toString().trim();
         String ciu = ciudad.getText().toString().trim();
         String gen = genero.getText().toString().trim();
@@ -205,6 +220,23 @@ public class SetupActivity2 extends AppCompatActivity {
         }else if(edad<15){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(getString(R.string.edad_insuficiente));
+            builder.setTitle("Error");
+            builder.setCancelable(false);
+            builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            }).setNegativeButton(R.string.volver, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            builder.show();
+        }else if(!emailValido){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(getString(R.string.noverificastetucorreo));
             builder.setTitle("Error");
             builder.setCancelable(false);
             builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {

@@ -37,5 +37,6 @@
         android:layout_marginTop="32dp"
         android:padding="15dp"
         android:textColor="@color/white"
-        android:background="@drawable/boton_redondeado"/>
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/fb_color"/>
 </LinearLayout>

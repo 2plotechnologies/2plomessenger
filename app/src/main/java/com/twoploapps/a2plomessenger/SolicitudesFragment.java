@@ -3,18 +3,17 @@ package com.twoploapps.a2plomessenger;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -226,11 +225,9 @@ public class SolicitudesFragment extends Fragment {
                                     public void onCancelled(@NonNull DatabaseError error) { }});
 
                             }else if (tipo.equals("enviado")){
-                                Button solicitu_aceptar =holder.itemView.findViewById(R.id.solicitud_aceptar_boton);
-                                solicitu_aceptar.setText(R.string.enviada);
+                                ImageButton solicitu_aceptar = holder.itemView.findViewById(R.id.solicitud_aceptar_boton);
+                                solicitu_aceptar.setImageResource(R.drawable.waiting);
                                 holder.itemView.findViewById(R.id.solicitud_caneclar_boton).setVisibility(View.GONE);
-
-
                                 UserRef.child(user_id).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -313,7 +310,7 @@ public class SolicitudesFragment extends Fragment {
     private static class SolicitudesViewHolder extends RecyclerView.ViewHolder{
         TextView nombres,ciudades, estados;
         CircleImageView images;
-        Button aceptar, cancelar;
+        ImageButton aceptar, cancelar;
         public SolicitudesViewHolder(@NonNull View itemView) {
             super(itemView);
             nombres=itemView.findViewById(R.id.user_nombre);

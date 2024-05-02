@@ -52,15 +52,21 @@ public class InicioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        toolbar=(Toolbar)findViewById(R.id.app_main_toolbar);
+        toolbar= findViewById(R.id.app_main_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("2Plo Messenger");
-        myviewPager = (ViewPager)findViewById(R.id.main_tabs_pager);
+        myviewPager = findViewById(R.id.main_tabs_pager);
         myacesoTabsAdapter = new AcesoTabsAdapter(getSupportFragmentManager(),this);
         myviewPager.setAdapter(myacesoTabsAdapter);
 
-        mytabLayout = (TabLayout)findViewById(R.id.main_tabs);
+        mytabLayout = findViewById(R.id.main_tabs);
         mytabLayout.setupWithViewPager(myviewPager);
+
+        mytabLayout.getTabAt(0).setIcon(R.drawable.chat);
+        mytabLayout.getTabAt(1).setIcon(R.drawable.posts);
+        mytabLayout.getTabAt(2).setIcon(R.drawable.contactos);
+        mytabLayout.getTabAt(3).setIcon(R.drawable.solicitudes);
+
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         RootRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("CodigosDeGrupo");

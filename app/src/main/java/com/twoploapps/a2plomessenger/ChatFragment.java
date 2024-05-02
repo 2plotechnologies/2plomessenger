@@ -93,13 +93,7 @@ public class ChatFragment extends Fragment {
 
                             }
                             final String nombres = snapshot.child("nombre").getValue().toString();
-                            String privacidadciu = snapshot.child("PC").getValue().toString();
-                            if(privacidadciu.equals("-")){
-                                holder.ciudadc.setText("-");
-                            }else{
-                                String ciudads = snapshot.child("ciudad").getValue().toString();
-                                holder.ciudadc.setText(ciudads);
-                            }
+                            holder.ciudadc.setVisibility(View.GONE);
                             String estadoc = snapshot.child("estado").getValue().toString();
                             holder.nombrec.setText(nombres);
                             String privacidadest = snapshot.child("PUC").getValue().toString();

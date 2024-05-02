@@ -130,7 +130,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/saveprivacity"
             android:layout_marginTop="10dp"
-            android:background="@color/black"
+            android:background="@drawable/boton_redondeado"
+            android:backgroundTint="@color/fb_color"
             android:text="@string/guardar"
             android:textColor="@color/white"/>
     </LinearLayout>

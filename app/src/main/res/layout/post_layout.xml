@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="8dp"
+    android:layout_margin="10dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <!-- Username -->
-        <TextView
-            android:id="@+id/username"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:textSize="18sp" />
-        <!-- Post Image -->
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/defaultprofilephoto"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView
             android:id="@+id/postimage"
             android:layout_width="match_parent"
@@ -32,39 +57,48 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:textSize="16sp" />
-        <!-- Delete Button -->
-        <ImageButton
-            android:id="@+id/btn_eliminar_post"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#DF190A"
-            android:src="@drawable/baseline_delete_24"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:visibility="gone"
-            android:contentDescription="@string/borrar" />
-        <ImageButton
-            android:id="@+id/btn_editar_post"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/baseline_edit_24"
-            android:backgroundTint="#00BFFF"
-            android:contentDescription="@string/editar"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:visibility="gone" />
-        <ImageButton
-            android:id="@+id/btnreportar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_flag_24"
-            android:visibility="gone"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@null" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/btn_eliminar_post"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#DF190A"
+                android:src="@drawable/baseline_delete_24"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:visibility="gone"
+                android:contentDescription="@string/borrar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <ImageButton
+                android:id="@+id/btnreportar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/baseline_flag_24"
+                android:visibility="gone"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="report" />
+            <ImageButton
+                android:id="@+id/btn_editar_post"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/baseline_edit_24"
+                android:backgroundTint="#00BFFF"
+                android:contentDescription="@string/editar"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/btn_eliminar_post"
+                app:layout_constraintTop_toTopOf="@+id/btn_eliminar_post"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

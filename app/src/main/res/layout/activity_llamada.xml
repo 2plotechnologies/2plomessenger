@@ -24,7 +24,7 @@
         android:layout_height="48dp"
         android:text="@string/volver_a_inicio"
         android:background="@drawable/boton_redondeado"
-        android:backgroundTint="@color/whatsAppColor"
+        android:backgroundTint="@color/fb_color"
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:padding="12dp"

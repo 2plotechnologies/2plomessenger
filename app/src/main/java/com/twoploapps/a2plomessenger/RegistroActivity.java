@@ -133,6 +133,7 @@ public class RegistroActivity extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(RegistroActivity.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
+                        mAuth.getCurrentUser().sendEmailVerification();
                         Intent intent = new Intent(RegistroActivity.this, SetupActivity2.class);
                         intent.putExtra("username",username);
                         startActivity(intent);

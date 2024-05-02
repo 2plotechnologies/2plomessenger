@@ -8,7 +8,7 @@
     <string name="acerca_de">Über</string>
     <string name="compartir">Teilen</string>
     <string name="cerrar_sesion">Abmelden</string>
-    <string name="app_desarrollada_por_isaias_guzm_n_2plo_apps">App entwickelt von Isaias Guzmán - 2Plo Apps</string>
+    <string name="app_desarrollada_por_isaias_guzm_n_2plo_apps">App entwickelt von Isaias Guzmán - 2Plo Technologies SF</string>
     <string name="version_app">Version 1.3.3</string>
     <string name="volver">Zurück</string>
     <string name="buscador">Benutzer suchen</string>
@@ -181,4 +181,10 @@
     <string name="comentarioeliminado">Kommentar gelöscht</string>
     <string name="seagrego">Ihr Kommentar wurde hinzugefügt</string>
     <string name="ingresalaclavedetucuenta">Du musst dein Kontopasswort eingeben, um fortzufahren</string>
+    <string name="noverificastetucorreo">Um fortzufahren, müssen Sie Ihre E-Mail überprüfen.</string>
+    <string name="enviamosuncorreoasudireccion">Wir haben eine E-Mail an Ihre angegebene E-Mail-Adresse gesendet. Sie müssen Ihre E-Mail überprüfen, um fortzufahren.</string>
+    <string name="groups">Gruppen</string>
+    <string name="channels">Kanäle</string>
+    <string name="proximamente">Demnächst</string>
+    <string name="actualmente_estamos">Wir arbeiten derzeit an diesem neuen Abschnitt.</string>
 </resources>

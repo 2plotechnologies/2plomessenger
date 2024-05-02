@@ -1,4 +1,5 @@
 package com.twoploapps.a2plomessenger;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.twoploapps.a2plomessenger.FragmentsNew.MainChatsFragment;
+
 public class AcesoTabsAdapter extends FragmentPagerAdapter {
     private Context context;
+
     public AcesoTabsAdapter(@NonNull FragmentManager fm, Context context) {
         super(fm);
         this.context = context;
@@ -19,7 +23,7 @@ public class AcesoTabsAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                ChatFragment chatFragment = new ChatFragment();
+                MainChatsFragment chatFragment = new MainChatsFragment();
                 return chatFragment;
             case 1:
                 PostsFragment postsFragment = new PostsFragment();
@@ -44,20 +48,19 @@ public class AcesoTabsAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
 
-                return context.getString(R.string.chats);
+                return "";
             case 1:
 
-                return context.getString(R.string.posts);
+                return "";
             case 2:
 
-                return context.getString(R.string.contactos);
+                return "";
             case 3:
 
-                return context.getString(R.string.solicitudes);
+                return "";
             default:
                 return null;
         }
-
     }
 
 }

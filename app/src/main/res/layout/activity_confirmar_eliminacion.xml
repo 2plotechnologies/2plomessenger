@@ -39,5 +39,6 @@
         android:layout_height="wrap_content"
         android:text="@string/cancelar"
         android:background="@drawable/boton_redondo"
+        android:backgroundTint="@color/fb_color"
         android:textColor="@color/white"/>
 </LinearLayout>

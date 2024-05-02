@@ -61,21 +61,23 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/botonblanco"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/fb_color"
         android:text="@string/enviar_mensaje"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:textColor="@color/white"/>
 <Button
     android:id="@+id/cancelar_mensaje_usuario_vic"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/enviar_mensaje_usuario_vic"
-    android:background="@drawable/botonblanco"
+    android:background="@drawable/boton_redondeado"
+    android:backgroundTint="@color/fb_color"
     android:layout_margin="15dp"
     android:text="@string/cancelar"
     android:visibility="gone"
     android:textSize="17sp"
     android:textStyle="bold"
-    android:textColor="@color/black"/>
+    android:textColor="@color/white"/>
 </RelativeLayout>
