@@ -28,6 +28,10 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:parentActivityName=".InicioActivity"/>
         <activity
+            android:name=".NewActivitys.CanalesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
             android:name=".DetallePostActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />

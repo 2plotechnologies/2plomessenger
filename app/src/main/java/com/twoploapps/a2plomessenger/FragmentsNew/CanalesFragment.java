@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.twoploapps.a2plomessenger.NewActivitys.CanalesActivity;
 import com.twoploapps.a2plomessenger.NewActivitys.CrearCanalActivity;
 import com.twoploapps.a2plomessenger.R;
 
@@ -31,6 +32,7 @@ public class CanalesFragment extends Fragment {
         // Inflate the layout for this fragment
         View channelview =  inflater.inflate(R.layout.fragment_canales, container, false);
         ImageButton crearCanal = channelview.findViewById(R.id.btn_new_channel);
+        ImageButton buscarCanal = channelview.findViewById(R.id.btn_search);
         crearCanal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,6 +40,15 @@ public class CanalesFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        buscarCanal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CanalesActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return channelview;
     }
 }
