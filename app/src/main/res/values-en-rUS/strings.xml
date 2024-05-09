@@ -189,4 +189,8 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="channels">Channels</string>
     <string name="proximamente">Coming soon</string>
     <string name="actualmente_estamos">We are currently working on this new section.</string>
+    <string name="ingresa_nombre_canal">Enter channel name</string>
+    <string name="ingresa_descripcion_canal">Enter channel description</string>
+    <string name="canalcreado">Channel created successfully</string>
+    <string name="crear_canal">Create Channel</string>
 </resources>

@@ -194,4 +194,8 @@
     <string name="channels">Canales</string>
     <string name="proximamente">Próximamente</string>
     <string name="actualmente_estamos">Actualmente estamos trabajando en esta nueva sección.</string>
+    <string name="ingresa_nombre_canal">Ingresa el nombre del canal</string>
+    <string name="ingresa_descripcion_canal">Ingresa la descripción del canal</string>
+    <string name="canalcreado">Canal creado con éxito</string>
+    <string name="crear_canal">Crear Canal</string>
 </resources>

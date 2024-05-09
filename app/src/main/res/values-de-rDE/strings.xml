@@ -187,4 +187,8 @@
     <string name="channels">Kanäle</string>
     <string name="proximamente">Demnächst</string>
     <string name="actualmente_estamos">Wir arbeiten derzeit an diesem neuen Abschnitt.</string>
+    <string name="ingresa_nombre_canal">Geben Sie den Kanalnamen ein</string>
+    <string name="ingresa_descripcion_canal">Geben Sie die Kanalbeschreibung ein</string>
+    <string name="canalcreado">Kanal erfolgreich erstellt</string>
+    <string name="crear_canal">Kanal erstellen</string>
 </resources>

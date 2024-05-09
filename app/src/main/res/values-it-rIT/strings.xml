@@ -189,4 +189,8 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="channels">Canali</string>
     <string name="proximamente">Prossimamente</string>
     <string name="actualmente_estamos">Attualmente stiamo lavorando su questa nuova sezione.</string>
+    <string name="ingresa_nombre_canal">Inserisci il nome del canale</string>
+    <string name="ingresa_descripcion_canal">Inserisci la descrizione del canale</string>
+    <string name="canalcreado">Canale creato con successo</string>
+    <string name="crear_canal">Crea canale</string>
 </resources>
