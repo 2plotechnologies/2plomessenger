@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".BuscarAmigosActivity">
 
-    <include android:id="@+id/buscar_amigos_toolbar"
-        layout="@layout/toolbar_principal"></include>
+    <include
+        android:id="@+id/buscar_amigos_toolbar"
+        layout="@layout/toolbar_principal" />
     <SearchView
         android:id="@+id/buscador"
         android:layout_width="match_parent"

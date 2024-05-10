@@ -6,16 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".NewActivitys.CanalesActivity"
     android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar_buscar_canales"
+        layout="@layout/toolbar_principal" />
+
     <SearchView
-        android:id="@+id/buscador"
+        android:id="@+id/buscador_channel"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:textColor="@color/black"
         android:queryHint="@string/buscarCanal"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/peliculasrecucler"
+        android:id="@+id/channel_rv"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

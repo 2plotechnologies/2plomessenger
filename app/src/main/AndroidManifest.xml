@@ -23,6 +23,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.2PloMessenger">
         <activity
+            android:name=".NewActivitys.MensajesCanalActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:parentActivityName=".InicioActivity"/>
+        <activity
             android:name=".NewActivitys.CrearCanalActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
@@ -30,7 +35,8 @@
         <activity
             android:name=".NewActivitys.CanalesActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:parentActivityName=".InicioActivity"/>
         <activity
             android:name=".DetallePostActivity"
             android:exported="false"

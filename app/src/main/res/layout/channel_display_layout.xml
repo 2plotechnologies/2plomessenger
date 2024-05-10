@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/channel_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/defaultprofilephoto"/>
+
+        <TextView
+            android:id="@+id/channel_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="nombre"
+            android:textSize="12sp"
+            android:layout_marginStart="5dp"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_follow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/boton_redondeado"
+            android:backgroundTint="@color/fb_color"
+            android:text="@string/seguir"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+</RelativeLayout>

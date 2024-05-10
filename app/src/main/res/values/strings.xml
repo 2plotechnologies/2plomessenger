@@ -198,5 +198,6 @@
     <string name="ingresa_descripcion_canal">Ingresa la descripción del canal</string>
     <string name="canalcreado">Canal creado con éxito</string>
     <string name="crear_canal">Crear Canal</string>
-    <string name="buscarCanal">Buscar canales</string>
+    <string name="buscarCanal">Buscar Canales</string>
+    <string name="seguir">Seguir</string>
 </resources>
