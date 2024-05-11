@@ -193,4 +193,7 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="ingresa_descripcion_canal">Digite a descrição do canal</string>
     <string name="canalcreado">Canal criado com sucesso</string>
     <string name="crear_canal">Criar canal</string>
+    <string name="buscarCanal">Buscar Canais</string>
+    <string name="seguir">Seguir</string>
+    <string name="canalpublico">Canal Público</string>
 </resources>

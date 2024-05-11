@@ -191,4 +191,8 @@
     <string name="ingresa_descripcion_canal">Geben Sie die Kanalbeschreibung ein</string>
     <string name="canalcreado">Kanal erfolgreich erstellt</string>
     <string name="crear_canal">Kanal erstellen</string>
+    <string name="buscarCanal">Kanäle durchsuchen</string>
+    <string name="seguir">Folgen</string>
+    <string name="canalpublico">Öffentlicher Kanal</string>
+
 </resources>

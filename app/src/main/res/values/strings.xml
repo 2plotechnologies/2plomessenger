@@ -200,4 +200,5 @@
     <string name="crear_canal">Crear Canal</string>
     <string name="buscarCanal">Buscar Canales</string>
     <string name="seguir">Seguir</string>
+    <string name="canalpublico">Canal Público</string>
 </resources>

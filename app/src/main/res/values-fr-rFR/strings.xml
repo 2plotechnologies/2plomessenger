@@ -193,4 +193,7 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="ingresa_descripcion_canal">Entrez la description du canal</string>
     <string name="canalcreado">Canal créé avec succès</string>
     <string name="crear_canal">Créer un canal</string>
+    <string name="buscarCanal">Rechercher des canaux</string>
+    <string name="seguir">Suivre</string>
+    <string name="canalpublico">Canal public</string>
 </resources>

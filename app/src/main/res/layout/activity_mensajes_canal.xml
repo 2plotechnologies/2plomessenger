@@ -1,6 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".NewActivitys.MensajesCanalActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include android:id="@+id/channel_chat_toolbar"
+        layout="@layout/toolbar_principal"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_channel_msg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/channel_chat_toolbar"
+        android:layout_above="@+id/channel_chat_linear_layout"/>
+    <LinearLayout
+        android:id="@+id/channel_chat_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/enviar_archivos_boton_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/file"
+            android:layout_margin="10dp"/>
+
+        <ImageView
+            android:id="@+id/emojiboton_channel"
+            android:layout_width="30sp"
+            android:layout_height="40sp"
+            android:src="@drawable/happy"
+            android:layout_margin="10dp"/>
+
+        <com.vanniktech.emoji.EmojiEditText
+            android:id="@+id/mensaje_channel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/escribir_mensaje"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:maxLines="5"
+            android:background="@drawable/edittext_background"/>
+
+        <ImageView
+            android:id="@+id/enviar_mensaje_boton_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/send"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+    
+</RelativeLayout>

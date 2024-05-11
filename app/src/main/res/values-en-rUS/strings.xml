@@ -193,4 +193,7 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="ingresa_descripcion_canal">Enter channel description</string>
     <string name="canalcreado">Channel created successfully</string>
     <string name="crear_canal">Create Channel</string>
+    <string name="buscarCanal">Search Channels</string>
+    <string name="seguir">Follow</string>
+    <string name="canalpublico">Public Channel</string>
 </resources>
