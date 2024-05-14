@@ -84,7 +84,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                         Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(holder.recibirImagenPerfil);
                     }else{
                         String ImagenRecibido = snapshot.child("imagen").getValue().toString();
-                        Picasso.get().load(ImagenRecibido).placeholder(R.drawable.welcome).into(holder.recibirImagenPerfil);
+                        Picasso.get().load(ImagenRecibido).placeholder(R.drawable.defaultprofilephoto).into(holder.recibirImagenPerfil);
                     }
                 }
             }

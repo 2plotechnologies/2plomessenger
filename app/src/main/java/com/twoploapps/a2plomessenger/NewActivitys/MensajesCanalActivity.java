@@ -15,8 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +28,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Models.Canal;
+import com.twoploapps.a2plomessenger.Models.MensajeCanal;
+import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.ChannelMsgAdapter;
 import com.twoploapps.a2plomessenger.R;
 import com.vanniktech.emoji.EmojiEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,11 +42,14 @@ public class MensajesCanalActivity extends AppCompatActivity {
     private TextView nombrecanal;
     private CircleImageView canal_imagen;
     private EmojiEditText mensaje;
-    private ImageView botonenviar, botonarchivo, emojiboton;
+    private ImageView botonarchivo;
+    private ImageView emojiboton;
+    private RecyclerView rv_mensajes_canal;
     private LinearLayout EnviarMensajes;
     private DatabaseReference RootRef,NotificacionesRef;
     private Canal canal;
     private String id, CurrentUserId;
+    private List<MensajeCanal> mensajeCanalList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,21 +70,58 @@ public class MensajesCanalActivity extends AppCompatActivity {
         }
 
         RootRef = FirebaseDatabase.getInstance().getReference();
-
         CurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mensajeCanalList = new ArrayList<>();
 
         nombrecanal = findViewById(R.id.usuario_nombre);
         canal_imagen = findViewById(R.id.usuario_imagen);
         TextView ultimaconexion = findViewById(R.id.usuario_conexion);
-
+        rv_mensajes_canal = findViewById(R.id.rv_channel_msg);
         EnviarMensajes = findViewById(R.id.channel_chat_linear_layout);
-
         mensaje = findViewById(R.id.mensaje_channel);
-        botonenviar = findViewById(R.id.enviar_mensaje_boton_channel);
+        ImageView botonenviar = findViewById(R.id.enviar_mensaje_boton_channel);
         botonarchivo = findViewById(R.id.enviar_archivos_boton_channel);
         emojiboton = findViewById(R.id.emojiboton_channel);
 
+        LinearLayoutManager lm = new LinearLayoutManager(this);
+        rv_mensajes_canal.setLayoutManager(lm);
+        ChannelMsgAdapter adapter = new ChannelMsgAdapter(mensajeCanalList);
+        rv_mensajes_canal.setAdapter(adapter);
+
         getRol();
+
+        RootRef.child("Canales").child(id).child("Mensajes").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                MensajeCanal mensajeCanal = snapshot.getValue(MensajeCanal.class);
+                mensajeCanalList.add(mensajeCanal);
+                adapter.notifyDataSetChanged();
+                int itemCount = rv_mensajes_canal.getAdapter().getItemCount();
+
+                // Hacer un desplazamiento inmediato al último elemento
+                rv_mensajes_canal.scrollToPosition(itemCount - 1);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         botonenviar.setOnClickListener(new View.OnClickListener() {
             @Override
