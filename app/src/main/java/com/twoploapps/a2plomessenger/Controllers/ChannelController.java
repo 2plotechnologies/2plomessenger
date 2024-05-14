@@ -14,10 +14,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.twoploapps.a2plomessenger.ChatActivity;
 import com.twoploapps.a2plomessenger.InicioActivity;
 import com.twoploapps.a2plomessenger.Models.Canal;
+import com.twoploapps.a2plomessenger.Models.MensajeCanal;
 import com.twoploapps.a2plomessenger.NewActivitys.MensajesCanalActivity;
 import com.twoploapps.a2plomessenger.R;
+import com.twoploapps.a2plomessenger.cifrado;
+import com.vanniktech.emoji.EmojiEditText;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class ChannelController {
 
@@ -64,6 +71,32 @@ public class ChannelController {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 callback.onDataReceived(null);
+            }
+        });
+    }
+
+    public static void EnviarMensajeCanal(String mensaje, Context context, String channelId, EmojiEditText Et_mensaje) {
+        String CurrentUserId = auth.getCurrentUser().getUid();
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+        String CurrentDate = dateFormat.format(calendar.getTime());
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("hh mm a");
+        String CurrentTime = dateFormat1.format(calendar.getTime());
+        String MessageChannelId = ref.child("Canales").child(channelId).child("Mensajes").push().getKey();
+        String mensajeEnc = cifrado.encrypt(mensaje);
+
+        MensajeCanal msg = new MensajeCanal(CurrentUserId, mensajeEnc, "texto", MessageChannelId, CurrentDate, CurrentTime);
+        ref.child("Canales").child(channelId).child("Mensajes").child(MessageChannelId).setValue(msg)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, R.string.mensaje_enviado, Toast.LENGTH_SHORT).show();
+                    Et_mensaje.setText("");
+                }else{
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Et_mensaje.setText("");
+                }
             }
         });
     }
