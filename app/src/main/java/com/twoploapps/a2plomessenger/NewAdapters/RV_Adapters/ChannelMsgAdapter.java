@@ -1,5 +1,9 @@
 package com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters;
 
+import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -7,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,9 +24,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.twoploapps.a2plomessenger.AudioActivity;
+import com.twoploapps.a2plomessenger.Controllers.ChannelController;
+import com.twoploapps.a2plomessenger.ImagenActivity;
+import com.twoploapps.a2plomessenger.InicioActivity;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.Models.MensajeCanal;
 import com.twoploapps.a2plomessenger.R;
+import com.twoploapps.a2plomessenger.VideoActivity;
 import com.twoploapps.a2plomessenger.cifrado;
 import com.vanniktech.emoji.EmojiTextView;
 
@@ -31,11 +42,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ChannelMsgAdapter extends RecyclerView.Adapter<ChannelMsgAdapter.ViewHolderChannelMessages> {
 
     List<MensajeCanal> my_channel_msg_List;
+    String channelId;
     FirebaseAuth auth=FirebaseAuth.getInstance();
     //String CurrentUserId=auth.getCurrentUser().getUid();
 
-    public ChannelMsgAdapter(List<MensajeCanal>msg_list){
+    public ChannelMsgAdapter(List<MensajeCanal>msg_list, String id){
         this.my_channel_msg_List = msg_list;
+        this.channelId = id;
     }
 
     @NonNull
@@ -156,6 +169,229 @@ public class ChannelMsgAdapter extends RecyclerView.Adapter<ChannelMsgAdapter.Vi
                 Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/imgbin_computer-icons-sound-icon-volume-png.png?alt=media&token=41edf2db-f52b-4894-958b-93f31ed86766")
                         .into(holder.mensajeImagenRecibir);
             }
+        }
+
+        if (deUsuarioId.equals(mensajeEnviadoID)){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("pdf") || my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("docx")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.descargar),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                                holder.itemView.getContext().getString(R.string.eliminar_todos)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                 if (position==0){
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje()));
+                                    holder.itemView.getContext().startActivity(intent);
+                                }else if (position==2){
+                                    ChannelController.EliminarMensajeCanal(holder.getAdapterPosition(), holder, my_channel_msg_List, channelId);
+                                    Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
+                                    holder.itemView.getContext().startActivity(intent);
+
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("texto")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.eliminar_todos),
+                                holder.itemView.getContext().getString(R.string.copiar),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    ChannelController.EliminarMensajeCanal(holder.getAdapterPosition(), holder, my_channel_msg_List, channelId);
+                                    Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
+                                    holder.itemView.getContext().startActivity(intent);
+                                }else if (position==1) {
+                                    String mensaje = my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje();
+                                    String mensajeDesc = cifrado.decrypt(mensaje);
+                                    ClipData clipData = ClipData.newPlainText("text", mensajeDesc);
+                                    ClipboardManager clipboard = (ClipboardManager) ContextCompat.getSystemService(holder.itemView.getContext(), ClipboardManager.class);
+                                    if(clipboard!=null){
+                                        clipboard.setPrimaryClip(clipData);
+                                        Toast.makeText(holder.itemView.getContext(), R.string.mensajecopiado, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            }
+                        });
+                        builder.show();
+                    }else if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("imagen")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.ver_img),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                                holder.itemView.getContext().getString(R.string.eliminar_todos)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(), ImagenActivity.class);
+                                    intent.putExtra("url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }else if (position==2){
+                                    ChannelController.EliminarMensajeCanal(holder.getAdapterPosition(), holder, my_channel_msg_List, channelId);
+                                    Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
+                                    holder.itemView.getContext().startActivity(intent);
+
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if(my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("mp4")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.ver_vid),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                                holder.itemView.getContext().getString(R.string.eliminar_todos)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(), VideoActivity.class);
+                                    intent.putExtra("url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }else if (position==2){
+                                    ChannelController.EliminarMensajeCanal(holder.getAdapterPosition(), holder, my_channel_msg_List, channelId);
+                                    Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
+                                    holder.itemView.getContext().startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if(my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("mp3")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.reproduciraudio),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                                holder.itemView.getContext().getString(R.string.eliminar_todos)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(), AudioActivity.class);
+                                    intent.putExtra("audio_url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }else if (position==2){
+                                    ChannelController.EliminarMensajeCanal(holder.getAdapterPosition(), holder, my_channel_msg_List, channelId);
+                                    Intent intent = new Intent(holder.itemView.getContext(), InicioActivity.class);
+                                    holder.itemView.getContext().startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                }
+            });
+        }else{
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("pdf") || my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("docx")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.descargar),
+                                holder.itemView.getContext().getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje()));
+                                    holder.itemView.getContext().startActivity(intent);
+
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("texto")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.copiar),
+                                holder.itemView.getContext().getString(R.string.cancelar),
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if(position==0){
+                                    String mensaje = my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje();
+                                    String mensajeDesc = cifrado.decrypt(mensaje);
+                                    ClipData clipData = ClipData.newPlainText("text", mensajeDesc);
+                                    ClipboardManager clipboard = (ClipboardManager) ContextCompat.getSystemService(holder.itemView.getContext(), ClipboardManager.class);
+                                    if(clipboard!=null){
+                                        clipboard.setPrimaryClip(clipData);
+                                        Toast.makeText(holder.itemView.getContext(), R.string.mensajecopiado, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if (my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("imagen")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.ver_img),
+                                holder.itemView.getContext().getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(), ImagenActivity.class);
+                                    intent.putExtra("url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if(my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("mp4")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.ver_vid),
+                                holder.itemView.getContext().getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                              if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(), VideoActivity.class);
+                                    intent.putExtra("url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else if(my_channel_msg_List.get(holder.getAdapterPosition()).getTipo().equals("mp3")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                holder.itemView.getContext().getString(R.string.reproduciraudio),
+                                holder.itemView.getContext().getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    Intent intent = new Intent(holder.itemView.getContext(),AudioActivity.class);
+                                    intent.putExtra("audio_url",my_channel_msg_List.get(holder.getAdapterPosition()).getMensaje());
+                                    holder.itemView.getContext().startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                }
+            });
         }
     }
 

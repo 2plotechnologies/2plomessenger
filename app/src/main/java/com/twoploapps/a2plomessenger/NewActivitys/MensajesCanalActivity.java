@@ -96,7 +96,7 @@ public class MensajesCanalActivity extends AppCompatActivity {
 
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rv_mensajes_canal.setLayoutManager(lm);
-        ChannelMsgAdapter adapter = new ChannelMsgAdapter(mensajeCanalList);
+        ChannelMsgAdapter adapter = new ChannelMsgAdapter(mensajeCanalList, id);
         rv_mensajes_canal.setAdapter(adapter);
 
         EmojiPopup popup = EmojiPopup.Builder.fromRootView(findViewById(R.id.root_view_channel)).build(mensaje);

@@ -24,15 +24,19 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.twoploapps.a2plomessenger.ChatActivity;
 import com.twoploapps.a2plomessenger.InicioActivity;
+import com.twoploapps.a2plomessenger.MensajeAdapter;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.Models.MensajeCanal;
 import com.twoploapps.a2plomessenger.NewActivitys.MensajesCanalActivity;
+import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.ChannelMsgAdapter;
 import com.twoploapps.a2plomessenger.R;
 import com.twoploapps.a2plomessenger.cifrado;
 import com.vanniktech.emoji.EmojiEditText;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class ChannelController {
 
@@ -189,6 +193,17 @@ public class ChannelController {
                                 });
                     }
                 });
+            }
+        });
+    }
+
+    public static void EliminarMensajeCanal(final int position, final ChannelMsgAdapter.ViewHolderChannelMessages holder, List<MensajeCanal> list, String channelId){
+        ref.child("Canales").child(channelId).child("Mensajes").child(list.get(position).getMensajeID()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(holder.itemView.getContext(), R.string.toasteliminado, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
