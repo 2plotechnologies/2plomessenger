@@ -1,12 +1,16 @@
 package com.twoploapps.a2plomessenger.Controllers;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -14,6 +18,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.twoploapps.a2plomessenger.ChatActivity;
 import com.twoploapps.a2plomessenger.InicioActivity;
 import com.twoploapps.a2plomessenger.Models.Canal;
@@ -101,4 +109,87 @@ public class ChannelController {
         });
     }
 
+    public static void EnviarArchivoCanal(Uri fileUri, String check, Context context, String channelId, ProgressDialog dialog){
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Documentos");
+        DatabaseReference channelMensajeRef = ref.child("Canales").child(channelId).child("Mensajes").push();
+        String MensajePushID = channelMensajeRef.getKey();
+        final StorageReference filePath = storageReference.child(MensajePushID+"."+check);
+        filePath.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String CurrentUserId = auth.getCurrentUser().getUid();
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+                        String CurrentDate = dateFormat.format(calendar.getTime());
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("hh mm a");
+                        String CurrentTime = dateFormat1.format(calendar.getTime());
+
+                        MensajeCanal msg = new MensajeCanal(CurrentUserId, uri.toString(), check, MensajePushID, CurrentDate, CurrentTime);
+
+                        ref.child("Canales").child(channelId).child("Mensajes").child(MensajePushID).setValue(msg)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialog.dismiss();
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double p = (100.0*snapshot.getBytesTransferred())/snapshot.getTotalByteCount();
+                dialog.setTitle(R.string.enviando_archivo);
+                dialog.setMessage((int) p + "%");
+            }
+        });
+    }
+
+    public static void EnviarImagenCanal(Uri fileUri, String check, Context context, String channelId, ProgressDialog dialog){
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Archivos");
+        DatabaseReference channelMensajeRef = ref.child("Canales").child(channelId).child("Mensajes").push();
+        String MensajePushID = channelMensajeRef.getKey();
+        final StorageReference filePath = storageReference.child(MensajePushID+"."+"jpg");
+
+        filePath.putFile(fileUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String CurrentUserId = auth.getCurrentUser().getUid();
+                        Calendar calendar = Calendar.getInstance();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+                        String CurrentDate = dateFormat.format(calendar.getTime());
+                        SimpleDateFormat dateFormat1 = new SimpleDateFormat("hh mm a");
+                        String CurrentTime = dateFormat1.format(calendar.getTime());
+
+                        MensajeCanal msg = new MensajeCanal(CurrentUserId, uri.toString(), check, MensajePushID, CurrentDate, CurrentTime);
+
+                        ref.child("Canales").child(channelId).child("Mensajes").child(MensajePushID).setValue(msg)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                });
+                    }
+                });
+            }
+        });
+    }
 }

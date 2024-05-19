@@ -37,8 +37,6 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
     private List<Mensajes> usuarioMensajes;
     private FirebaseAuth auth;
     private DatabaseReference UserRef;
-    private static final String AES = "AES";
-    private static final String key = BuildConfig.CLAVE_CIFRADO;
 
     public MensajeAdapter (List<Mensajes> usuarioMensajes){
         this.usuarioMensajes = usuarioMensajes;

@@ -1,6 +1,10 @@
 package com.twoploapps.a2plomessenger.NewActivitys;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,13 +30,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.twoploapps.a2plomessenger.ChatActivity;
 import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.Models.MensajeCanal;
 import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.ChannelMsgAdapter;
 import com.twoploapps.a2plomessenger.R;
 import com.vanniktech.emoji.EmojiEditText;
+import com.vanniktech.emoji.EmojiPopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,14 +51,14 @@ public class MensajesCanalActivity extends AppCompatActivity {
     private TextView nombrecanal;
     private CircleImageView canal_imagen;
     private EmojiEditText mensaje;
-    private ImageView botonarchivo;
-    private ImageView emojiboton;
     private RecyclerView rv_mensajes_canal;
     private LinearLayout EnviarMensajes;
     private DatabaseReference RootRef,NotificacionesRef;
-    private Canal canal;
     private String id, CurrentUserId;
     private List<MensajeCanal> mensajeCanalList;
+    private ProgressDialog dialog;
+    private String check="",myUrl="";
+    private Uri fileUri;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +78,8 @@ public class MensajesCanalActivity extends AppCompatActivity {
             actionBar.setCustomView(view);
         }
 
+        dialog = new ProgressDialog(this);
+
         RootRef = FirebaseDatabase.getInstance().getReference();
         CurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mensajeCanalList = new ArrayList<>();
@@ -80,13 +91,78 @@ public class MensajesCanalActivity extends AppCompatActivity {
         EnviarMensajes = findViewById(R.id.channel_chat_linear_layout);
         mensaje = findViewById(R.id.mensaje_channel);
         ImageView botonenviar = findViewById(R.id.enviar_mensaje_boton_channel);
-        botonarchivo = findViewById(R.id.enviar_archivos_boton_channel);
-        emojiboton = findViewById(R.id.emojiboton_channel);
+        ImageView botonarchivo = findViewById(R.id.enviar_archivos_boton_channel);
+        ImageView emojiboton = findViewById(R.id.emojiboton_channel);
 
         LinearLayoutManager lm = new LinearLayoutManager(this);
         rv_mensajes_canal.setLayoutManager(lm);
         ChannelMsgAdapter adapter = new ChannelMsgAdapter(mensajeCanalList);
         rv_mensajes_canal.setAdapter(adapter);
+
+        EmojiPopup popup = EmojiPopup.Builder.fromRootView(findViewById(R.id.root_view_channel)).build(mensaje);
+
+        emojiboton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.toggle();
+            }
+        });
+
+        botonarchivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CharSequence[] opciones = new CharSequence[] {
+                        getString(R.string.imagenes),
+                        "PDF",
+                        "Word",
+                        "Video MP4",
+                        getString(R.string.audio)
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(MensajesCanalActivity.this);
+                builder.setTitle(getString(R.string.seleccioinatipo));
+                builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which==0){
+                            check="imagen";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("image/*");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.selecciionar_imagenes)),438);
+                        }
+                        if(which==1){
+                            check="pdf";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("application/pdf");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_pdf)),438);
+                        }
+                        if(which==2){
+                            check="docx";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("application/msword");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_word)),438);
+                        }
+                        if(which==3){
+                            check="mp4";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("video/mp4");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_video)),438);
+                        }
+                        if(which==4){
+                            check="mp3";
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            intent.setType("audio/mpeg");
+                            startActivityForResult(intent.createChooser(intent, getString(R.string.audio)),438);
+                        }
+                    }
+                });
+                builder.show();
+            }
+        });
 
         getRol();
 
@@ -160,5 +236,22 @@ public class MensajesCanalActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}});
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==438 && resultCode==RESULT_OK && data!=null && data.getData()!=null){
+            dialog.setTitle(R.string.enviando_imagen);
+            dialog.setMessage(getString(R.string.estamos_enviando_imagen));
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+            fileUri = data.getData();
+            if(!check.equals("imagen")){
+                ChannelController.EnviarArchivoCanal(fileUri, check, MensajesCanalActivity.this, id, dialog);
+            }else if(check.equals("imagen")){
+                ChannelController.EnviarImagenCanal(fileUri, check, MensajesCanalActivity.this, id, dialog);
+            }
+        }
     }
 }

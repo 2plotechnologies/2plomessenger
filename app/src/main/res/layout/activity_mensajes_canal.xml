@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".NewActivitys.MensajesCanalActivity">
+    tools:context=".NewActivitys.MensajesCanalActivity"
+    android:id="@+id/root_view_channel">
 
     <include android:id="@+id/channel_chat_toolbar"
         layout="@layout/toolbar_principal"/>
