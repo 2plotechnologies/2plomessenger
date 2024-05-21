@@ -196,4 +196,10 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="buscarCanal">Buscar Canais</string>
     <string name="seguir">Seguir</string>
     <string name="canalpublico">Canal Público</string>
+    <string name="dejar_de_seguir">Deixar de seguir</string>
+    <string name="eliminar_canal">Excluir Canal</string>
+    <string name="infocanal">Informações do Canal</string>
+    <string name="canal_eliminado">Canal excluído…</string>
+    <string name="deseas_eliminar_canal">Tem certeza de que deseja excluir este canal? Esta ação não pode ser desfeita</string>
+    <string name="dejastedeseguirestecanal">Você deixou de seguir este canal</string>
 </resources>

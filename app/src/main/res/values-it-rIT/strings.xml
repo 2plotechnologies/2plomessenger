@@ -196,4 +196,10 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="buscarCanal">Cerca Canali</string>
     <string name="seguir">Segui</string>
     <string name="canalpublico">Canale Pubblico</string>
+    <string name="dejar_de_seguir">Smetti di seguire</string>
+    <string name="eliminar_canal">Elimina Canale</string>
+    <string name="infocanal">Informazioni del Canale</string>
+    <string name="canal_eliminado">Canale eliminato…</string>
+    <string name="deseas_eliminar_canal">Sei sicuro di voler eliminare questo canale? Questa azione non può essere annullata</string>
+    <string name="dejastedeseguirestecanal">Hai smesso di seguire questo canale</string>
 </resources>

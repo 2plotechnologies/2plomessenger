@@ -201,4 +201,10 @@
     <string name="buscarCanal">Buscar Canales</string>
     <string name="seguir">Seguir</string>
     <string name="canalpublico">Canal Público</string>
+    <string name="dejar_de_seguir">Dejar de seguir</string>
+    <string name="eliminar_canal">Eliminar Canal</string>
+    <string name="infocanal">Información del Canal</string>
+    <string name="canal_eliminado">Canal Eliminado…</string>
+    <string name="deseas_eliminar_canal">¿Estás seguro que deseas eliminar este canal? Esta acción no se puede deshacer</string>
+    <string name="dejastedeseguirestecanal">Dejaste de seguir este canal</string>
 </resources>

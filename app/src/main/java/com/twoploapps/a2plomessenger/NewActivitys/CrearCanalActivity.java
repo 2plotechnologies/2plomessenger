@@ -1,11 +1,5 @@
 package com.twoploapps.a2plomessenger.NewActivitys;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,9 +32,6 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.R;
-import com.twoploapps.a2plomessenger.SetupActivity2;
-
-import java.io.File;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -42,21 +39,17 @@ public class CrearCanalActivity extends AppCompatActivity {
 
     private EditText txt_nombre, txt_desc;
     private CircleImageView img;
-
     final  static  int Gallery_PICK =1;
     private StorageReference ChannelImage;
-
     private FirebaseAuth auth;
     private ProgressDialog dialog;
-    private Toolbar toolbar;
-
     Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_canal);
-        toolbar=(Toolbar) findViewById(R.id.toolbar_crear_canal);
+        Toolbar toolbar = findViewById(R.id.toolbar_crear_canal);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if(actionBar!=null){

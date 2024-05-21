@@ -101,67 +101,68 @@ public class MensajesCanalActivity extends AppCompatActivity {
 
         EmojiPopup popup = EmojiPopup.Builder.fromRootView(findViewById(R.id.root_view_channel)).build(mensaje);
 
-        emojiboton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popup.toggle();
-            }
+        emojiboton.setOnClickListener(v -> popup.toggle());
+
+        nombrecanal.setOnClickListener(v -> {
+            Intent intent = new Intent(MensajesCanalActivity.this, InfoCanalActivity.class);
+            intent.putExtra("channel_id", id);
+            startActivity(intent);
         });
 
-        botonarchivo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CharSequence[] opciones = new CharSequence[] {
-                        getString(R.string.imagenes),
-                        "PDF",
-                        "Word",
-                        "Video MP4",
-                        getString(R.string.audio)
-                };
-                AlertDialog.Builder builder = new AlertDialog.Builder(MensajesCanalActivity.this);
-                builder.setTitle(getString(R.string.seleccioinatipo));
-                builder.setItems(opciones, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(which==0){
-                            check="imagen";
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            intent.setType("image/*");
-                            startActivityForResult(intent.createChooser(intent, getString(R.string.selecciionar_imagenes)),438);
-                        }
-                        if(which==1){
-                            check="pdf";
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            intent.setType("application/pdf");
-                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_pdf)),438);
-                        }
-                        if(which==2){
-                            check="docx";
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            intent.setType("application/msword");
-                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_word)),438);
-                        }
-                        if(which==3){
-                            check="mp4";
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            intent.setType("video/mp4");
-                            startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_video)),438);
-                        }
-                        if(which==4){
-                            check="mp3";
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-                            intent.setType("audio/mpeg");
-                            startActivityForResult(intent.createChooser(intent, getString(R.string.audio)),438);
-                        }
-                    }
-                });
-                builder.show();
-            }
+        ultimaconexion.setOnClickListener(v -> {
+            Intent intent = new Intent(MensajesCanalActivity.this, InfoCanalActivity.class);
+            intent.putExtra("channel_id", id);
+            startActivity(intent);
+        });
+
+        botonarchivo.setOnClickListener(v -> {
+            CharSequence[] opciones = new CharSequence[] {
+                    getString(R.string.imagenes),
+                    "PDF",
+                    "Word",
+                    "Video MP4",
+                    getString(R.string.audio)
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(MensajesCanalActivity.this);
+            builder.setTitle(getString(R.string.seleccioinatipo));
+            builder.setItems(opciones, (dialog, which) -> {
+                if(which==0){
+                    check="imagen";
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("image/*");
+                    startActivityForResult(intent.createChooser(intent, getString(R.string.selecciionar_imagenes)),438);
+                }
+                if(which==1){
+                    check="pdf";
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("application/pdf");
+                    startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_pdf)),438);
+                }
+                if(which==2){
+                    check="docx";
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("application/msword");
+                    startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_word)),438);
+                }
+                if(which==3){
+                    check="mp4";
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("video/mp4");
+                    startActivityForResult(intent.createChooser(intent, getString(R.string.seleccionar_video)),438);
+                }
+                if(which==4){
+                    check="mp3";
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    intent.setType("audio/mpeg");
+                    startActivityForResult(intent.createChooser(intent, getString(R.string.audio)),438);
+                }
+            });
+            builder.show();
         });
 
         getRol();
@@ -231,6 +232,8 @@ public class MensajesCanalActivity extends AppCompatActivity {
                     if(Rol!=null && Rol.equals("miembro")){
                         EnviarMensajes.setVisibility(View.GONE);
                     }
+                }else{
+                    EnviarMensajes.setVisibility(View.GONE);
                 }
             }
 

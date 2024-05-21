@@ -196,4 +196,10 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="buscarCanal">Search Channels</string>
     <string name="seguir">Follow</string>
     <string name="canalpublico">Public Channel</string>
+    <string name="dejar_de_seguir">Unfollow</string>
+    <string name="eliminar_canal">Delete Channel</string>
+    <string name="infocanal">Channel Information</string>
+    <string name="canal_eliminado">Channel Deleted…</string>
+    <string name="deseas_eliminar_canal">Are you sure you want to delete this channel? This action cannot be undone</string>
+    <string name="dejastedeseguirestecanal">You unfollowed this channel</string>
 </resources>

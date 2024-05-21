@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewActivitys.InfoCanalActivity">
+
+    <include
+        android:id="@+id/toolbar_info_canal"
+        layout="@layout/toolbar_principal" />
+
+    <ScrollView
+        android:id="@+id/mi_scroll_view2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_info_canal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/nombre_canal_edit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/textos"
+                android:padding="10dp"
+                android:hint="@string/ingresa_nombre_canal"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/descripcion_canal_edit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/textos"
+                android:layout_below="@id/nombre_canal_edit"
+                android:padding="10dp"
+                android:hint="@string/ingresa_descripcion_canal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:inputType="text" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/channel_img_edit"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_below="@+id/descripcion_canal_edit"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/baseline_image_24"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="2dp"/>
+
+            <Button
+                android:id="@+id/channel_button_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boton_redondeado"
+                android:backgroundTint="@color/fb_color"
+                android:layout_below="@id/channel_img_edit"
+                android:padding="10dp"
+                android:text="@string/guardar_informacion"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <Button
+                android:id="@+id/dejar_de_seguir"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boton_redondeado"
+                android:backgroundTint="@color/red"
+                android:layout_below="@id/channel_button_edit"
+                android:padding="10dp"
+                android:text="@string/dejar_de_seguir"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <Button
+                android:id="@+id/eliminar_canal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boton_redondeado"
+                android:backgroundTint="@color/red"
+                android:layout_below="@id/dejar_de_seguir"
+                android:padding="10dp"
+                android:text="@string/eliminar_canal"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

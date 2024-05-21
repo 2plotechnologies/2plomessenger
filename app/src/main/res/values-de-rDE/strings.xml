@@ -194,5 +194,10 @@
     <string name="buscarCanal">Kanäle durchsuchen</string>
     <string name="seguir">Folgen</string>
     <string name="canalpublico">Öffentlicher Kanal</string>
-
+    <string name="dejar_de_seguir">Nicht mehr folgen</string>
+    <string name="eliminar_canal">Kanal löschen</string>
+    <string name="infocanal">Kanalinformationen</string>
+    <string name="canal_eliminado">Kanal gelöscht…</string>
+    <string name="deseas_eliminar_canal">Bist du sicher, dass du diesen Kanal löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden</string>
+    <string name="dejastedeseguirestecanal">Du folgst diesem Kanal nicht mehr</string>
 </resources>

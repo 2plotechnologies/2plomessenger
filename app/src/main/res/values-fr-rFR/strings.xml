@@ -196,4 +196,10 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="buscarCanal">Rechercher des canaux</string>
     <string name="seguir">Suivre</string>
     <string name="canalpublico">Canal public</string>
+    <string name="dejar_de_seguir">Se désabonner</string>
+    <string name="eliminar_canal">Supprimer le canal</string>
+    <string name="infocanal">Informations du canal</string>
+    <string name="canal_eliminado">Canal supprimé…</string>
+    <string name="deseas_eliminar_canal">Êtes-vous sûr de vouloir supprimer ce canal ? Cette action ne peut pas être annulée</string>
+    <string name="dejastedeseguirestecanal">Vous avez cessé de suivre ce canal</string>
 </resources>

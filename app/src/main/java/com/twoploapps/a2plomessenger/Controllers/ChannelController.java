@@ -37,6 +37,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 public class ChannelController {
 
@@ -56,6 +57,34 @@ public class ChannelController {
                     String CurrentUserId = auth.getCurrentUser().getUid();
                     ref.child("Canales").child(channelId).child("Miembros").child(CurrentUserId).child("Rol").setValue("creador");
                     Toast.makeText(context, context.getString(R.string.canalcreado), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, InicioActivity.class);
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public static void Edit(Map<String, Object> canal, String channelId, Context context){
+        ref.child("Canales").child(channelId).updateChildren(canal).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, R.string.guardado_exitosamente, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public static void Delete(String channelId, Context context){
+        ref.child("Canales").child(channelId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, R.string.canal_eliminado, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, InicioActivity.class);
                     context.startActivity(intent);
                 }else{
