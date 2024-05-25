@@ -53,7 +53,7 @@ public class MensajesCanalActivity extends AppCompatActivity {
     private EmojiEditText mensaje;
     private RecyclerView rv_mensajes_canal;
     private LinearLayout EnviarMensajes;
-    private DatabaseReference RootRef,NotificacionesRef;
+    private DatabaseReference RootRef;
     private String id, CurrentUserId;
     private List<MensajeCanal> mensajeCanalList;
     private ProgressDialog dialog;

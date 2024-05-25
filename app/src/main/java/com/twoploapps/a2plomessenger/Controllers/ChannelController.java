@@ -36,6 +36,7 @@ import com.vanniktech.emoji.EmojiEditText;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +48,8 @@ public class ChannelController {
 
     static FirebaseAuth auth = FirebaseAuth.getInstance();
     static DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+    static DatabaseReference NotificacionesRef = FirebaseDatabase.getInstance().getReference().child("Notificaciones");
+    static String channelName;
 
     public static void Create(Canal canal, String channelId, Context context){
 
@@ -117,6 +120,7 @@ public class ChannelController {
     }
 
     public static void EnviarMensajeCanal(String mensaje, Context context, String channelId, EmojiEditText Et_mensaje) {
+        obtenerNombre(channelId);
         String CurrentUserId = auth.getCurrentUser().getUid();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -134,12 +138,48 @@ public class ChannelController {
                 if(task.isSuccessful()){
                     Toast.makeText(context, R.string.mensaje_enviado, Toast.LENGTH_SHORT).show();
                     Et_mensaje.setText("");
+                    EnviarNotificaciones(channelId);
                 }else{
                     Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     Et_mensaje.setText("");
                 }
             }
         });
+    }
+
+    private static void obtenerNombre(String channelId) {
+        ref.child("Canales").child(channelId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    channelName = snapshot.child("nombre").getValue(String.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
+    }
+
+    private static void EnviarNotificaciones(String channelId) {
+        ref.child("Canales").child(channelId).child("Miembros").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        String userId = dataSnapshot.getKey();
+                        if(userId!=null){
+                            HashMap<String, String> channelNoficicacion = new HashMap<>();
+                            channelNoficicacion.put("de", channelId);
+                            channelNoficicacion.put("tipo","mensaje_canal");
+                            channelNoficicacion.put("username", channelName);
+                            NotificacionesRef.child(userId).push().setValue(channelNoficicacion);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     public static void EnviarArchivoCanal(Uri fileUri, String check, Context context, String channelId, ProgressDialog dialog){
