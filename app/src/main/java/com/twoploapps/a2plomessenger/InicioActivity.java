@@ -1,9 +1,5 @@
 package com.twoploapps.a2plomessenger;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -13,19 +9,22 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.shape.CornerFamily;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.shape.MaterialShapeDrawable;
+import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,7 +37,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Random;
 
 public class InicioActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -66,6 +64,19 @@ public class InicioActivity extends AppCompatActivity {
         mytabLayout.getTabAt(1).setIcon(R.drawable.posts);
         mytabLayout.getTabAt(2).setIcon(R.drawable.contactos);
         mytabLayout.getTabAt(3).setIcon(R.drawable.solicitudes);
+
+        ShapeAppearanceModel shapeAppearanceModel = new ShapeAppearanceModel()
+                .toBuilder()
+                .setTopLeftCorner(com.google.android.material.shape.CornerFamily.ROUNDED, 16)  // 16dp de radio
+                .setTopRightCorner(com.google.android.material.shape.CornerFamily.ROUNDED, 16)  // 16dp de radio
+                .build();
+
+        // Crear un drawable con el modelo de apariencia
+        MaterialShapeDrawable shapeDrawable = new MaterialShapeDrawable(shapeAppearanceModel);
+        shapeDrawable.setFillColor(ContextCompat.getColorStateList(this, R.color.fb_color));
+
+        // Aplicar el drawable al TabLayout
+        ViewCompat.setBackground(mytabLayout, shapeDrawable);
 
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         RootRef = FirebaseDatabase.getInstance().getReference().child("Grupos");

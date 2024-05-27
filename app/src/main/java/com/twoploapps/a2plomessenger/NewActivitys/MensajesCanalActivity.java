@@ -57,8 +57,7 @@ public class MensajesCanalActivity extends AppCompatActivity {
     private String id, CurrentUserId;
     private List<MensajeCanal> mensajeCanalList;
     private ProgressDialog dialog;
-    private String check="",myUrl="";
-    private Uri fileUri;
+    private String check="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -249,7 +248,7 @@ public class MensajesCanalActivity extends AppCompatActivity {
             dialog.setMessage(getString(R.string.estamos_enviando_imagen));
             dialog.setCanceledOnTouchOutside(false);
             dialog.show();
-            fileUri = data.getData();
+            Uri fileUri = data.getData();
             if(!check.equals("imagen")){
                 ChannelController.EnviarArchivoCanal(fileUri, check, MensajesCanalActivity.this, id, dialog);
             }else if(check.equals("imagen")){
