@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.marlonlom.utilities.timeago.TimeAgo;
+import com.github.marlonlom.utilities.timeago.TimeAgoMessages;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +29,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderposts> {
     FirebaseAuth auth=FirebaseAuth.getInstance();
@@ -74,7 +76,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderpo
 
             }
         });
+
+        long timeInMillis = posts.getFecha();
+
+        Locale LocaleBylanguageTag = Locale.getDefault();
+        TimeAgoMessages messages = new TimeAgoMessages.Builder().withLocale(LocaleBylanguageTag).build();
+
+        String text = TimeAgo.using(timeInMillis, messages);
         holder.username.setText(posts.getNomuser());
+        holder.time.setText(text);
         if(posts.hasImage() && posts.hasText()){
             Picasso.get().load(posts.getImagen()).into(holder.imagen);
             holder.texto.setText(posts.getTexto());
@@ -189,13 +199,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewholderpo
     }
 
     public class viewholderposts extends RecyclerView.ViewHolder {
-        TextView texto, username;
+        TextView texto, username, time;
         ImageView imagen;
         ImageButton eliminar,editar;
         ImageButton reportar;
         public viewholderposts(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.username);
+            time = itemView.findViewById(R.id.txt_time);
             texto = itemView.findViewById(R.id.posttext);
             imagen = itemView.findViewById(R.id.postimage);
             eliminar = itemView.findViewById(R.id.btn_eliminar_post);

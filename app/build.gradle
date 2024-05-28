@@ -10,8 +10,8 @@ android {
         applicationId "com.twoploapps.a2plomessenger"
         minSdk 23
         targetSdk 33
-        versionCode 15
-        versionName "1.4"
+        versionCode 16
+        versionName "1.4.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "CLAVE_CIFRADO", "\"$CLAVE_CIFRADO\""
@@ -73,6 +73,7 @@ android {
         implementation 'com.vanniktech:emoji-google:0.7.0'
         implementation 'com.hbb20:ccp:2.5.0'
         implementation 'androidx.cardview:cardview:1.0.0'
+        implementation 'com.github.marlonlom:timeago:4.0.3'
     }
 }
 dependencies {
