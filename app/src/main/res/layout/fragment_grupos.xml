@@ -6,23 +6,32 @@
     tools:context=".GruposFragment"
     android:orientation="vertical"
     android:gravity="center">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/proximamente"
-        android:gravity="center"
-        android:textSize="40sp"
-        android:layout_gravity="center" />
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/tower_crane"
-        android:layout_gravity="center"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/actualmente_estamos"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:layout_gravity="center" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gruposlista"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+    <ImageButton
+        android:id="@+id/btn_join"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:scaleType="fitXY"
+        android:layout_gravity="end"
+        android:src="@drawable/join"
+        android:backgroundTint="@color/white"
+        android:background="@drawable/boton_redondo"
+        android:contentDescription="New Channel" />
+
+    <ImageButton
+        android:id="@+id/btn_new_group"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_add_box_24"
+        android:backgroundTint="@color/white"
+        android:scaleType="fitXY"
+        android:background="@drawable/boton_redondo"
+        android:contentDescription="New Channel" />
 </LinearLayout>
