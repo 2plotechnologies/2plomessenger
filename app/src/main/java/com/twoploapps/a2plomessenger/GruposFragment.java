@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.InputType;
 import android.text.TextUtils;
@@ -30,15 +32,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.twoploapps.a2plomessenger.Controllers.GroupController;
+import com.twoploapps.a2plomessenger.Models.Canal;
+import com.twoploapps.a2plomessenger.Models.Grupo;
 import com.twoploapps.a2plomessenger.NewActivitys.CreateGroupActivity;
+import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.ChannelsAdapter;
+import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.GroupsAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class GruposFragment extends Fragment {
 
+    private LinearLayoutManager lm;
+    private GroupsAdapter adapter;
+    private ArrayList<Grupo> groupArrayList;
+    private String CurrentUserId;
 
     public GruposFragment() {
         // Required empty public constructor
@@ -48,8 +59,38 @@ public class GruposFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View grupoFragmentoView = inflater.inflate(R.layout.fragment_grupos, container, false);
+        RecyclerView rv_groups = grupoFragmentoView.findViewById(R.id.gruposlista);
         ImageButton crearGrupo= grupoFragmentoView.findViewById(R.id.btn_new_group);
         ImageButton unirGrupo = grupoFragmentoView.findViewById(R.id.btn_join);
+
+        lm = new LinearLayoutManager(getContext());
+        groupArrayList = new ArrayList<>();
+        adapter = new GroupsAdapter(groupArrayList);
+        rv_groups.setLayoutManager(lm);
+        rv_groups.setAdapter(adapter);
+
+        CurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference groupsRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
+
+        groupsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    groupArrayList.clear();
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        if(dataSnapshot.child("Miembros").hasChild(CurrentUserId)){
+                            Grupo grupo = dataSnapshot.getValue(Grupo.class);
+                            groupArrayList.add(grupo);
+                        }
+                    }
+                    Collections.reverse(groupArrayList);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
 
         crearGrupo.setOnClickListener(new View.OnClickListener() {
             @Override
