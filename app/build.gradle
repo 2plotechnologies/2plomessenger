@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.twoploapps.a2plomessenger"
-        minSdk 23
+        minSdk 24
         targetSdk 33
         versionCode 16
         versionName "1.4.1"
@@ -46,20 +46,20 @@ android {
 
     dependencies {
 
-        implementation 'androidx.appcompat:appcompat:1.6.0'
-        implementation 'com.google.android.material:material:1.8.0'
+        implementation 'androidx.appcompat:appcompat:1.7.0'
+        implementation 'com.google.android.material:material:1.12.0'
         implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-        implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
-        implementation 'com.google.firebase:firebase-messaging:23.1.1'
-        implementation 'com.google.firebase:firebase-storage:20.1.0'
-        implementation 'com.google.firebase:firebase-auth:21.1.0'
+        implementation 'com.google.firebase:firebase-database-ktx:21.0.0'
+        implementation 'com.google.firebase:firebase-messaging:24.0.0'
+        implementation 'com.google.firebase:firebase-storage:21.0.0'
+        implementation 'com.google.firebase:firebase-auth:23.0.0'
         implementation 'com.firebaseui:firebase-ui-database:7.1.1'
-        implementation platform('com.google.firebase:firebase-bom:26.2.0')
+        implementation platform('com.google.firebase:firebase-bom:33.1.0')
         implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-        implementation 'com.google.firebase:firebase-database:20.1.0'
-        implementation 'com.google.firebase:firebase-messaging:23.1.1'
-        implementation 'com.google.firebase:firebase-functions:20.2.2'
-        implementation 'com.google.firebase:firebase-firestore:24.4.2'
+        implementation 'com.google.firebase:firebase-database:21.0.0'
+        implementation 'com.google.firebase:firebase-messaging:24.0.0'
+        implementation 'com.google.firebase:firebase-functions:21.0.0'
+        implementation 'com.google.firebase:firebase-firestore:25.0.0'
         testImplementation 'junit:junit:4.+'
         androidTestImplementation 'androidx.test.ext:junit:1.1.5'
         implementation ('org.jitsi.react:jitsi-meet-sdk:+') { transitive = true }
@@ -69,15 +69,16 @@ android {
         implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
         implementation 'com.google.firebase:firebase-messaging'
         implementation 'com.android.support:multidex:1.0.3'
-        implementation 'androidx.browser:browser:1.4.0'
+        implementation 'androidx.browser:browser:1.8.0'
         implementation 'com.vanniktech:emoji-google:0.7.0'
         implementation 'com.hbb20:ccp:2.5.0'
         implementation 'androidx.cardview:cardview:1.0.0'
         implementation 'com.github.marlonlom:timeago:4.0.3'
     }
+    namespace 'com.twoploapps.a2plomessenger'
 }
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

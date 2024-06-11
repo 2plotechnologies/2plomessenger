@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.twoploapps.a2plomessenger">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-sdk tools:overrideLibrary="org.jitsi.meet.sdk, com.swmansion.rnscreens, com.amplitude.reactnative, com.reactnativegooglesignin, com.reactnativecommunity.asyncstorage, com.ocetnik.timer, com.calendarevents, com.reactnativecommunity.clipboard, com.reactnativecommunity.netinfo, com.kevinresol.react_native_default_preference, com.learnium.RNDeviceInfo, com.swmansion.gesturehandler, org.linusu, com.rnimmersive, com.corbt.keepawake, org.wonday.orientation, com.reactnativepagerview, com.oblador.performance, com.th3rdwave.safeareacontext, com.reactnativecommunity.slider, org.devio.rn.splashscreen, com.horcrux.svg, com.brentvatne.react, com.oney.WebRTCModule, com.reactnativecommunity.webview" />
 

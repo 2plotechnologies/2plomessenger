@@ -207,4 +207,13 @@
     <string name="canal_eliminado">Canal Eliminado…</string>
     <string name="deseas_eliminar_canal">¿Estás seguro que deseas eliminar este canal? Esta acción no se puede deshacer</string>
     <string name="dejastedeseguirestecanal">Dejaste de seguir este canal</string>
+    <string name="ingresa_nombre_grupo">Ingrese el nombre del grupo</string>
+    <string name="ingresa_descripcion_grupo">Ingresa la descripción del grupo</string>
+    <string name="grupocreado">Grupo creado con éxito</string>
+    <string name="crear_grupo">Crear Grupo</string>
+    <string name="te_uniste_al_grupo">Te uniste satisfactoriamente al grupo</string>
+    <string name="introduce_el_code_del_grupo">Introduce el código del grupo</string>
+    <string name="unirse_grupo">Unirse a un grupo</string>
+    <string name="codigogrupohint">Código del grupo</string>
+    <string name="ya_estas_en_el_grupo">Ya estas en este grupo</string>
 </resources>
