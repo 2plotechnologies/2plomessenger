@@ -114,7 +114,8 @@
             android:name=".GrupoChatActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".InicioActivity"/>
         <activity
             android:name=".MiperfilActivity"
             android:exported="false"

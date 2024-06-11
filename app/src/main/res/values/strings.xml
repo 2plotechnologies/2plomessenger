@@ -216,4 +216,5 @@
     <string name="unirse_grupo">Unirse a un grupo</string>
     <string name="codigogrupohint">Código del grupo</string>
     <string name="ya_estas_en_el_grupo">Ya estas en este grupo</string>
+    <string name="chat_en_grupo">Chat en grupo</string>
 </resources>

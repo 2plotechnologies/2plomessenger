@@ -1,5 +1,6 @@
 package com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
+import com.twoploapps.a2plomessenger.GrupoChatActivity;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.Models.Grupo;
 import com.twoploapps.a2plomessenger.R;
@@ -43,6 +45,15 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         holder.groupName.setText(grupo.getNombre());
 
         Picasso.get().load(grupo.getImagen()).placeholder(R.drawable.defaultprofilephoto).into(holder.groupImg);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), GrupoChatActivity.class);
+                intent.putExtra("groupId", my_groupsList.get(holder.getAdapterPosition()).getId());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
