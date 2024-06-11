@@ -202,4 +202,13 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="canal_eliminado">Canal excluído…</string>
     <string name="deseas_eliminar_canal">Tem certeza de que deseja excluir este canal? Esta ação não pode ser desfeita</string>
     <string name="dejastedeseguirestecanal">Você deixou de seguir este canal</string>
+    <string name="ingresa_nombre_grupo">Digite o nome do grupo</string>
+    <string name="ingresa_descripcion_grupo">Digite a descrição do grupo</string>
+    <string name="grupocreado">Grupo criado com sucesso</string>
+    <string name="crear_grupo">Criar grupo</string>
+    <string name="te_uniste_al_grupo">Você se juntou ao grupo com sucesso</string>
+    <string name="introduce_el_code_del_grupo">Digite o código do grupo</string>
+    <string name="unirse_grupo">Juntar-se a um grupo</string>
+    <string name="codigogrupohint">Código do grupo</string>
+    <string name="ya_estas_en_el_grupo">Você já está neste grupo</string>
 </resources>

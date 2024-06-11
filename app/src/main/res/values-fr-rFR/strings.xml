@@ -202,4 +202,13 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="canal_eliminado">Canal supprimé…</string>
     <string name="deseas_eliminar_canal">Êtes-vous sûr de vouloir supprimer ce canal ? Cette action ne peut pas être annulée</string>
     <string name="dejastedeseguirestecanal">Vous avez cessé de suivre ce canal</string>
+    <string name="ingresa_nombre_grupo">Entrez le nom du groupe</string>
+    <string name="ingresa_descripcion_grupo">Entrez la description du groupe</string>
+    <string name="grupocreado">Groupe créé avec succès</string>
+    <string name="crear_grupo">Créer un groupe</string>
+    <string name="te_uniste_al_grupo">Vous avez rejoint le groupe avec succès</string>
+    <string name="introduce_el_code_del_grupo">Entrez le code du groupe</string>
+    <string name="unirse_grupo">Rejoindre un groupe</string>
+    <string name="codigogrupohint">Code du groupe</string>
+    <string name="ya_estas_en_el_grupo">Vous êtes déjà dans ce groupe</string>
 </resources>

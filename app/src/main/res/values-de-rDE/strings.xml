@@ -200,4 +200,13 @@
     <string name="canal_eliminado">Kanal gelöscht…</string>
     <string name="deseas_eliminar_canal">Bist du sicher, dass du diesen Kanal löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden</string>
     <string name="dejastedeseguirestecanal">Du folgst diesem Kanal nicht mehr</string>
+    <string name="ingresa_nombre_grupo">Geben Sie den Gruppennamen ein</string>
+    <string name="ingresa_descripcion_grupo">Geben Sie die Gruppenbeschreibung ein</string>
+    <string name="grupocreado">Gruppe erfolgreich erstellt</string>
+    <string name="crear_grupo">Gruppe erstellen</string>
+    <string name="te_uniste_al_grupo">Du bist erfolgreich der Gruppe beigetreten</string>
+    <string name="introduce_el_code_del_grupo">Geben Sie den Gruppencode ein</string>
+    <string name="unirse_grupo">Einer Gruppe beitreten</string>
+    <string name="codigogrupohint">Gruppencode</string>
+    <string name="ya_estas_en_el_grupo">Du bist bereits in dieser Gruppe</string>
 </resources>

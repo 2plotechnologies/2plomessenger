@@ -202,4 +202,13 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="canal_eliminado">Canale eliminato…</string>
     <string name="deseas_eliminar_canal">Sei sicuro di voler eliminare questo canale? Questa azione non può essere annullata</string>
     <string name="dejastedeseguirestecanal">Hai smesso di seguire questo canale</string>
+    <string name="ingresa_nombre_grupo">Inserisci il nome del gruppo</string>
+    <string name="ingresa_descripcion_grupo">Inserisci la descrizione del gruppo</string>
+    <string name="grupocreado">Gruppo creato con successo</string>
+    <string name="crear_grupo">Crea gruppo</string>
+    <string name="te_uniste_al_grupo">Ti sei unito con successo al gruppo</string>
+    <string name="introduce_el_code_del_grupo">Inserisci il codice del gruppo</string>
+    <string name="unirse_grupo">Unirsi a un gruppo</string>
+    <string name="codigogrupohint">Codice del gruppo</string>
+    <string name="ya_estas_en_el_grupo">Sei già in questo gruppo</string>
 </resources>
