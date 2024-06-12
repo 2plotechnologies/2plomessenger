@@ -93,7 +93,7 @@ public class ContactosFragment extends Fragment {
                                 }
                                 String estadou = snapshot.child("estado").getValue().toString();
                                 if(privacidadimg.equals("Oculto")){
-                                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").into(holder.imagen);
+                                    Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/defaultprofilephoto.png?alt=media&token=d2f0f0de-2386-45bc-952a-aedeea866b0c").into(holder.imagen);
                                 }else{
                                     String imagenu = snapshot.child("imagen").getValue().toString();
                                     Picasso.get().load(imagenu).placeholder(R.drawable.defaultprofilephoto).into(holder.imagen);

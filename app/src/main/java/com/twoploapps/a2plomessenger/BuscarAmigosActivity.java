@@ -67,7 +67,7 @@ public class BuscarAmigosActivity extends AppCompatActivity {
                         }
                         holder.estadou.setText(model.getEstado());
                         if(model.getPI()!=null&& Objects.equals(model.getPI(), "Oculto")||Objects.equals(model.getPI(),"Contactos")){
-                            Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
+                            Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/defaultprofilephoto.png?alt=media&token=d2f0f0de-2386-45bc-952a-aedeea866b0c").placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
                         }else{
                             Picasso.get().load(model.getImagen()).placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
                         }
@@ -128,7 +128,7 @@ public class BuscarAmigosActivity extends AppCompatActivity {
                         }
                         holder.estadou.setText(model.getEstado());
                         if(model.getPI()!=null&& Objects.equals(model.getPI(), "Oculto")||Objects.equals(model.getPI(),"Contactos")){
-                            Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com.png?alt=media&token=1d2dff28-0fd1-4caf-9ca0-b6192b0fc8c2").placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
+                            Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/defaultprofilephoto.png?alt=media&token=d2f0f0de-2386-45bc-952a-aedeea866b0c").placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
                         }else{
                             Picasso.get().load(model.getImagen()).placeholder(R.drawable.defaultprofilephoto).into(holder.imagenu);
                         }
