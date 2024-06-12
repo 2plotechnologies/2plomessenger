@@ -211,4 +211,5 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="unirse_grupo">Juntar-se a um grupo</string>
     <string name="codigogrupohint">Código do grupo</string>
     <string name="ya_estas_en_el_grupo">Você já está neste grupo</string>
+    <string name="chat_en_grupo">Conversa em grupo</string>
 </resources>

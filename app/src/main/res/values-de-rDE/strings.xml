@@ -209,4 +209,5 @@
     <string name="unirse_grupo">Einer Gruppe beitreten</string>
     <string name="codigogrupohint">Gruppencode</string>
     <string name="ya_estas_en_el_grupo">Du bist bereits in dieser Gruppe</string>
+    <string name="chat_en_grupo">Gruppenchat</string>
 </resources>

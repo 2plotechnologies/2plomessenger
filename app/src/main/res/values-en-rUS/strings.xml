@@ -211,4 +211,5 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="unirse_grupo">Join a group</string>
     <string name="codigogrupohint">Group code</string>
     <string name="ya_estas_en_el_grupo">You are already in this group</string>
+    <string name="chat_en_grupo">Group Chat</string>
 </resources>

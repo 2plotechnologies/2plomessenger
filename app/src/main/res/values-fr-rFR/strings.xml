@@ -211,4 +211,5 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="unirse_grupo">Rejoindre un groupe</string>
     <string name="codigogrupohint">Code du groupe</string>
     <string name="ya_estas_en_el_grupo">Vous êtes déjà dans ce groupe</string>
+    <string name="chat_en_grupo">Discussion de groupe</string>
 </resources>
