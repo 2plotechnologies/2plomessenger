@@ -9,8 +9,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InfoGrupoActivity extends AppCompatActivity {
     private TextView ng,txcode,codigogrupo;
     private EditText nombregrupo;
@@ -31,6 +36,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
     private DatabaseReference GrupoRef, UserRef;
     private Button btnsalir;
     private FirebaseAuth auth;
+    private ListView listamiembros;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +49,13 @@ public class InfoGrupoActivity extends AppCompatActivity {
         txcode = findViewById(R.id.txcode);
         codigogrupo = findViewById(R.id.codigogrupo);
         nombregrupo = findViewById(R.id.nombregrupo);
+        listamiembros = findViewById(R.id.list_view);
         btnsalir = findViewById(R.id.btnsalir);
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         auth=FirebaseAuth.getInstance();
         id = getIntent().getStringExtra("group_id");
+        obtenerNombresDeUsuarios(id);
         currentUserid = auth.getCurrentUser().getUid();
         codigogrupo.setText(id);
         GrupoRef.child(id).addValueEventListener(new ValueEventListener() {
@@ -64,6 +72,8 @@ public class InfoGrupoActivity extends AppCompatActivity {
 
             }
         });
+
+
         btnsalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,4 +103,56 @@ public class InfoGrupoActivity extends AppCompatActivity {
             }
         });
     }
+    private void obtenerNombresDeUsuarios(String groupId) {
+        DatabaseReference grupoRef = FirebaseDatabase.getInstance().getReference().child("Grupos").child(groupId).child("Miembros");
+        grupoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    List<String> userIds = new ArrayList<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        userIds.add(dataSnapshot.getKey());
+                    }
+                    obtenerNombresDeUsuariosPorId(userIds);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle possible errors.
+            }
+        });
+    }
+
+    private void obtenerNombresDeUsuariosPorId(List<String> userIds) {
+        List<String> nombresUsuarios = new ArrayList<>();
+        for (String userId : userIds) {
+            UserRef.child(userId).child("nombre").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String nombre = snapshot.getValue(String.class);
+                        if (nombre != null) {
+                            nombresUsuarios.add(nombre);
+                        }
+                        // Una vez obtenidos todos los nombres, actualiza el ListView
+                        if (nombresUsuarios.size() == userIds.size()) {
+                            actualizarListView(nombresUsuarios);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle possible errors.
+                }
+            });
+        }
+    }
+    private void actualizarListView(List<String> nombresUsuarios) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nombresUsuarios);
+        listamiembros.setAdapter(adapter);
+    }
+
+
 }
