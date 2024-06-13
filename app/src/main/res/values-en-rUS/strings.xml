@@ -212,4 +212,11 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="codigogrupohint">Group code</string>
     <string name="ya_estas_en_el_grupo">You are already in this group</string>
     <string name="chat_en_grupo">Group Chat</string>
+    <string name="nombre_del_grupo">Group name:</string>
+    <string name="eliminar_grupo">Delete Group</string>
+    <string name="salir_del_grupo">Leave group</string>
+    <string name="c_digo_del_grupo">Group code:</string>
+    <string name="saliste_del_grupo">You left the group</string>
+    <string name="deseas_salir">Do you want to leave the group?</string>
+    <string name="info_grupo">Group information</string>
 </resources>

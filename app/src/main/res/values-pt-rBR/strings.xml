@@ -212,4 +212,11 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="codigogrupohint">Código do grupo</string>
     <string name="ya_estas_en_el_grupo">Você já está neste grupo</string>
     <string name="chat_en_grupo">Conversa em grupo</string>
+    <string name="nombre_del_grupo">Nome do grupo:</string>
+    <string name="eliminar_grupo">Excluir grupo</string>
+    <string name="salir_del_grupo">Sair do grupo</string>
+    <string name="c_digo_del_grupo">Código do grupo:</string>
+    <string name="saliste_del_grupo">Você saiu do grupo</string>
+    <string name="deseas_salir">Você quer sair do grupo?</string>
+    <string name="info_grupo">Informações do grupo</string>
 </resources>

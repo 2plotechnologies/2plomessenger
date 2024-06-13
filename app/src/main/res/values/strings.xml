@@ -217,4 +217,11 @@
     <string name="codigogrupohint">Código del grupo</string>
     <string name="ya_estas_en_el_grupo">Ya estas en este grupo</string>
     <string name="chat_en_grupo">Chat en grupo</string>
+    <string name="nombre_del_grupo">Nombre del grupo:</string>
+    <string name="eliminar_grupo">Eliminar Grupo</string>
+    <string name="salir_del_grupo">Salir del grupo</string>
+    <string name="c_digo_del_grupo">Código del grupo:</string>
+    <string name="saliste_del_grupo">Saliste del grupo</string>
+    <string name="deseas_salir">¿Deseas salir del grupo?</string>
+    <string name="info_grupo">Información del grupo</string>
 </resources>

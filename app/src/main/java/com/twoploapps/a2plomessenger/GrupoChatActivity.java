@@ -35,6 +35,7 @@ import com.twoploapps.a2plomessenger.Controllers.GroupController;
 import com.twoploapps.a2plomessenger.Models.Grupo;
 import com.twoploapps.a2plomessenger.Models.MensajeCanal;
 import com.twoploapps.a2plomessenger.Models.MensajeGrupo;
+import com.twoploapps.a2plomessenger.NewActivitys.InfoCanalActivity;
 import com.twoploapps.a2plomessenger.NewActivitys.MensajesCanalActivity;
 import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.ChannelMsgAdapter;
 import com.twoploapps.a2plomessenger.NewAdapters.RV_Adapters.GroupMessageAdapter;
@@ -133,6 +134,18 @@ public class GrupoChatActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
+
+        nombregrupo.setOnClickListener(v -> {
+            Intent intent = new Intent(GrupoChatActivity.this, InfoGrupoActivity.class);
+            intent.putExtra("group_id", id);
+            startActivity(intent);
+        });
+
+        ultimaconexion.setOnClickListener(v -> {
+            Intent intent = new Intent(GrupoChatActivity.this, InfoGrupoActivity.class);
+            intent.putExtra("group_id", id);
+            startActivity(intent);
         });
 
         GroupController.getData(id, new GroupController.OnGroupDataReceived() {

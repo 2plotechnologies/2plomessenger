@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class InfoGrupoActivity extends AppCompatActivity {
     private TextView ng,txcode,codigogrupo;
     private EditText nombregrupo;
-    private String CurrentGruponombre, currentUserid;
+    private String currentUserid, id;
     private Toolbar toolbar;
     private DatabaseReference GrupoRef, UserRef;
     private Button btnsalir;
@@ -36,27 +36,26 @@ public class InfoGrupoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_grupo);
-        toolbar=(Toolbar) findViewById(R.id.toolbar_infogrupo);
+        toolbar = findViewById(R.id.toolbar_infogrupo);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Informacion del grupo");
-        ng = (TextView) findViewById(R.id.ng);
-        txcode = (TextView) findViewById(R.id.txcode);
-        codigogrupo = (TextView) findViewById(R.id.codigogrupo);
-        nombregrupo=(EditText) findViewById(R.id.nombregrupo);
-        btnsalir=(Button)findViewById(R.id.btnsalir);
+        getSupportActionBar().setTitle(getString(R.string.info_grupo));
+        ng = findViewById(R.id.ng);
+        txcode = findViewById(R.id.txcode);
+        codigogrupo = findViewById(R.id.codigogrupo);
+        nombregrupo = findViewById(R.id.nombregrupo);
+        btnsalir = findViewById(R.id.btnsalir);
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        CurrentGruponombre = getIntent().getExtras().get("nombre_grupo").toString();
         auth=FirebaseAuth.getInstance();
+        id = getIntent().getStringExtra("group_id");
         currentUserid = auth.getCurrentUser().getUid();
-        nombregrupo.setText(CurrentGruponombre);
-        nombregrupo.setEnabled(false);
-        GrupoRef.child(CurrentGruponombre).addValueEventListener(new ValueEventListener() {
+        codigogrupo.setText(id);
+        GrupoRef.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    String CodigoGrupo = snapshot.child("codigo").getValue().toString();
-                    codigogrupo.setText(CodigoGrupo);
+                    String name = snapshot.child("nombre").getValue(String.class);
+                    nombregrupo.setText(name);
                 }
             }
 
@@ -69,25 +68,22 @@ public class InfoGrupoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(InfoGrupoActivity.this);
-                builder.setMessage("¿Deseas salir del grupo?")
+                builder.setMessage(getString(R.string.deseas_salir))
                         .setCancelable(false)
-                        .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                UserRef.child(currentUserid).child("Grupos").child(CurrentGruponombre).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int i) {
+                                GrupoRef.child(id).child("Miembros").child(currentUserid).removeValue()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
-                                        if(!task.isSuccessful()){
-                                            Toast.makeText(InfoGrupoActivity.this, "Error al salir", Toast.LENGTH_SHORT).show();
-                                        }else{
-                                            Intent intent = new Intent(InfoGrupoActivity.this,InicioActivity.class);
-                                            startActivity(intent);
-                                            Toast.makeText(InfoGrupoActivity.this, "Saliste del grupo", Toast.LENGTH_SHORT).show();
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(InfoGrupoActivity.this, getString(R.string.saliste_del_grupo), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
                             }
                         })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }

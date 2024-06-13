@@ -212,4 +212,11 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="codigogrupohint">Code du groupe</string>
     <string name="ya_estas_en_el_grupo">Vous êtes déjà dans ce groupe</string>
     <string name="chat_en_grupo">Discussion de groupe</string>
+    <string name="nombre_del_grupo">Nom du groupe:</string>
+    <string name="eliminar_grupo">Supprimer le groupe</string>
+    <string name="salir_del_grupo">Quitter le groupe</string>
+    <string name="c_digo_del_grupo">Code du groupe:</string>
+    <string name="saliste_del_grupo">Vous avez quitté le groupe</string>
+    <string name="deseas_salir">Voulez-vous quitter le groupe?</string>
+    <string name="info_grupo">Informations sur le groupe</string>
 </resources>

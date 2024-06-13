@@ -210,4 +210,11 @@
     <string name="codigogrupohint">Gruppencode</string>
     <string name="ya_estas_en_el_grupo">Du bist bereits in dieser Gruppe</string>
     <string name="chat_en_grupo">Gruppenchat</string>
+    <string name="nombre_del_grupo">Gruppenname:</string>
+    <string name="eliminar_grupo">Gruppe löschen</string>
+    <string name="salir_del_grupo">Gruppe verlassen</string>
+    <string name="c_digo_del_grupo">Gruppencode:</string>
+    <string name="saliste_del_grupo">Du hast die Gruppe verlassen</string>
+    <string name="deseas_salir">Möchtest du die Gruppe verlassen?</string>
+    <string name="info_grupo">Gruppeninformationen</string>
 </resources>
