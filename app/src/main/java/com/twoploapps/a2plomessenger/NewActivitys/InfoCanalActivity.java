@@ -46,7 +46,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class InfoCanalActivity extends AppCompatActivity {
     private EditText nombre, descripcion;
     private CircleImageView img;
-    final  static  int Gallery_PICK =1;
+    final  static  int Gallery_PICK = 1;
     private StorageReference ChannelImage;
     private FirebaseAuth auth;
     private ProgressDialog dialog;

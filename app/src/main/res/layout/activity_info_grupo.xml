@@ -33,11 +33,33 @@
                 android:inputType="text"
                 tools:ignore="LabelFor" />
         </LinearLayout>
+        <EditText
+            android:id="@+id/descripcion_grupo_edit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/textos"
+            android:layout_below="@id/ngl"
+            android:padding="10dp"
+            android:hint="@string/ingresa_descripcion_grupo"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="text" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/group_img_edit"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/descripcion_grupo_edit"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/baseline_image_24"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp"/>
         <TextView
             android:id="@+id/txcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ngl"
+            android:layout_below="@+id/group_img_edit"
             android:text="@string/c_digo_del_grupo"
             android:gravity="center"
             android:textSize="20sp">
@@ -51,18 +73,43 @@
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold" />
+        <TextView
+            android:id="@+id/txt_miembros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/codigogrupo"
+            android:gravity="center"
+            android:text = "@string/miembros"
+            android:textSize="30sp"
+            android:textStyle="bold" />
         <ListView
             android:id="@+id/list_view"
-            android:layout_below="@+id/codigogrupo"
+            android:layout_below="@+id/txt_miembros"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="200dp" />
+        <Button
+            android:id="@+id/group_button_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boton_redondeado"
+            android:backgroundTint="@color/fb_color"
+            android:layout_below="@id/list_view"
+            android:padding="10dp"
+            android:text="@string/guardar_informacion"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
         <Button
             android:id="@+id/btnsalir"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/list_view"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/group_button_edit"
             android:background="@drawable/boton_redondeado"
             android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="@color/red"
             android:text="@string/salir_del_grupo" />
         <Button
@@ -70,6 +117,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnsalir"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/boton_redondeado"
             android:textColor="@color/white"
             android:layout_marginTop="30dp"

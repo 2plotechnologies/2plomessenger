@@ -224,4 +224,7 @@
     <string name="saliste_del_grupo">Saliste del grupo</string>
     <string name="deseas_salir">¿Deseas salir del grupo?</string>
     <string name="info_grupo">Información del grupo</string>
+    <string name="grupo_eliminado">Grupo Eliminado</string>
+    <string name="deseas_eliminar_grupo">¿Estás seguro que deseas eliminar este grupo? Esta acción no se puede deshacer, todos los mensajes enviados se perderán de forma permanente.</string>
+    <string name="miembros">Miembros:</string>
 </resources>

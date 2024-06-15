@@ -35,6 +35,7 @@ import com.vanniktech.emoji.EmojiEditText;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 public class GroupController {
 
@@ -231,6 +232,34 @@ public class GroupController {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(holder.itemView.getContext(), R.string.toasteliminado, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public static void Edit(Map<String, Object> grupo, String groupId, Context context){
+        ref.child("Grupos").child(groupId).updateChildren(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, R.string.guardado_exitosamente, Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public static void Delete(String groupId, Context context){
+        ref.child("Grupos").child(groupId).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(context, R.string.grupo_eliminado, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, InicioActivity.class);
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
