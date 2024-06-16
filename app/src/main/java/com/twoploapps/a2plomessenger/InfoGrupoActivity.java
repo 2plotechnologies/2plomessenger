@@ -1,12 +1,15 @@
 package com.twoploapps.a2plomessenger;
 
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +19,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,9 +40,7 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
-import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Controllers.GroupController;
-import com.twoploapps.a2plomessenger.NewActivitys.InfoCanalActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +61,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ListView listamiembros;
     final  static  int Gallery_PICK = 1;
+    List<String> userIds;
     Uri imageUri;
 
     @Override
@@ -66,7 +70,12 @@ public class InfoGrupoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_info_grupo);
         Toolbar toolbar = findViewById(R.id.toolbar_infogrupo);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getString(R.string.info_grupo));
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setTitle(getString(R.string.info_grupo));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+        }
         ng = findViewById(R.id.ng);
         txcode = findViewById(R.id.txcode);
         codigogrupo = findViewById(R.id.codigogrupo);
@@ -85,13 +94,25 @@ public class InfoGrupoActivity extends AppCompatActivity {
         id = getIntent().getStringExtra("group_id");
         obtenerNombresDeUsuarios(id);
         currentUserid = auth.getCurrentUser().getUid();
-        codigogrupo.setText(id);
+        userIds = new ArrayList<>();
         getRol();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        codigogrupo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClipData clipData = ClipData.newPlainText("text", id);
+                ClipboardManager clipboard = ContextCompat.getSystemService(InfoGrupoActivity.this, ClipboardManager.class);
+                if(clipboard!=null){
+                    clipboard.setPrimaryClip(clipData);
+                    Toast.makeText(InfoGrupoActivity.this, R.string.codigocopiado, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -163,6 +184,56 @@ public class InfoGrupoActivity extends AppCompatActivity {
             }
         });
 
+        listamiembros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String userId = userIds.get(position);
+                if(!userId.equals(currentUserid)){
+                    if(rol.equals("admin")||rol.equals("creador")){
+                        CharSequence[] opciones = new CharSequence[]{
+                                getString(R.string.eliminar_del_grupo),
+                                getString(R.string.hacer_admin),
+                                getString(R.string.ver_perfil),
+                                getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(InfoGrupoActivity.this);
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if (position==0){
+                                    eliminarUsuarioDelGrupo(userId);
+                                }else if (position==1){
+                                    hacerUsuarioAdministrador(userId);
+                                }
+                                else if(position == 2){
+                                    Intent intent = new Intent(InfoGrupoActivity.this, PerfilActivity.class);
+                                    intent.putExtra("usuario_id", userId);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }else{
+                        CharSequence[] opciones = new CharSequence[]{
+                                getString(R.string.ver_perfil),
+                                getString(R.string.cancelar)
+                        };
+                        AlertDialog.Builder builder = new AlertDialog.Builder(InfoGrupoActivity.this);
+                        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int position) {
+                                if(position == 0){
+                                    Intent intent = new Intent(InfoGrupoActivity.this, PerfilActivity.class);
+                                    intent.putExtra("usuario_id", userId);
+                                    startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.show();
+                    }
+                }
+            }
+        });
 
         btnsalir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +249,8 @@ public class InfoGrupoActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             Toast.makeText(InfoGrupoActivity.this, getString(R.string.saliste_del_grupo), Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(InfoGrupoActivity.this, InicioActivity.class);
+                                            startActivity(intent);
                                         }
                                     }
                                 });
@@ -199,7 +272,7 @@ public class InfoGrupoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    List<String> userIds = new ArrayList<>();
+                    userIds.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         userIds.add(dataSnapshot.getKey());
                     }
@@ -257,10 +330,14 @@ public class InfoGrupoActivity extends AppCompatActivity {
                         img_grupo.setEnabled(false);
                         btn_guardar.setVisibility(View.GONE);
                         btneliminar.setVisibility(View.GONE);
+                        txcode.setVisibility(View.GONE);
+                        codigogrupo.setVisibility(View.GONE);
                     }else if(Rol!=null && Rol.equals("creador")){
-                        rol = "admin";
+                        rol = "creador";
+                        codigogrupo.setText(id);
                     }else{
                         rol = "admin";
+                        codigogrupo.setText(id);
                         btneliminar.setVisibility(View.GONE);
                     }
                 }
@@ -314,5 +391,59 @@ public class InfoGrupoActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         }
+    }
+    private void eliminarUsuarioDelGrupo(String userId) {
+        DatabaseReference miembroRef = FirebaseDatabase.getInstance().getReference().child("Grupos").child(id).child("Miembros").child(userId);
+        miembroRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(InfoGrupoActivity.this, "Usuario eliminado del grupo", Toast.LENGTH_SHORT).show();
+                    GrupoRef.child(id).child("ListaNegra").child(userId).setValue(System.currentTimeMillis());
+                    // Actualiza el ListView si es necesario
+                    obtenerNombresDeUsuarios(id);
+                } else {
+                    Toast.makeText(InfoGrupoActivity.this, "Error al eliminar usuario", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void hacerUsuarioAdministrador(String userId) {
+        GrupoRef.child(id).child("Miembros").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    if (snapshot.child("Rol").getValue(String.class).equals("admin")){
+                        GrupoRef.child(id).child("Miembros").child(userId).child("Rol").setValue("miembro")
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(InfoGrupoActivity.this, "User is no longer admin", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else if(snapshot.child("Rol").getValue(String.class).equals("creador")){
+                        Toast.makeText(InfoGrupoActivity.this, R.string.este_usuario_es_creador, Toast.LENGTH_SHORT).show();
+                    }else{
+                        GrupoRef.child(id).child("Miembros").child(userId).child("Rol").setValue("admin")
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()){
+                                    Toast.makeText(InfoGrupoActivity.this, "User is admin", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(InfoGrupoActivity.this, "Error: "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

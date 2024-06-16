@@ -183,6 +183,7 @@ public class ChannelController {
     }
 
     public static void EnviarArchivoCanal(Uri fileUri, String check, Context context, String channelId, ProgressDialog dialog){
+        obtenerNombre(channelId);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Documentos");
         DatabaseReference channelMensajeRef = ref.child("Canales").child(channelId).child("Mensajes").push();
         String MensajePushID = channelMensajeRef.getKey();
@@ -208,6 +209,7 @@ public class ChannelController {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             dialog.dismiss();
+                                            EnviarNotificaciones(channelId);
                                         }
                                     }
                                 });
@@ -231,6 +233,7 @@ public class ChannelController {
     }
 
     public static void EnviarImagenCanal(Uri fileUri, String check, Context context, String channelId, ProgressDialog dialog){
+        obtenerNombre(channelId);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Archivos");
         DatabaseReference channelMensajeRef = ref.child("Canales").child(channelId).child("Mensajes").push();
         String MensajePushID = channelMensajeRef.getKey();
@@ -257,6 +260,7 @@ public class ChannelController {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             dialog.dismiss();
+                                            EnviarNotificaciones(channelId);
                                         }
                                     }
                                 });

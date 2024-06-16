@@ -227,4 +227,10 @@
     <string name="grupo_eliminado">Grupo Eliminado</string>
     <string name="deseas_eliminar_grupo">¿Estás seguro que deseas eliminar este grupo? Esta acción no se puede deshacer, todos los mensajes enviados se perderán de forma permanente.</string>
     <string name="miembros">Miembros:</string>
+    <string name="eliminar_del_grupo">Eliminar del grupo</string>
+    <string name="hacer_admin">Hacer/quitar admin</string>
+    <string name="ver_perfil">Ver perfil</string>
+    <string name="este_usuario_es_creador">No puedes modificar el rol del creador del grupo</string>
+    <string name="fuiste_eliminado">Ya no puedes acceder a este grupo porque fuiste eliminado</string>
+    <string name="codigocopiado">Código copiado al portapapeles</string>
 </resources>

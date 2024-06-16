@@ -34,6 +34,7 @@ import com.vanniktech.emoji.EmojiEditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -67,13 +68,15 @@ public class GroupController {
     public static void Join (String groupId, Context context){
         String CurrentUserId = auth.getCurrentUser().getUid();
 
-        ref.child("Grupos").child(groupId).addValueEventListener(new ValueEventListener() {
+        ref.child("Grupos").child(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     if(snapshot.child("Miembros").hasChild(CurrentUserId)){
                         Toast.makeText(context, context.getString(R.string.ya_estas_en_el_grupo), Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else if (snapshot.child("ListaNegra").hasChild(CurrentUserId)) {
+                        Toast.makeText(context, R.string.fuiste_eliminado, Toast.LENGTH_SHORT).show();
+                    } else{
                         ref.child("Grupos").child(groupId).child("Miembros").child(CurrentUserId).child("Rol").setValue("miembro")
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -116,6 +119,7 @@ public class GroupController {
     }
 
     public static void EnviarMensajeGrupo(String mensaje, Context context, String groupId, EmojiEditText Et_mensaje, String username) {
+        obtenerNombre(groupId);
         String CurrentUserId = auth.getCurrentUser().getUid();
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -134,6 +138,7 @@ public class GroupController {
                         if(task.isSuccessful()){
                             Toast.makeText(context, R.string.mensaje_enviado, Toast.LENGTH_SHORT).show();
                             Et_mensaje.setText("");
+                            EnviarNotificaciones(groupId);
                         }else{
                             Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             Et_mensaje.setText("");
@@ -143,6 +148,7 @@ public class GroupController {
     }
 
     public static void EnviarArchivoGrupo(Uri fileUri, String check, Context context, String groupId, ProgressDialog dialog, String username){
+        obtenerNombre(groupId);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Documentos");
         DatabaseReference groupMensajeRef = ref.child("Grupos").child(groupId).child("Mensajes").push();
         String MensajePushID = groupMensajeRef.getKey();
@@ -168,6 +174,7 @@ public class GroupController {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             dialog.dismiss();
+                                            EnviarNotificaciones(groupId);
                                         }
                                     }
                                 });
@@ -191,6 +198,7 @@ public class GroupController {
     }
 
     public static void EnviarImagenGrupo(Uri fileUri, String check, Context context, String groupId, ProgressDialog dialog, String username){
+        obtenerNombre(groupId);
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Archivos");
         DatabaseReference groupMensajeRef = ref.child("Grupos").child(groupId).child("Mensajes").push();
         String MensajePushID = groupMensajeRef.getKey();
@@ -217,6 +225,7 @@ public class GroupController {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
                                             dialog.dismiss();
+                                            EnviarNotificaciones(groupId);
                                         }
                                     }
                                 });
@@ -235,6 +244,19 @@ public class GroupController {
                 }
             }
         });
+    }
+
+    private static void obtenerNombre(String groupId) {
+        ref.child("Grupos").child(groupId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    groupName = snapshot.child("nombre").getValue(String.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 
     public static void Edit(Map<String, Object> grupo, String groupId, Context context){
@@ -263,5 +285,27 @@ public class GroupController {
                 }
             }
         });
+    }
+
+    private static void EnviarNotificaciones(String groupId) {
+        ref.child("Grupos").child(groupId).child("Miembros").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                        String userId = dataSnapshot.getKey();
+                        if(userId!=null){
+                            HashMap<String, String> channelNoficicacion = new HashMap<>();
+                            channelNoficicacion.put("de", groupId);
+                            channelNoficicacion.put("tipo","mensaje_grupo");
+                            channelNoficicacion.put("username", groupName);
+                            NotificacionesRef.child(userId).push().setValue(channelNoficicacion);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}});
     }
 }
