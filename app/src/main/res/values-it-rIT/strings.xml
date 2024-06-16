@@ -219,4 +219,13 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="saliste_del_grupo">Você saiu do grupo</string>
     <string name="deseas_salir">Você quer sair do grupo?</string>
     <string name="info_grupo">Informações do grupo</string>
+    <string name="grupo_eliminado">Gruppo eliminato</string>
+    <string name="deseas_eliminar_grupo">Sei sicuro di voler eliminare questo gruppo? Questa azione non può essere annullata, tutti i messaggi inviati saranno persi definitivamente.</string>
+    <string name="miembros">Membri:</string>
+    <string name="eliminar_del_grupo">Rimuovi dal gruppo</string>
+    <string name="hacer_admin">Rendi/rimuovi admin</string>
+    <string name="ver_perfil">Visualizza profilo</string>
+    <string name="este_usuario_es_creador">Non puoi modificare il ruolo del creatore del gruppo</string>
+    <string name="fuiste_eliminado">Non puoi più accedere a questo gruppo perché sei stato rimosso</string>
+    <string name="codigocopiado">Codice copiato negli appunti</string>
 </resources>

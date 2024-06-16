@@ -219,4 +219,13 @@ Baixe aqui: https://play.google.com/store/apps/details?id=com.twoploapps.a2plome
     <string name="saliste_del_grupo">Você saiu do grupo</string>
     <string name="deseas_salir">Você quer sair do grupo?</string>
     <string name="info_grupo">Informações do grupo</string>
+    <string name="grupo_eliminado">Grupo excluído</string>
+    <string name="deseas_eliminar_grupo">Tem certeza de que deseja excluir este grupo? Esta ação não pode ser desfeita, todas as mensagens enviadas serão perdidas permanentemente.</string>
+    <string name="miembros">Membros:</string>
+    <string name="eliminar_del_grupo">Remover do grupo</string>
+    <string name="hacer_admin">Tornar/remover admin</string>
+    <string name="ver_perfil">Ver perfil</string>
+    <string name="este_usuario_es_creador">Você não pode modificar o papel do criador do grupo</string>
+    <string name="fuiste_eliminado">Você não pode mais acessar este grupo porque foi removido</string>
+    <string name="codigocopiado">Código copiado para a área de transferência</string>
 </resources>

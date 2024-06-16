@@ -219,4 +219,13 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="saliste_del_grupo">Vous avez quitté le groupe</string>
     <string name="deseas_salir">Voulez-vous quitter le groupe?</string>
     <string name="info_grupo">Informations sur le groupe</string>
+    <string name="grupo_eliminado">Groupe supprimé</string>
+    <string name="deseas_eliminar_grupo">Êtes-vous sûr de vouloir supprimer ce groupe ? Cette action ne peut pas être annulée, tous les messages envoyés seront définitivement perdus.</string>
+    <string name="miembros">Membres :</string>
+    <string name="eliminar_del_grupo">Retirer du groupe</string>
+    <string name="hacer_admin">Rendre/retirer admin</string>
+    <string name="ver_perfil">Voir le profil</string>
+    <string name="este_usuario_es_creador">Vous ne pouvez pas modifier le rôle du créateur du groupe</string>
+    <string name="fuiste_eliminado">Vous ne pouvez plus accéder à ce groupe car vous avez été supprimé</string>
+    <string name="codigocopiado">Code copié dans le presse-papiers</string>
 </resources>

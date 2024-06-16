@@ -219,4 +219,13 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="saliste_del_grupo">You left the group</string>
     <string name="deseas_salir">Do you want to leave the group?</string>
     <string name="info_grupo">Group information</string>
+    <string name="grupo_eliminado">Group Deleted</string>
+    <string name="deseas_eliminar_grupo">Are you sure you want to delete this group? This action cannot be undone, all sent messages will be permanently lost.</string>
+    <string name="miembros">Members:</string>
+    <string name="eliminar_del_grupo">Remove from group</string>
+    <string name="hacer_admin">Make/remove admin</string>
+    <string name="ver_perfil">View profile</string>
+    <string name="este_usuario_es_creador">You cannot modify the role of the group creator</string>
+    <string name="fuiste_eliminado">You can no longer access this group because you were removed</string>
+    <string name="codigocopiado">Code copied to clipboard</string>
 </resources>
