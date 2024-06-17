@@ -1,15 +1,10 @@
 package com.twoploapps.a2plomessenger;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -28,24 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
+import timber.log.Timber;
 
 public class RegistroActivity extends AppCompatActivity {
-    private TextView textobienvenida, textoregistro, textousername, textocorr, textopass,txtpreguntaya;
     private EditText textouser, textocorreo, textocontra;
-    private Button btnregister, btniniciasesion;
-    private CheckBox mostrarpassword;
-    private ImageView logo;
+    private Button btnregister;
     private String userID;
     private FirebaseAuth mAuth;
     private FirebaseFirestore database;
@@ -55,16 +43,16 @@ public class RegistroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        textobienvenida=(TextView) findViewById(R.id.textobienvenida);
-        txtpreguntaya=(TextView)findViewById(R.id.txtpregutaya);
-        logo=(ImageView) findViewById(R.id.logoapp);
-        textouser=(EditText) findViewById(R.id.textouser);
-        textocorreo=(EditText) findViewById(R.id.textocorreo);
-        textocontra=(EditText) findViewById(R.id.textocontra);
-        btnregister=(Button)findViewById(R.id.btnregistrer);
-        mostrarpassword=(CheckBox) findViewById(R.id.mostrarpasswordregistro);
+        TextView textobienvenida = findViewById(R.id.textobienvenida);
+        TextView txtpreguntaya = findViewById(R.id.txtpregutaya);
+        ImageView logo = findViewById(R.id.logoapp);
+        textouser = findViewById(R.id.textouser);
+        textocorreo = findViewById(R.id.textocorreo);
+        textocontra = findViewById(R.id.textocontra);
+        btnregister = findViewById(R.id.btnregistrer);
+        CheckBox mostrarpassword = findViewById(R.id.mostrarpasswordregistro);
         progressBar = findViewById(R.id.progressregistro);
-        mAuth=FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         database = FirebaseFirestore.getInstance();
         mostrarpassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -111,6 +99,9 @@ public class RegistroActivity extends AppCompatActivity {
         }else if(TextUtils.isEmpty(password)){
             textocontra.setError(getString(R.string.ingresa_password));
             textocontra.requestFocus();
+        }else if(!isStrongPassword(password)){
+            textocontra.setError(getString(R.string.ingresa_password_fuerte));
+            textocontra.requestFocus();
         }else{
             progressBar.setVisibility(View.VISIBLE);
             btnregister.setVisibility(View.GONE);
@@ -129,7 +120,7 @@ public class RegistroActivity extends AppCompatActivity {
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Log.d("TAG","onSuccess: Datos registrados"+userID);
+                                Timber.tag("TAG").d("onSuccess: Datos registrados%s", userID);
                             }
                         });
                         Toast.makeText(RegistroActivity.this, R.string.usuario_registrado, Toast.LENGTH_SHORT).show();
@@ -146,5 +137,32 @@ public class RegistroActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    public static boolean isStrongPassword(String password) {
+        // Criterios para una contraseña fuerte
+        int longitudMinima = 6;
+        boolean tieneMayuscula = false;
+        boolean tieneMinuscula = false;
+        boolean tieneDigito = false;
+        boolean tieneCaracterEspecial = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                tieneMayuscula = true;
+            } else if (Character.isLowerCase(c)) {
+                tieneMinuscula = true;
+            } else if (Character.isDigit(c)) {
+                tieneDigito = true;
+            } else if (!Character.isLetterOrDigit(c)) {
+                tieneCaracterEspecial = true;
+            }
+        }
+
+        // Verificar si todos los criterios se cumplen
+        return password.length() >= longitudMinima &&
+                tieneMayuscula &&
+                tieneMinuscula &&
+                tieneDigito &&
+                tieneCaracterEspecial;
     }
 }

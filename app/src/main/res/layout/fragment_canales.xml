@@ -35,5 +35,13 @@
         android:scaleType="fitXY"
         android:background="@drawable/boton_redondo"
         android:contentDescription="New Channel" />
-
+    <TextView
+        android:id="@+id/tv_empty_channels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_channels"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="16dp"
+        android:textSize="16sp"/>
 </LinearLayout>

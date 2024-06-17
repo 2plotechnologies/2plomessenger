@@ -1,17 +1,9 @@
 package com.twoploapps.a2plomessenger;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -31,14 +29,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import java.lang.reflect.Constructor;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ChatFragment extends Fragment {
     private View ChatViewUnica;
     private RecyclerView ChatLista;
+    private TextView nomsg;
     private DatabaseReference ContactosRef, UserRef;
     private FirebaseAuth auth;
     private String CurrentUserId;
@@ -58,6 +55,7 @@ public class ChatFragment extends Fragment {
         ChatLista=(RecyclerView)ChatViewUnica.findViewById(R.id.chat_lista);
         ChatLista.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageButton btnbuscar = ChatViewUnica.findViewById(R.id.btnbuscarcontactos);
+        nomsg = ChatViewUnica.findViewById(R.id.empty_view);
         btnbuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,6 +162,8 @@ public class ChatFragment extends Fragment {
                                         public void onCancelled(@NonNull DatabaseError error) {}});
                                 }
                             });
+                        }else{
+                            nomsg.setVisibility(View.VISIBLE);
                         }
 
                     }

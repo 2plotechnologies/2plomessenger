@@ -23,6 +23,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -46,7 +47,6 @@ import java.util.Set;
 
 public class GruposFragment extends Fragment {
 
-    private LinearLayoutManager lm;
     private GroupsAdapter adapter;
     private ArrayList<Grupo> groupArrayList;
     private String CurrentUserId;
@@ -62,8 +62,8 @@ public class GruposFragment extends Fragment {
         RecyclerView rv_groups = grupoFragmentoView.findViewById(R.id.gruposlista);
         ImageButton crearGrupo= grupoFragmentoView.findViewById(R.id.btn_new_group);
         ImageButton unirGrupo = grupoFragmentoView.findViewById(R.id.btn_join);
-
-        lm = new LinearLayoutManager(getContext());
+        TextView empty = grupoFragmentoView.findViewById(R.id.tv_empty_groups);
+        LinearLayoutManager lm = new LinearLayoutManager(getContext());
         groupArrayList = new ArrayList<>();
         adapter = new GroupsAdapter(groupArrayList);
         rv_groups.setLayoutManager(lm);
@@ -86,6 +86,12 @@ public class GruposFragment extends Fragment {
                     }
                     Collections.reverse(groupArrayList);
                     adapter.notifyDataSetChanged();
+
+                    if(groupArrayList.isEmpty()){
+                        empty.setVisibility(View.VISIBLE);
+                    }else{
+                        empty.setVisibility(View.GONE);
+                    }
                 }
             }
 

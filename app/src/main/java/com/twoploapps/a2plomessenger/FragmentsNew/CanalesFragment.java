@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -52,7 +53,7 @@ public class CanalesFragment extends Fragment {
         RecyclerView rv_my_channels = channelview.findViewById(R.id.canaleslista);
         ImageButton crearCanal = channelview.findViewById(R.id.btn_new_channel);
         ImageButton buscarCanal = channelview.findViewById(R.id.btn_search);
-
+        TextView empty = channelview.findViewById(R.id.tv_empty_channels);
         lm = new LinearLayoutManager(getContext());
         canalArrayList = new ArrayList<>();
         adapter = new ChannelsAdapter(canalArrayList);
@@ -76,6 +77,12 @@ public class CanalesFragment extends Fragment {
                     }
                     Collections.reverse(canalArrayList);
                     adapter.notifyDataSetChanged();
+
+                    if(canalArrayList.isEmpty()){
+                        empty.setVisibility(View.VISIBLE);
+                    }else{
+                        empty.setVisibility(View.GONE);
+                    }
                 }
             }
 

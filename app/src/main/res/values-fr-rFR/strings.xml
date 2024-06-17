@@ -228,4 +228,8 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="este_usuario_es_creador">Vous ne pouvez pas modifier le rôle du créateur du groupe</string>
     <string name="fuiste_eliminado">Vous ne pouvez plus accéder à ce groupe car vous avez été supprimé</string>
     <string name="codigocopiado">Code copié dans le presse-papiers</string>
+    <string name="ingresa_password_fuerte">Votre mot de passe est trop faible, veuillez créer un mot de passe plus fort.</string>
+    <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">Pas de chats disponibles, appuyez sur le bouton pour voir les utilisateurs de l\'application</string>
+    <string name="no_channels">Aucun canal disponible, vous pouvez en créer un ou en suivre un autre</string>
+    <string name="no_groups">Aucun groupe disponible, vous pouvez en créer un ou en rejoindre un autre</string>
 </resources>

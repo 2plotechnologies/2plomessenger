@@ -228,4 +228,8 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="este_usuario_es_creador">You cannot modify the role of the group creator</string>
     <string name="fuiste_eliminado">You can no longer access this group because you were removed</string>
     <string name="codigocopiado">Code copied to clipboard</string>
+    <string name="ingresa_password_fuerte">Your password is too weak, please create a stronger password.</string>
+    <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">No chats available, press the button to see the app users</string>
+    <string name="no_channels">No channels available, you can create one or follow another</string>
+    <string name="no_groups">No groups available, you can create one or join another</string>
 </resources>

@@ -56,15 +56,15 @@ public class SetupActivity2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setup);
-        nombre= findViewById(R.id.nombre_setup);
-        ciudad= findViewById(R.id.ciudad_setup);
-        genero= findViewById(R.id.genero_setup);
-        edad= findViewById(R.id.edad_setup);
-        estado= findViewById(R.id.Estado_setup);
-        Button guardarinfo = findViewById(R.id.boton_setup);
-        imagen_setup= findViewById(R.id.imagen_setup);
-        Toolbar toolbar = findViewById(R.id.toolbar_setup);
+        setContentView(R.layout.activity_setup2);
+        nombre= findViewById(R.id.nombre_setup2);
+        ciudad= findViewById(R.id.ciudad_setup2);
+        genero= findViewById(R.id.genero_setup2);
+        edad= findViewById(R.id.edad_setup2);
+        estado= findViewById(R.id.Estado_setup2);
+        Button guardarinfo = findViewById(R.id.boton_setup2);
+        imagen_setup = findViewById(R.id.imagen_setup2);
+        Toolbar toolbar = findViewById(R.id.toolbar_setup2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.completa_perfil);
         dialog = new ProgressDialog(this);

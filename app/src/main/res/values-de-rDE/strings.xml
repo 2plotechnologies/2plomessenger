@@ -226,4 +226,8 @@
     <string name="este_usuario_es_creador">Sie können die Rolle des Gruppenerstellers nicht ändern</string>
     <string name="fuiste_eliminado">Sie haben keinen Zugriff mehr auf diese Gruppe, weil Sie entfernt wurden</string>
     <string name="codigocopiado">Code in die Zwischenablage kopiert</string>
+    <string name="ingresa_password_fuerte">Dein Passwort ist zu schwach, bitte erstelle ein stärkeres Passwort.</string>
+    <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">Keine Chats vorhanden, drücken Sie die Schaltfläche, um die Benutzer der App anzuzeigen</string>
+    <string name="no_channels">Keine Kanäle vorhanden, du kannst einen erstellen oder einem anderen folgen</string>
+    <string name="no_groups">Keine Gruppen verfügbar, du kannst eine erstellen oder einer anderen beitreten</string>
 </resources>

@@ -92,18 +92,27 @@
         app:civ_border_color="@color/black"
         app:civ_border_width="2dp"/>
 
-    <Button
-        android:id="@+id/boton_setup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/botones"
-        android:layout_below="@id/imagen_setup"
-        android:padding="10dp"
-        android:text="Guardar Informacion"
-        android:textColor="#ffffff"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+            <Button
+                android:id="@+id/boton_setup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/boton_redondeado"
+                android:backgroundTint="@color/fb_color"
+                android:layout_below="@id/imagen_setup"
+                android:padding="10dp"
+                android:text="@string/guardar_informacion"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/boton_setup"
+                android:text="@string/enviamosuncorreoasudireccion"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"/>
         </RelativeLayout>
     </ScrollView>
 
