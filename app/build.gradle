@@ -9,8 +9,8 @@ android {
     defaultConfig {
         applicationId "com.twoploapps.a2plomessenger"
         minSdk 24
-        targetSdk 33
-        versionCode 17
+        targetSdk 34
+        versionCode 18
         versionName "1.4.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -54,7 +54,7 @@ android {
         implementation 'com.google.firebase:firebase-storage:21.0.0'
         implementation 'com.google.firebase:firebase-auth:23.0.0'
         implementation 'com.firebaseui:firebase-ui-database:7.1.1'
-        implementation platform('com.google.firebase:firebase-bom:33.1.0')
+        implementation platform('com.google.firebase:firebase-bom:33.1.1')
         implementation 'androidx.legacy:legacy-support-v4:1.0.0'
         implementation 'com.google.firebase:firebase-database:21.0.0'
         implementation 'com.google.firebase:firebase-messaging:24.0.0'
@@ -63,7 +63,7 @@ android {
         testImplementation 'junit:junit:4.+'
         androidTestImplementation 'androidx.test.ext:junit:1.1.5'
         implementation ('org.jitsi.react:jitsi-meet-sdk:+') { transitive = true }
-        androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+        androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
         implementation 'de.hdodenhof:circleimageview:3.1.0'
         implementation 'com.squareup.picasso:picasso:2.71828'
         implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
