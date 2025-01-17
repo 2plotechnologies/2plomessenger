@@ -38,7 +38,6 @@ import java.time.ZoneOffset;
 import java.util.Date;
 
 public class PublicarPostActivity extends AppCompatActivity {
-    private FirebaseAuth auth;
     private String CurrentUserId;
     private StorageReference reference;
     private DatabaseReference PostRef, nomUserRef;
@@ -53,7 +52,7 @@ public class PublicarPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publicar_post);
-        auth=FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         CurrentUserId= auth.getCurrentUser().getUid();
         PostRef= FirebaseDatabase.getInstance().getReference().child("Posts");
         nomUserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");

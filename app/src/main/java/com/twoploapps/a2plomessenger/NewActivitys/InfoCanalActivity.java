@@ -30,10 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.R;
@@ -48,7 +45,6 @@ public class InfoCanalActivity extends AppCompatActivity {
     private CircleImageView img;
     final  static  int Gallery_PICK = 1;
     private StorageReference ChannelImage;
-    private FirebaseAuth auth;
     private ProgressDialog dialog;
     private Button editar, unfollow, eliminar;
     private DatabaseReference RootRef;
@@ -80,7 +76,7 @@ public class InfoCanalActivity extends AppCompatActivity {
 
         ChannelImage= FirebaseStorage.getInstance().getReference().child("ImagesCanal");
         dialog = new ProgressDialog(this);
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         CurrentUserId = auth.getCurrentUser().getUid();
         id = getIntent().getStringExtra("channel_id");
         getRol();
@@ -224,45 +220,29 @@ public class InfoCanalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if(resultCode ==RESULT_OK){
-                imageUri = result.getUri();
-                Picasso.get().load(imageUri).into(img);
-                dialog.setTitle(R.string.enviando_imagen);
-                dialog.setMessage(getString(R.string.estamos_enviando_imagen));
-                dialog.show();
-                dialog.setCanceledOnTouchOutside(false);
+            imageUri = data.getData();
+            Picasso.get().load(imageUri).into(img);
+            dialog.setTitle(R.string.enviando_imagen);
+            dialog.setMessage(getString(R.string.estamos_enviando_imagen));
+            dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
 
-                StorageReference filePath = ChannelImage.child(id+".jpg");
-                filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(InfoCanalActivity.this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
-                            filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    final String downloadUri = uri.toString();
-                                    Map<String, Object> canal = new HashMap<>();
-                                    canal.put("imagen", downloadUri);
-                                    ChannelController.Edit(canal,id, InfoCanalActivity.this);
-                                    dialog.dismiss();
-                                }
-                            });
-                        }
-                    }
-                });
-            }else{
-                Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
+            StorageReference filePath = ChannelImage.child(id+".jpg");
+            filePath.putFile(imageUri).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(InfoCanalActivity.this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
+                    filePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                        final String downloadUri = uri.toString();
+                        Map<String, Object> canal = new HashMap<>();
+                        canal.put("imagen", downloadUri);
+                        ChannelController.Edit(canal,id, InfoCanalActivity.this);
+                        dialog.dismiss();
+                    });
+                }
+            });
+        }else{
+            Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
     }
 }

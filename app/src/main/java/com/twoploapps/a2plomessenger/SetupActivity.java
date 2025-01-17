@@ -1,10 +1,5 @@
 package com.twoploapps.a2plomessenger;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -18,8 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -30,12 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.File;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -113,61 +108,55 @@ public class SetupActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if(resultCode ==RESULT_OK){
-                dialog.setTitle("Imagen de perfil");
-                dialog.setMessage("Estamos guardando su foto de perfil..");
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
-                final Uri resultUri = result.getUri();
-                StorageReference filePath = UserProfileImagen.child(CurrenUserID+".jpg");
-                final File url = new File(resultUri.getPath());
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(SetupActivity.this, "Imagen guardada", Toast.LENGTH_SHORT).show();
-                            UserProfileImagen.child(CurrenUserID+".jpg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    final String downloadUri = uri.toString();
-                                    UserRef.child(CurrenUserID).child("imagen").setValue(downloadUri)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()){
-                                                        Picasso.get()
-                                                                .load(downloadUri)
-                                                                .error(R.drawable.defaultprofilephoto)
-                                                                .into(imagen_setup);
-                                                        Toast.makeText(SetupActivity.this, "Imagen se cargo con exito", Toast.LENGTH_SHORT).show();
-                                                        dialog.dismiss();
-                                                    }else{
-                                                        String error = task.getException().getMessage();
-                                                        Toast.makeText(SetupActivity.this, "Imagen no guardada code:"+error, Toast.LENGTH_SHORT).show();
-                                                        dialog.dismiss();
-                                                    }
-                                                }
-                                            });
-                                }
-                            });
-                        }
-                    }
-                });
-            }else{
-                Toast.makeText(this, "Imagen no es soportada Intentelo de nuevo", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
+        if (requestCode == Gallery_PICK && resultCode == RESULT_OK && data != null) {
+            Uri imageUri = data.getData(); // URI de la imagen seleccionada
+
+            dialog.setTitle("Imagen de perfil");
+            dialog.setMessage("Estamos guardando su foto de perfil...");
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+
+            // Referencia al almacenamiento en Firebase
+            StorageReference filePath = UserProfileImagen.child(CurrenUserID + ".jpg");
+
+            // Subir la imagen a Firebase Storage
+            filePath.putFile(imageUri).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(SetupActivity.this, "Imagen guardada", Toast.LENGTH_SHORT).show();
+
+                    // Obtener la URL de descarga de la imagen
+                    filePath.getDownloadUrl().addOnSuccessListener(uri -> {
+                        final String downloadUri = uri.toString();
+
+                        // Guardar la URL de la imagen en Firebase Database
+                        UserRef.child(CurrenUserID).child("imagen").setValue(downloadUri)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        // Mostrar la imagen en el ImageView con Picasso
+                                        Picasso.get()
+                                                .load(downloadUri)
+                                                .error(R.drawable.defaultprofilephoto)
+                                                .into(imagen_setup);
+
+                                        Toast.makeText(SetupActivity.this, "Imagen cargada con éxito", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    } else {
+                                        String error = task1.getException().getMessage();
+                                        Toast.makeText(SetupActivity.this, "Error al guardar la imagen: " + error, Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+                                });
+                    });
+                } else {
+                    Toast.makeText(SetupActivity.this, "Error al subir la imagen", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            Toast.makeText(this, "No se seleccionó ninguna imagen o hubo un error", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void GuardarInfromacionDB() {
         String nom = nombre.getText().toString();
         String ciu = ciudad.getText().toString();

@@ -24,6 +24,7 @@
         <activity
             android:name=".NewActivitys.CreateGroupActivity"
             android:exported="false"
+            android:parentActivityName=".InicioActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".NewActivitys.InfoCanalActivity"
@@ -32,18 +33,18 @@
         <activity
             android:name=".NewActivitys.MensajesCanalActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:parentActivityName=".InicioActivity"/>
+            android:parentActivityName=".InicioActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".NewActivitys.CrearCanalActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:parentActivityName=".InicioActivity"/>
+            android:parentActivityName=".InicioActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".NewActivitys.CanalesActivity"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:parentActivityName=".InicioActivity"/>
+            android:parentActivityName=".InicioActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".DetallePostActivity"
             android:exported="false"
@@ -113,9 +114,9 @@
         <activity
             android:name=".GrupoChatActivity"
             android:exported="false"
+            android:parentActivityName=".InicioActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:windowSoftInputMode="adjustResize"
-            android:parentActivityName=".InicioActivity"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MiperfilActivity"
             android:exported="false"
@@ -159,10 +160,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <activity
-            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>

@@ -35,7 +35,6 @@ public class PerfilActivity extends AppCompatActivity {
     private CircleImageView usuarioima;
     private Button enviarmensaje, cancelarmensaje;
     private DatabaseReference UserRef, SolicitudRef, ContactosRef, NotificacionesRef;
-    private FirebaseAuth auth;
     boolean contactoAgregado = false;
 
     private Toolbar toolbar;
@@ -49,18 +48,18 @@ public class PerfilActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
         usuario_revid = getIntent().getExtras().get("usuario_id").toString();
-        auth = FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         UserRef= FirebaseDatabase.getInstance().getReference().child("Usuarios");
         ContactosRef= FirebaseDatabase.getInstance().getReference().child("Contactos");
         SolicitudRef=FirebaseDatabase.getInstance().getReference().child("Solicitudes");
         NotificacionesRef=FirebaseDatabase.getInstance().getReference().child("Notificaciones");
         usuario_enviarid = auth.getCurrentUser().getUid();
-        usuarionom = (TextView)findViewById(R.id.usuario_vic_nombre);
-        usuariociu = (TextView)findViewById(R.id.usuario_vic_ciudad);
-        usuarioest = (TextView)findViewById(R.id.usuario_vic_estado);
-        usuarioima = (CircleImageView) findViewById(R.id.usuario_vic_imagen);
-        enviarmensaje = (Button) findViewById(R.id.enviar_mensaje_usuario_vic);
-        cancelarmensaje=(Button) findViewById(R.id.cancelar_mensaje_usuario_vic);
+        usuarionom = findViewById(R.id.usuario_vic_nombre);
+        usuariociu = findViewById(R.id.usuario_vic_ciudad);
+        usuarioest = findViewById(R.id.usuario_vic_estado);
+        usuarioima = findViewById(R.id.usuario_vic_imagen);
+        enviarmensaje = findViewById(R.id.enviar_mensaje_usuario_vic);
+        cancelarmensaje = findViewById(R.id.cancelar_mensaje_usuario_vic);
         CurrenEstado = "nueva";
         ObtenerInfromacionDB();
         verificarContactoAgregado();
@@ -119,7 +118,7 @@ public class PerfilActivity extends AppCompatActivity {
                     String estadoUser = snapshot.child("estado").getValue().toString();
                     if(privacidadimg.equals("Oculto")){
                         Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/defaultprofilephoto.png?alt=media&token=d2f0f0de-2386-45bc-952a-aedeea866b0c").into(usuarioima);
-                    }else if(privacidadimg.equals("Contacto")&&!contactoAgregado){
+                    }else if(privacidadimg.equals("Contactos") && !contactoAgregado){
                         Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/defaultprofilephoto.png?alt=media&token=d2f0f0de-2386-45bc-952a-aedeea866b0c").into(usuarioima);
                     }else{
                         String imagenUser = snapshot.child("imagen").getValue().toString();

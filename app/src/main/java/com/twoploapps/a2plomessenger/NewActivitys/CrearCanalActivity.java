@@ -27,8 +27,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 import com.twoploapps.a2plomessenger.Controllers.ChannelController;
 import com.twoploapps.a2plomessenger.Models.Canal;
 import com.twoploapps.a2plomessenger.R;
@@ -128,21 +126,15 @@ public class CrearCanalActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if(resultCode ==RESULT_OK){
-                imageUri = result.getUri();
-                Picasso.get().load(imageUri).into(img);
-            }else{
-                Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
+            imageUri = data.getData(); // URI de la imagen seleccionada
+
+            // Mostrar la imagen seleccionada en el ImageView usando Picasso
+            Picasso.get().load(imageUri).into(img);
+
+            // Mostrar un mensaje o realizar alguna otra acción si es necesario
+            Toast.makeText(this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
         }
     }
 }

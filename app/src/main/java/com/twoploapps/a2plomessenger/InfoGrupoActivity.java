@@ -38,8 +38,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 import com.twoploapps.a2plomessenger.Controllers.GroupController;
 
 import java.util.ArrayList;
@@ -56,9 +54,9 @@ public class InfoGrupoActivity extends AppCompatActivity {
     private String currentUserid, id, rol;
     private DatabaseReference GrupoRef, UserRef;
     private StorageReference GroupImage;
-    private Button btnsalir, btneliminar, btn_guardar;
+    private Button btneliminar;
+    private Button btn_guardar;
     private ProgressDialog dialog;
-    private FirebaseAuth auth;
     private ListView listamiembros;
     final  static  int Gallery_PICK = 1;
     List<String> userIds;
@@ -84,13 +82,13 @@ public class InfoGrupoActivity extends AppCompatActivity {
         img_grupo = findViewById(R.id.group_img_edit);
         listamiembros = findViewById(R.id.list_view);
         btn_guardar = findViewById(R.id.group_button_edit);
-        btnsalir = findViewById(R.id.btnsalir);
+        Button btnsalir = findViewById(R.id.btnsalir);
         btneliminar = findViewById(R.id.btneliminar);
         dialog = new ProgressDialog(this);
         GrupoRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         GroupImage= FirebaseStorage.getInstance().getReference().child("ImagesGrupo");
-        auth=FirebaseAuth.getInstance();
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         id = getIntent().getStringExtra("group_id");
         obtenerNombresDeUsuarios(id);
         currentUserid = auth.getCurrentUser().getUid();
@@ -351,45 +349,36 @@ public class InfoGrupoActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==Gallery_PICK && resultCode == RESULT_OK && data != null){
-            Uri imageUri = data.getData();
-            CropImage.activity(imageUri)
-                    .setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-        }
-        if (requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if(resultCode ==RESULT_OK){
-                imageUri = result.getUri();
-                Picasso.get().load(imageUri).into(img_grupo);
-                dialog.setTitle(R.string.enviando_imagen);
-                dialog.setMessage(getString(R.string.estamos_enviando_imagen));
-                dialog.show();
-                dialog.setCanceledOnTouchOutside(false);
+            imageUri = data.getData();
+            Picasso.get().load(imageUri).into(img_grupo);
+            dialog.setTitle(R.string.enviando_imagen);
+            dialog.setMessage(getString(R.string.estamos_enviando_imagen));
+            dialog.show();
+            dialog.setCanceledOnTouchOutside(false);
 
-                StorageReference filePath = GroupImage.child(id+".jpg");
-                filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(InfoGrupoActivity.this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
-                            filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    final String downloadUri = uri.toString();
-                                    Map<String, Object> grupo = new HashMap<>();
-                                    grupo.put("imagen", downloadUri);
-                                    GroupController.Edit(grupo,id, InfoGrupoActivity.this);
-                                    dialog.dismiss();
-                                }
-                            });
-                        }
+            StorageReference filePath = GroupImage.child(id+".jpg");
+            filePath.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(InfoGrupoActivity.this, R.string.imagen_guardada, Toast.LENGTH_SHORT).show();
+                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                final String downloadUri = uri.toString();
+                                Map<String, Object> grupo = new HashMap<>();
+                                grupo.put("imagen", downloadUri);
+                                GroupController.Edit(grupo,id, InfoGrupoActivity.this);
+                                dialog.dismiss();
+                            }
+                        });
                     }
-                });
-            }else{
-                Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
+                }
+            });
+
+        }else{
+            Toast.makeText(this, R.string.imagen_no_soportada, Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
     }
     private void eliminarUsuarioDelGrupo(String userId) {
