@@ -10,7 +10,7 @@ android {
         applicationId "com.twoploapps.a2plomessenger"
         minSdk 24
         targetSdk 34
-        versionCode 20
+        versionCode 21
         versionName "1.5"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
