@@ -232,4 +232,11 @@ Scaricala qui: https://play.google.com/store/apps/details?id=com.twoploapps.a2pl
     <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">Nessuna chat disponibile, premi il pulsante per vedere gli utenti dell\'app</string>
     <string name="no_channels">Nessun canale disponibile, puoi crearne uno o seguirne un altro</string>
     <string name="no_groups">Nessun gruppo disponibile, puoi crearne uno o unirti a un altro</string>
+    <string name="grabar_nota">Registrare una nota vocale</string>
+    <string name="grabacion_iniciada">Registrazione avviata</string>
+    <string name="grabacion_finalizada">Registrazione terminata</string>
+    <string name="estamos_enviando_audio">Stiamo inviando il tuo audio.</string>
+    <string name="grabar_nota_de_voz">Registrare una nota vocale</string>
+    <string name="iniciar_grabaci_n">Avvia registrazione</string>
+    <string name="detener_grabaci_n">Ferma registrazione</string>
 </resources>

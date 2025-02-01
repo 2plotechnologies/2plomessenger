@@ -1,15 +1,19 @@
 package com.twoploapps.a2plomessenger;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +49,7 @@ import com.squareup.picasso.Picasso;
 import com.vanniktech.emoji.EmojiEditText;
 import com.vanniktech.emoji.EmojiPopup;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -255,7 +262,8 @@ public class ChatActivity extends AppCompatActivity {
                         "PDF",
                         "Word",
                         "Video MP4",
-                        getString(R.string.audio)
+                        getString(R.string.audio),
+                        getString(R.string.grabar_nota)
                 };
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
                 builder.setTitle(getString(R.string.seleccioinatipo));
@@ -297,12 +305,133 @@ public class ChatActivity extends AppCompatActivity {
                             intent.setType("audio/mpeg");
                             startActivityForResult(intent.createChooser(intent, getString(R.string.audio)),438);
                         }
+                        if (which == 5) {
+                            // Nueva opción para grabar nota de voz
+                            check = "note";
+                            showVoiceRecordingDialog(); // Mostrar diálogo para grabar la nota de voz
+                        }
                     }
                 });
                 builder.show();
             }
         });
     }
+
+    private void showVoiceRecordingDialog() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Si no se ha concedido, solicitar el permiso
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
+        builder.setTitle(R.string.grabar_nota);
+
+        // Layout para el diálogo
+        View view = LayoutInflater.from(ChatActivity.this).inflate(R.layout.dialog_voice_recording, null);
+        builder.setView(view);
+
+        Button startRecordingButton = view.findViewById(R.id.startRecordingButton);
+        Button stopRecordingButton = view.findViewById(R.id.stopRecordingButton);
+        stopRecordingButton.setEnabled(false);
+
+        // Inicializar el grabador
+        final MediaRecorder[] mediaRecorder = {new MediaRecorder()};
+        String filePath = getExternalFilesDir(null).getAbsolutePath() + "/nota_de_voz.mp3";
+
+        AlertDialog dialog = builder.create();
+
+        startRecordingButton.setOnClickListener(v -> {
+            try {
+                mediaRecorder[0].setAudioSource(MediaRecorder.AudioSource.MIC);
+                mediaRecorder[0].setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+                mediaRecorder[0].setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+                mediaRecorder[0].setOutputFile(filePath);
+                mediaRecorder[0].prepare();
+                mediaRecorder[0].start();
+                Toast.makeText(ChatActivity.this, getString(R.string.grabacion_iniciada), Toast.LENGTH_SHORT).show();
+                startRecordingButton.setEnabled(false);
+                stopRecordingButton.setEnabled(true);
+            } catch (Exception e) {
+                Toast.makeText(ChatActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        stopRecordingButton.setOnClickListener(v -> {
+            try {
+                mediaRecorder[0].stop();
+                mediaRecorder[0].release();
+                mediaRecorder[0] = null;
+                Toast.makeText(ChatActivity.this, getString(R.string.grabacion_finalizada), Toast.LENGTH_SHORT).show();
+
+                // Subir el archivo grabado a Firebase
+                uploadVoiceNoteToFirebase(filePath, dialog);
+                startRecordingButton.setEnabled(true);
+                stopRecordingButton.setEnabled(false);
+            } catch (Exception e) {
+                Toast.makeText(ChatActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.cancelar), (d, which) -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void uploadVoiceNoteToFirebase(String filePath, AlertDialog dialog2) {
+
+        dialog.setTitle(R.string.enviando_archivo);
+        dialog.setMessage(getString(R.string.estamos_enviando_audio));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+
+        DatabaseReference usuarioMensajeRef = RootRef.child("mensajes").child(EnviarUserID).child(RecibirUserID).push();
+        String MensajePushID = usuarioMensajeRef.getKey();
+
+        Uri fileUri = Uri.fromFile(new File(filePath));
+        StorageReference filePathRef = FirebaseStorage.getInstance().getReference().child("NotasDeVoz").child(MensajePushID + ".mp3");
+
+        String mensajeEnviadoRef = "Mensajes/"+EnviarUserID + "/" + RecibirUserID;
+        String mensajeRecibidoRef = "Mensajes/"+RecibirUserID + "/" + EnviarUserID;
+
+        filePathRef.putFile(fileUri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                filePathRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                    // Convertimos uri a String
+                    String downloadUri = uri.toString();
+                    Map mensajeTxt = new HashMap();
+                    mensajeTxt.put("mensaje", downloadUri); // Asegúrate de usar la cadena aquí
+                    mensajeTxt.put("tipo","mp3");
+                    mensajeTxt.put("de",EnviarUserID);
+                    mensajeTxt.put("para",RecibirUserID);
+                    mensajeTxt.put("mensajeID",MensajePushID);
+                    mensajeTxt.put("fecha",CurrentDate);
+                    mensajeTxt.put("hora",CurrentTime);
+
+                    Map mensajeTxtFull = new HashMap<>();
+                    mensajeTxtFull.put(mensajeEnviadoRef+"/"+ MensajePushID,mensajeTxt);
+                    mensajeTxtFull.put(mensajeRecibidoRef+"/"+ MensajePushID,mensajeTxt);
+
+                    RootRef.updateChildren(mensajeTxtFull);
+                    dialog.dismiss();
+                    dialog2.dismiss(); // Cerrar el diálogo después de la subida
+                    HashMap<String, String> chatNoficicacion = new HashMap<>();
+                    chatNoficicacion.put("de", EnviarUserID);
+                    chatNoficicacion.put("tipo","mensaje");
+                    chatNoficicacion.put("username", RecibirUserName);
+                    NotificacionesRef.child(RecibirUserID).push().setValue(chatNoficicacion);
+                }).addOnFailureListener(e -> {
+                    dialog.dismiss();
+                    dialog2.dismiss();
+                    Toast.makeText(ChatActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+            } else {
+                dialog2.dismiss();
+                Toast.makeText(ChatActivity.this, "Error al subir la nota de voz", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -237,4 +237,11 @@
     <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">No hay chats, presione el botón para ver los usuarios de la app</string>
     <string name="no_channels">No hay canales, puedes crear uno o seguir a otro</string>
     <string name="no_groups">No hay grupos disponibles, puedes crear uno o unirte a otro</string>
+    <string name="grabar_nota">Grabar nota de voz</string>
+    <string name="grabacion_iniciada">Grabación iniciada</string>
+    <string name="grabacion_finalizada">Grabación finalizada</string>
+    <string name="estamos_enviando_audio">Estamos enviando tu audio.</string>
+    <string name="grabar_nota_de_voz">Grabar nota de voz</string>
+    <string name="iniciar_grabaci_n">Iniciar grabación</string>
+    <string name="detener_grabaci_n">Detener grabación</string>
 </resources>

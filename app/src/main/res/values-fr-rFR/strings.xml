@@ -232,4 +232,11 @@ Téléchargez-le ici: https://play.google.com/store/apps/details?id=com.twoploap
     <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">Pas de chats disponibles, appuyez sur le bouton pour voir les utilisateurs de l\'application</string>
     <string name="no_channels">Aucun canal disponible, vous pouvez en créer un ou en suivre un autre</string>
     <string name="no_groups">Aucun groupe disponible, vous pouvez en créer un ou en rejoindre un autre</string>
+    <string name="grabar_nota">Enregistrer une note vocale</string>
+    <string name="grabacion_iniciada">Enregistrement démarré</string>
+    <string name="grabacion_finalizada">Enregistrement terminé</string>
+    <string name="estamos_enviando_audio">Nous envoyons votre audio.</string>
+    <string name="grabar_nota_de_voz">Enregistrer une note vocale</string>
+    <string name="iniciar_grabaci_n">Démarrer l\'enregistrement</string>
+    <string name="detener_grabaci_n">Arrêter l\'enregistrement</string>
 </resources>

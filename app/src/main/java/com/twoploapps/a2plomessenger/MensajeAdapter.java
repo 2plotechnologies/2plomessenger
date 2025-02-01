@@ -36,7 +36,6 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
 
     private List<Mensajes> usuarioMensajes;
     private FirebaseAuth auth;
-    private DatabaseReference UserRef;
 
     public MensajeAdapter (List<Mensajes> usuarioMensajes){
         this.usuarioMensajes = usuarioMensajes;
@@ -48,11 +47,11 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
         public ImageView mensajeImagenEnviar, mensajeImagenRecibir;
         public MensajesViewHolder(@NonNull View itemView) {
             super(itemView);
-            enviarMensajeTexto=(EmojiTextView) itemView.findViewById(R.id.enviar_mensaje);
-            recibirMensajeTexto=(EmojiTextView) itemView.findViewById(R.id.recibir_mensaje);
-            recibirImagenPerfil=(CircleImageView) itemView.findViewById(R.id.mensaje_imagen_perfil);
-            mensajeImagenEnviar=(ImageView)itemView.findViewById(R.id.mensaje_enviar_imagen);
-            mensajeImagenRecibir=(ImageView)itemView.findViewById(R.id.mensaje_recibir_imagen);
+            enviarMensajeTexto= itemView.findViewById(R.id.enviar_mensaje);
+            recibirMensajeTexto= itemView.findViewById(R.id.recibir_mensaje);
+            recibirImagenPerfil= itemView.findViewById(R.id.mensaje_imagen_perfil);
+            mensajeImagenEnviar= itemView.findViewById(R.id.mensaje_enviar_imagen);
+            mensajeImagenRecibir= itemView.findViewById(R.id.mensaje_recibir_imagen);
         }
     }
 
@@ -71,8 +70,8 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
         String DeUsuarioId = mensajes.getDe();
         String TipoMensaje = mensajes.getTipo();
 
-        UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(DeUsuarioId);
-        UserRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Usuarios").child(DeUsuarioId);
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -120,7 +119,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
         }else if (TipoMensaje.equals("pdf") || TipoMensaje.equals("docx")){
             if (DeUsuarioId.equals(mensajeEnviadoID)){
                 holder.mensajeImagenEnviar.setVisibility(View.VISIBLE);
-                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/whatsappro-d46ee.appspot.com/o/Archivos%2Farchivos.png?alt=media&token=9de607b2-da1d-4b6c-91f2-10bfd3828baf")
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/Archivos%2Ffile.png?alt=media&token=fdba3507-0171-4b33-b8ce-7a7295d30686")
                         .into(holder.mensajeImagenEnviar);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -133,7 +132,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                 holder.recibirImagenPerfil.setVisibility(View.VISIBLE);
                 holder.mensajeImagenRecibir.setVisibility(View.VISIBLE);
 
-                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/whatsappro-d46ee.appspot.com/o/Archivos%2Farchivos.png?alt=media&token=9de607b2-da1d-4b6c-91f2-10bfd3828baf")
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/Archivos%2Ffile.png?alt=media&token=fdba3507-0171-4b33-b8ce-7a7295d30686")
                         .into(holder.mensajeImagenRecibir);
             }
 
@@ -159,7 +158,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
         }else if(TipoMensaje.equals("mp3")){
             if (DeUsuarioId.equals(mensajeEnviadoID)){
                 holder.mensajeImagenEnviar.setVisibility(View.VISIBLE);
-                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/imgbin_computer-icons-sound-icon-volume-png.png?alt=media&token=41edf2db-f52b-4894-958b-93f31ed86766")
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com%20(5).png?alt=media&token=7b9291bf-53da-4909-a994-3964d9676332")
                         .into(holder.mensajeImagenEnviar);
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -172,7 +171,7 @@ public class MensajeAdapter extends RecyclerView.Adapter<MensajeAdapter.Mensajes
                 holder.recibirImagenPerfil.setVisibility(View.VISIBLE);
                 holder.mensajeImagenRecibir.setVisibility(View.VISIBLE);
 
-                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/imgbin_computer-icons-sound-icon-volume-png.png?alt=media&token=41edf2db-f52b-4894-958b-93f31ed86766")
+                Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/plo-messenger.appspot.com/o/pngwing.com%20(5).png?alt=media&token=7b9291bf-53da-4909-a994-3964d9676332")
                         .into(holder.mensajeImagenRecibir);
             }
         }

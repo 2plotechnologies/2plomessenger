@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- Título o descripción -->
+    <TextView
+        android:id="@+id/voiceRecordingTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/grabar_nota_de_voz"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón para iniciar la grabación -->
+    <Button
+        android:id="@+id/startRecordingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/iniciar_grabaci_n"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="8dp"
+        android:drawableStart="@android:drawable/ic_btn_speak_now"
+        android:drawablePadding="8dp"
+        android:padding="12dp" />
+
+    <!-- Botón para detener la grabación -->
+    <Button
+        android:id="@+id/stopRecordingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detener_grabaci_n"
+        android:backgroundTint="@color/red"
+        android:textColor="@android:color/white"
+        android:drawableStart="@android:drawable/ic_media_pause"
+        android:drawablePadding="8dp"
+        android:padding="12dp" />
+
+</LinearLayout>

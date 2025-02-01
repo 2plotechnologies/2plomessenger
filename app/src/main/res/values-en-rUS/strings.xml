@@ -232,4 +232,11 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">No chats available, press the button to see the app users</string>
     <string name="no_channels">No channels available, you can create one or follow another</string>
     <string name="no_groups">No groups available, you can create one or join another</string>
+    <string name="grabar_nota">Record voice note</string>
+    <string name="grabacion_iniciada">Recording started</string>
+    <string name="grabacion_finalizada">Recording finished</string>
+    <string name="estamos_enviando_audio">We are sending your audio.</string>
+    <string name="grabar_nota_de_voz">Record voice note</string>
+    <string name="iniciar_grabaci_n">Start recording</string>
+    <string name="detener_grabaci_n">Stop recording</string>
 </resources>

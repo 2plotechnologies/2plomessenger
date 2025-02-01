@@ -230,4 +230,11 @@
     <string name="no_hay_chats_presione_el_bot_n_para_ver_los_usuarios_de_la_app">Keine Chats vorhanden, drücken Sie die Schaltfläche, um die Benutzer der App anzuzeigen</string>
     <string name="no_channels">Keine Kanäle vorhanden, du kannst einen erstellen oder einem anderen folgen</string>
     <string name="no_groups">Keine Gruppen verfügbar, du kannst eine erstellen oder einer anderen beitreten</string>
+    <string name="grabar_nota">Sprachnotiz aufnehmen</string>
+    <string name="grabacion_iniciada">Aufnahme gestartet</string>
+    <string name="grabacion_finalizada">Aufnahme beendet</string>
+    <string name="estamos_enviando_audio">Wir senden deine Audioaufnahme.</string>
+    <string name="grabar_nota_de_voz">Sprachnotiz aufnehmen</string>
+    <string name="iniciar_grabaci_n">Aufnahme starten</string>
+    <string name="detener_grabaci_n">Aufnahme stoppen</string>
 </resources>

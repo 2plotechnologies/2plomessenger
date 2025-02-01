@@ -10,8 +10,8 @@ android {
         applicationId "com.twoploapps.a2plomessenger"
         minSdk 24
         targetSdk 34
-        versionCode 19
-        versionName "1.4.3"
+        versionCode 20
+        versionName "1.5"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "CLAVE_CIFRADO", "\"$CLAVE_CIFRADO\""
