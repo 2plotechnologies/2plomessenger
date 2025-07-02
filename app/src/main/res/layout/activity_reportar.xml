@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_report_user"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@android:color/white">
+
+    <!-- Texto de advertencia/política -->
+    <TextView
+        android:id="@+id/text_policy_warning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/en_2plo_messenger_no_toleramos_ning_n_intento_de_difamaci_n_y_no_permitimos_reportes_falsos_por_favor_explica_claramente_el_motivo_de_tu_reporte"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp"
+        android:paddingBottom="16dp"/>
+
+    <!-- Caja de texto para motivo -->
+    <EditText
+        android:id="@+id/editText_reason"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:hint="@string/escribe_aqu_el_motivo_del_reporte"
+        android:gravity="top|start"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:textSize="15sp"
+        android:inputType="textMultiLine"
+        android:maxLines="5"/>
+
+    <!-- Botón para enviar -->
+    <Button
+        android:id="@+id/button_send_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enviar_reporte"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:padding="16dp"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancelar"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/fb_color"
+        android:padding="16dp"
+        android:textSize="16sp"/>
+</LinearLayout>

@@ -9,7 +9,7 @@
     <string name="compartir">Share</string>
     <string name="cerrar_sesion">Log out</string>
     <string name="app_desarrollada_por_isaias_guzm_n_2plo_apps">App developed by Isaias Guzmán - 2Plo Technologies SF</string>
-    <string name="version_app">Version 1.5</string>
+    <string name="version_app">Version 1.5.1</string>
     <string name="volver">Back</string>
     <string name="buscador">Search users</string>
     <string name="chats">Chats</string>
@@ -239,4 +239,12 @@ Download it here: https://play.google.com/store/apps/details?id=com.twoploapps.a
     <string name="grabar_nota_de_voz">Record voice note</string>
     <string name="iniciar_grabaci_n">Start recording</string>
     <string name="detener_grabaci_n">Stop recording</string>
+    <string name="chatcon2ploai">Chat with 2Plo AI</string>
+    <string name="inpulsado">Powered by GEMINI</string>
+    <string name="en_2plo_messenger_no_toleramos_ning_n_intento_de_difamaci_n_y_no_permitimos_reportes_falsos_por_favor_explica_claramente_el_motivo_de_tu_reporte">
+    In 2Plo Messenger, we do not tolerate any attempt at defamation and do not allow false reports. Please clearly explain the reason for your report.
+</string>
+    <string name="escribe_aqu_el_motivo_del_reporte">Write the reason for the report here…</string>
+    <string name="enviar_reporte">Send Report</string>
+    <string name="reportar_usuario">Report User</string>
 </resources>

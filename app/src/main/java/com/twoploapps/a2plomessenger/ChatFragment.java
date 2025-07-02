@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.twoploapps.a2plomessenger.NewActivitys.ChatAIActivity;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,11 +56,20 @@ public class ChatFragment extends Fragment {
         ChatLista=(RecyclerView)ChatViewUnica.findViewById(R.id.chat_lista);
         ChatLista.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageButton btnbuscar = ChatViewUnica.findViewById(R.id.btnbuscarcontactos);
+        ImageButton btn_chat_ai = ChatViewUnica.findViewById(R.id.btn_open_ai);
         nomsg = ChatViewUnica.findViewById(R.id.empty_view);
         btnbuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),BuscarAmigosActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_chat_ai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatAIActivity.class);
                 startActivity(intent);
             }
         });

@@ -237,4 +237,13 @@
     <string name="grabar_nota_de_voz">Sprachnotiz aufnehmen</string>
     <string name="iniciar_grabaci_n">Aufnahme starten</string>
     <string name="detener_grabaci_n">Aufnahme stoppen</string>
+    <string name="chatcon2ploai">Chatte mit 2Plo AI</string>
+    <string name="inpulsado">Angetrieben von GEMINI</string>
+    <string name="en_2plo_messenger_no_toleramos_ning_n_intento_de_difamaci_n_y_no_permitimos_reportes_falsos_por_favor_explica_claramente_el_motivo_de_tu_reporte">
+    In 2Plo Messenger tolerieren wir keine Verleumdung und keine falschen Meldungen. Bitte erkläre den Grund für deine Meldung klar und deutlich.
+</string>
+    <string name="escribe_aqu_el_motivo_del_reporte">Schreibe hier den Grund für die Meldung…</string>
+    <string name="enviar_reporte">Meldung senden</string>
+    <string name="reportar_usuario">Benutzer melden</string>
+
 </resources>

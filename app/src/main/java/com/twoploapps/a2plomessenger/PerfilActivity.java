@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.twoploapps.a2plomessenger.NewActivitys.ReportarActivity;
 
 import java.util.HashMap;
 
@@ -60,6 +62,15 @@ public class PerfilActivity extends AppCompatActivity {
         usuarioima = findViewById(R.id.usuario_vic_imagen);
         enviarmensaje = findViewById(R.id.enviar_mensaje_usuario_vic);
         cancelarmensaje = findViewById(R.id.cancelar_mensaje_usuario_vic);
+        FloatingActionButton reportUser = findViewById(R.id.fab_report_user);
+        reportUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PerfilActivity.this, ReportarActivity.class);
+                intent.putExtra("user_id", usuario_revid);
+                startActivity(intent);
+            }
+        });
         CurrenEstado = "nueva";
         ObtenerInfromacionDB();
         verificarContactoAgregado();

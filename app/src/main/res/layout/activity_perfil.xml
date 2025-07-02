@@ -67,17 +67,28 @@
         android:textSize="17sp"
         android:textStyle="bold"
         android:textColor="@color/white"/>
-<Button
-    android:id="@+id/cancelar_mensaje_usuario_vic"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/enviar_mensaje_usuario_vic"
-    android:background="@drawable/boton_redondeado"
-    android:backgroundTint="@color/fb_color"
-    android:layout_margin="15dp"
-    android:text="@string/cancelar"
-    android:visibility="gone"
-    android:textSize="17sp"
-    android:textStyle="bold"
-    android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/cancelar_mensaje_usuario_vic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enviar_mensaje_usuario_vic"
+        android:background="@drawable/boton_redondeado"
+        android:backgroundTint="@color/fb_color"
+        android:layout_margin="15dp"
+        android:text="@string/cancelar"
+        android:visibility="gone"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+    <!-- BOTÓN FLOTANTE PARA REPORTAR -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_report_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="24dp"
+        android:contentDescription="@string/reportar_usuario"
+        app:srcCompat="@drawable/baseline_flag_24"
+        app:backgroundTint="@android:color/holo_red_dark" />
 </RelativeLayout>
