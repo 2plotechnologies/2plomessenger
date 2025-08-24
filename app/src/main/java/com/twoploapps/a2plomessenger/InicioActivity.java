@@ -26,6 +26,9 @@ import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.appcheck.FirebaseAppCheck;
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,25 +42,26 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 public class InicioActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    private ViewPager myviewPager;
-    private TabLayout mytabLayout;
-    private AcesoTabsAdapter myacesoTabsAdapter;
     private String CurrentUserId, username, imageurl;
     private FirebaseAuth mAuth;
-    private DatabaseReference UserRef, RootRef,GrupoRef;
+    private DatabaseReference UserRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
-        toolbar= findViewById(R.id.app_main_toolbar);
+        FirebaseApp.initializeApp(/*context=*/ this);
+        FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.getInstance();
+        firebaseAppCheck.installAppCheckProviderFactory(
+                PlayIntegrityAppCheckProviderFactory.getInstance());
+        Toolbar toolbar = findViewById(R.id.app_main_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("2Plo Messenger");
-        myviewPager = findViewById(R.id.main_tabs_pager);
-        myacesoTabsAdapter = new AcesoTabsAdapter(getSupportFragmentManager(),this);
+        ViewPager myviewPager = findViewById(R.id.main_tabs_pager);
+        AcesoTabsAdapter myacesoTabsAdapter = new AcesoTabsAdapter(getSupportFragmentManager(), this);
         myviewPager.setAdapter(myacesoTabsAdapter);
 
-        mytabLayout = findViewById(R.id.main_tabs);
+        TabLayout mytabLayout = findViewById(R.id.main_tabs);
         mytabLayout.setupWithViewPager(myviewPager);
 
         mytabLayout.getTabAt(0).setIcon(R.drawable.chat);
@@ -79,8 +83,8 @@ public class InicioActivity extends AppCompatActivity {
         ViewCompat.setBackground(mytabLayout, shapeDrawable);
 
         UserRef = FirebaseDatabase.getInstance().getReference().child("Usuarios");
-        RootRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
-        GrupoRef = FirebaseDatabase.getInstance().getReference().child("CodigosDeGrupo");
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference().child("Grupos");
+        DatabaseReference grupoRef = FirebaseDatabase.getInstance().getReference().child("CodigosDeGrupo");
         mAuth = FirebaseAuth.getInstance();
         CurrentUserId = mAuth.getCurrentUser().getUid();
         getUsername();

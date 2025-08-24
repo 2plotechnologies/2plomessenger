@@ -147,11 +147,13 @@ public class ChatAIActivity extends AppCompatActivity {
                         public void onSuccess(GenerateContentResponse result) {
                             String resultText = result.getText();
                             guardarRespuestaAI(resultText);
+                            mensaje.setText("");
                         }
 
                         @Override
                         public void onFailure(Throwable t) {
                             t.printStackTrace();
+                            mensaje.setText("");
                         }
                     }, Runnable::run);
                 }
