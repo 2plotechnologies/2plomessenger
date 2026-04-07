@@ -38,7 +38,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/boton_redondo"
         android:backgroundTint="@color/fb_color"
-        android:contentDescription="Chat AI"
+        android:contentDescription="Chat IA"
         android:scaleType="fitXY"
         android:src="@drawable/twoploai" />
 

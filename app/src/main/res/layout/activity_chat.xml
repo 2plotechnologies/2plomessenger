@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root_view"
-    tools:context=".ChatActivity">
+    tools:context=".ChatActivity"
+    android:fitsSystemWindows="true">
 
     <include android:id="@+id/chat_toolbar"
         layout="@layout/toolbar_principal"/>

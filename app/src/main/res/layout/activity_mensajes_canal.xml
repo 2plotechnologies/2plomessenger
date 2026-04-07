@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".NewActivitys.MensajesCanalActivity"
-    android:id="@+id/root_view_channel">
+    android:id="@+id/root_view_channel"
+    android:fitsSystemWindows="true">
 
     <include android:id="@+id/channel_chat_toolbar"
         layout="@layout/toolbar_principal"/>

@@ -1,6 +1,7 @@
 package com.twoploapps.a2plomessenger;
 
 import android.util.Base64;
+import com.twoploapps.a2plomessenger.BuildConfig;
 
 import java.nio.charset.StandardCharsets;
 

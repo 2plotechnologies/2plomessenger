@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/root_view_ai"
-    tools:context=".NewActivitys.ChatAIActivity">
+    tools:context=".NewActivitys.ChatAIActivity"
+    android:fitsSystemWindows="true">
 
     <include
         android:id="@+id/aichat_bar_layout"

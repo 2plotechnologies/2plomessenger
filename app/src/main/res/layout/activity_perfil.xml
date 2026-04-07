@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PerfilActivity"
-    android:background="@color/teal_700">
+    android:background="@color/teal_700"
+    android:fitsSystemWindows="true">
 
     <include android:id="@+id/usuario_perfil_toolbar"
         layout="@layout/toolbar_principal"/>
