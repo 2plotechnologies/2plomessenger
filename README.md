@@ -34,6 +34,3 @@ Aplicación Android de mensajería social desarrollada en Java con Firebase.
 2. Sincronizar Gradle.
 3. Verificar configuración de Firebase.
 4. Ejecutar en emulador o dispositivo Android.
-
-## Nota
-Este repositorio incluye llaves/propiedades sensibles de ejemplo en `gradle.properties`; se recomienda mover secretos a `local.properties` o variables de entorno antes de distribución.
